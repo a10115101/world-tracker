@@ -21,3 +21,19 @@ body {
   color: black;
   line-height: 2;
 }
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 3px;
+  /* background-color: var(--color-light0); */
+  transition: all 0.2s;
+}
+
+input:focus {
+  outline: none;
+  background-color: #ffffff;
+}

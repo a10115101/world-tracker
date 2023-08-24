@@ -1,0 +1,75 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.form {
+  padding: 0rem 2rem;
+  background-color: #ffffff;
+  color: #444444;
+  border: #444444 solid 2px;
+}
+
+.rowSingup {
+  display: flex;
+  align-items: center;
+}
+
+.rowSingup a:link,
+.rowSingup a:visited {
+  color: #05aae1;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-left: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0rem;
+}
+
+.row i {
+  padding-right: 0.5rem;
+}
+
+.btn {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.rowDivision {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.rowLink a:link,
+.rowLink a:visited {
+  color: #444444;
+  border: solid 2px #444444;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.rowLink img {
+  height: 16px;
+  width: 16px;
+}
+
+.rowLink span {
+  padding-left: 1rem;
+}

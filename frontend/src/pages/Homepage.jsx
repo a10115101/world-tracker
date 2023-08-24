@@ -20,7 +20,7 @@ function Homepage() {
         <img
           src="/background.jpg"
           alt="background"
-          style={{ maxWidth: "800px" }}
+          style={{ maxWidth: "800px", borderRadius: "5px" }}
         />
       </section>
     </main>
