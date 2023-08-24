@@ -1,35 +1,44 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { Link, NavLink } from "react-router-dom";
 
-import { Link } from "react-router-dom";
+import styles from "./AppNav.module.css";
 
 function AppNav() {
   return (
-    <Navbar bg="dark" data-bs-theme="dark">
-      <Container>
-        <Link className="navbar-brand" to="/">
-          World Tracker
-        </Link>
-        <Nav className="ms-auto">
-          <Link className="nav-link active" to="/login">
+    <nav className={styles.nav}>
+      <Link to="/">World Tracker</Link>
+      <ul>
+        <li>
+          <NavLink to="/login">
+            <i className="fa-solid fa-right-to-bracket" />
             Login
-          </Link>
-          <Link className="nav-link active" to="/signup">
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/signup">
+            <i className="fa-solid fa-user-plus" />
             Signup
-          </Link>
-          <Link className="nav-link active" to="/map">
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/map">
+            <i className="fa-solid fa-map-location-dot" />
             Map
-          </Link>
-          <Link className="nav-link active" to="/profile">
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/profile">
+            <i className="fa-solid fa-user" />
             Profile
-          </Link>
-          <Link className="nav-link active" to="/">
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/">
+            <i className="fa-solid fa-right-from-bracket" />
             Logout
-          </Link>
-        </Nav>
-      </Container>
-    </Navbar>
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
   );
 }
 

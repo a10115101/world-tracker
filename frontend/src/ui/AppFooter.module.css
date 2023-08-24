@@ -1,0 +1,14 @@
+.footer {
+  display: flex;
+  background-color: var(--color-dark0);
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+
+.footer p {
+  padding: 0.5rem;
+  color: var(--color-light1);
+  font-size: 1rem;
+}
