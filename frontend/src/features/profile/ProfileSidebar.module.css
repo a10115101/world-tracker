@@ -1,0 +1,32 @@
+.sidebar {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-dark1);
+  border: 3px solid black;
+  width: 15vw;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  padding: 0.5rem;
+  gap: 3rem;
+}
+
+.sidebar div {
+  color: #ededed;
+}
+
+.sidebar a:link,
+.sidebar a:visited {
+  text-decoration: none;
+  color: #ededed;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.sidebar i {
+  padding-right: 1rem;
+}

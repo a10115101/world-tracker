@@ -4,11 +4,13 @@ import Layout from "./ui/Layout";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Singup from "./pages/Singup";
+
 import MapLayout from "./ui/MapLayout";
 import MapRecords from "./features/map/MapRecords";
 import MapRecord from "./features/map/MapRecord";
 import AddMapRecord from "./features/map/AddMapRecord";
-import ProfileLayout from "./ui/ProfileLayout";
+
+import Profile from "./pages/Profile";
 import ProfileAbout from "./features/profile/ProfileAbout";
 import ProfileDetails from "./features/profile/ProfileDetails";
 import ProfileFriends from "./features/profile/ProfileFriends";
@@ -30,7 +32,7 @@ function App() {
             <Route path="add" element={<AddMapRecord />} />
           </Route>
 
-          <Route path="profile" element={<ProfileLayout />}>
+          <Route path="profile" element={<Profile />}>
             <Route index element={<ProfileAbout />} />
             <Route path="about" element={<ProfileAbout />} />
             <Route path="details" element={<ProfileDetails />} />
