@@ -39,7 +39,10 @@ function Login() {
 
         <div className={styles.rowLink}>
           <Link>
-            <img src="https://img.icons8.com/color/16/000000/google-logo.png" />
+            <img
+              src="https://img.icons8.com/color/30/google-logo.png"
+              alt="google-logo"
+            />
             <span>Google Account</span>
           </Link>
         </div>
