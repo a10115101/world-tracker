@@ -1,10 +1,10 @@
-.homepage {
+.container {
   display: flex;
   justify-content: center;
   margin: 4rem;
 }
 
-.homepage section {
+.container section {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -14,17 +14,17 @@
   background-color: #ffffff;
 }
 
-.homepage h1 {
+.container h1 {
   color: var(--color-dark1);
 }
 
-.homepage p {
+.container p {
   text-align: center;
   font-size: 1.25rem;
 }
 
-.homepage a:link,
-.homepage a:visited {
+.container a:link,
+.container a:visited {
   display: inline-block;
   background-color: var(--color-dark0);
   color: var(--color-light1);

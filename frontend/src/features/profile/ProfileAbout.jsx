@@ -2,7 +2,7 @@ import styles from "./ProfileAbout.module.css";
 
 function ProfileAbout() {
   return (
-    <main className={styles.container}>
+    <section className={styles.container}>
       <h1>About me</h1>
 
       <form>
@@ -33,7 +33,7 @@ function ProfileAbout() {
 
         <button>Save</button>
       </form>
-    </main>
+    </section>
   );
 }
 

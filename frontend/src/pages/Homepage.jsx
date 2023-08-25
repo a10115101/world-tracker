@@ -4,7 +4,7 @@ import styles from "./Homepage.module.css";
 
 function Homepage() {
   return (
-    <main className={styles.homepage}>
+    <main className={styles.container}>
       <section>
         <img src="/logo.png" alt="logo" style={{ maxWidth: "375px" }} />
         <h1>Every wonderful journey is memorable!</h1>

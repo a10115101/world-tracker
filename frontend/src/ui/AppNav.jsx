@@ -4,7 +4,7 @@ import styles from "./AppNav.module.css";
 
 function AppNav() {
   return (
-    <nav className={styles.nav}>
+    <nav className={styles.header}>
       <Link to="/">World Tracker</Link>
       <ul>
         <li>

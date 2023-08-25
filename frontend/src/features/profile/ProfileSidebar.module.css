@@ -1,4 +1,4 @@
-.sidebar {
+.container {
   display: flex;
   justify-content: center;
   background-color: var(--color-dark1);
@@ -6,7 +6,7 @@
   width: 15vw;
 }
 
-.sidebar ul {
+.container ul {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -15,18 +15,18 @@
   gap: 3rem;
 }
 
-.sidebar div {
+.container div {
   color: #ededed;
 }
 
-.sidebar a:link,
-.sidebar a:visited {
+.container a:link,
+.container a:visited {
   text-decoration: none;
   color: #ededed;
   font-size: 1.5rem;
   font-weight: 400;
 }
 
-.sidebar i {
+.container i {
   padding-right: 1rem;
 }

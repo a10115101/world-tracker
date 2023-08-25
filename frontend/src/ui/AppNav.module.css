@@ -1,4 +1,4 @@
-.nav {
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6,20 +6,20 @@
   padding: 0.5rem 2rem;
 }
 
-.nav ul {
+.header ul {
   list-style: none;
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
-.nav i {
+.header i {
   color: var(--color-light1);
   padding: 0.5rem;
 }
 
-.nav a:link,
-.nav a:visited {
+.header a:link,
+.header a:visited {
   text-decoration: none;
   color: var(--color-light1);
   text-transform: uppercase;
