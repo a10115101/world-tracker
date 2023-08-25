@@ -1,10 +1,8 @@
 .footer {
   display: flex;
   background-color: var(--color-dark0);
-  position: absolute;
   width: 100%;
-  left: 0;
-  bottom: 0;
+  margin-top: auto;
 }
 
 .footer p {
