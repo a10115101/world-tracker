@@ -1,3 +1,44 @@
 .container {
   border: 2px solid blue;
+  width: 85vw;
+  padding: 1.25rem;
+}
+
+.data {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.data div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid green;
+  font-size: 1.25rem;
+  width: 30vw;
+}
+
+.chart {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.chart div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid orange;
+  font-size: 1.25rem;
+  width: 37.5vw;
+  height: 70vh;
+}
+
+.container i {
+  /* color: var(--color-light1); */
+  padding: 0.75rem;
 }
