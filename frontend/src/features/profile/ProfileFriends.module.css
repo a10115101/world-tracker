@@ -1,0 +1,84 @@
+.container {
+  align-self: center;
+  border: 1px solid gray;
+  background-color: #ffffff;
+  border-radius: 5px;
+  width: 80vw;
+  margin-left: 2.25rem;
+}
+
+.topContainer {
+  display: flex;
+  align-items: center;
+  background-color: grey;
+  border-radius: 5px;
+  height: 7.5vh;
+  padding: 1rem;
+}
+
+.topContainerLeft {
+  width: 67.5vw;
+}
+
+.topContainerRight {
+  display: flex;
+  width: 32.5vw;
+  align-items: center;
+}
+
+.bottomContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  background-color: rgb(244, 238, 238, 0.5);
+  border-radius: 5px;
+  padding: 1rem 1.5rem;
+  height: 72.5vh;
+  overflow-y: scroll;
+}
+
+.bottomContainer::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}
+
+.cardContainer {
+  display: flex;
+  border: 2px solid gray;
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
+  height: 15vh;
+  width: 35vw;
+  padding: 1rem;
+  margin: 0.75rem;
+}
+
+.cardContainerLeft {
+  background-color: greenyellow;
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
+}
+
+.cardContainerCenter {
+  font-size: 1.25rem;
+}
+
+.cardContainerRight {
+  display: flex;
+  flex-direction: column;
+  border: 2px black solid;
+}
+
+.container button {
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.container i {
+  margin-right: 0.75rem;
+}
