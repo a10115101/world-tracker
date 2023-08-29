@@ -5,8 +5,8 @@ import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Singup from "./pages/Singup";
 
-import MapLayout from "./ui/MapLayout";
-import MapRecords from "./features/map/MapRecords";
+import Map from "./pages/Map";
+import MapRecordList from "./features/map/MapRecordList";
 import MapRecord from "./features/map/MapRecord";
 import AddMapRecord from "./features/map/AddMapRecord";
 
@@ -26,8 +26,8 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Singup />} />
 
-          <Route path="map" element={<MapLayout />}>
-            <Route index element={<MapRecords />} />
+          <Route path="map" element={<Map />}>
+            <Route index element={<MapRecordList />} />
             <Route path="map/:id" element={<MapRecord />} />
             <Route path="add" element={<AddMapRecord />} />
           </Route>

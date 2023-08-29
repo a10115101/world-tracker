@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  background-color: #ffffff;
+  border-radius: 5px;
+  width: 45vw;
+}
+
+.topContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15%;
+  width: 100%;
+  font-size: 1.5rem;
+  background-color: grey;
+  border-radius: 5px;
+}
+
+.bottomContainer {
+  padding-top: 0.75rem;
+  height: 85%;
+  width: 100%;
+  background-color: rgb(244, 238, 238, 0.5);
+  overflow-y: scroll;
+}
+
+.bottomContainer::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}

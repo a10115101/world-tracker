@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex: 1;
+}
+
+.mapContainer {
+  display: flex;
+  border: 2px solid blue;
+  width: 100%;
+}
+
+.mapContainerLeft {
+  position: absolute;
+  z-index: 10;
+  align-self: center;
+  height: 10vh;
+}
+
+.mapContainerCenter {
+  border: 2px solid pink;
+  z-index: 1;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+}
+
+.mapContainerRight {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  z-index: 10;
+  top: 10%;
+  right: 2.5%;
+}
+
+.mapContainerRight i {
+  margin-right: 0.75rem;
+}
