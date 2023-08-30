@@ -1,0 +1,34 @@
+.container {
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.topContainer {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid black;
+  padding-left: 0.5rem;
+}
+
+.bottomContainer {
+  padding-left: 0.5rem;
+}
+
+.bottomContainer ul {
+  list-style: none;
+  cursor: pointer;
+}
+
+.bottomContainer li:hover {
+  background-color: grey;
+}
+
+.container i {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.container input {
+  border: none;
+}

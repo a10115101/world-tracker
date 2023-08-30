@@ -6,6 +6,7 @@ import { Marker } from "react-leaflet/Marker";
 import { Popup } from "react-leaflet/Popup";
 
 import MapSidebar from "../features/map/MapSidebar";
+import MapSearch from "../ui/MapSearch";
 import styles from "./Map.module.css";
 
 function Map() {
@@ -45,8 +46,7 @@ function Map() {
         </div>
 
         <div className={styles.mapContainerRight}>
-          <i className="fa-solid fa-magnifying-glass" />
-          <input type="text" placeholder="Search for country or city" />
+          <MapSearch />
         </div>
       </div>
     </div>
