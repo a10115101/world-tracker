@@ -4,12 +4,12 @@ import styles from "./MapSearch.module.css";
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 
-function MapSearch() {
+function MapSearch({ setSelectPosition }) {
   const [searchText, setSearchText] = useState("");
   const [listPlace, setListPlace] = useState([]);
 
   const handleSearch = async () => {
-    if (!searchText) return;
+    if (searchText.length <= 1) return;
 
     const params = {
       q: searchText,
@@ -49,7 +49,16 @@ function MapSearch() {
         {listPlace && (
           <ul>
             {listPlace.map((item) => {
-              return <li key={item?.osm_id}>{item.display_name}</li>;
+              return (
+                <li
+                  key={item?.place_id}
+                  onClick={() => {
+                    setSelectPosition(item);
+                  }}
+                >
+                  {item.display_name}
+                </li>
+              );
             })}
           </ul>
         )}
