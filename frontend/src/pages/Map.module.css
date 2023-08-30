@@ -5,7 +5,6 @@
 
 .mapContainer {
   display: flex;
-  border: 2px solid blue;
   width: 100%;
 }
 
@@ -17,11 +16,13 @@
 }
 
 .mapContainerCenter {
-  border: 2px solid pink;
   z-index: 1;
-  top: 0%;
-  left: 0%;
   width: 100%;
+  height: 100%;
+}
+
+.map {
+  height: 100%;
 }
 
 .mapContainerRight {
@@ -31,8 +32,16 @@
   z-index: 10;
   top: 10%;
   right: 2.5%;
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 5px;
+  padding-left: 0.25rem;
 }
 
 .mapContainerRight i {
-  margin-right: 0.75rem;
+  margin-right: 0.5rem;
+}
+
+.mapContainerRight input {
+  border: none;
 }

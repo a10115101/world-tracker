@@ -28,7 +28,7 @@ function App() {
 
           <Route path="map" element={<Map />}>
             <Route index element={<MapRecordList />} />
-            <Route path="map/:id" element={<MapRecord />} />
+            <Route path="/map/:id" element={<MapRecord />} />
             <Route path="add" element={<AddMapRecord />} />
           </Route>
 

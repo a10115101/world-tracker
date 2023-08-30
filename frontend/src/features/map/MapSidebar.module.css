@@ -1,9 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  border: 1px solid gray;
-  background-color: #ffffff;
-  border-radius: 5px;
+  background-color: #faf1e4;
   width: 45vw;
 }
 
@@ -14,8 +12,8 @@
   height: 15%;
   width: 100%;
   font-size: 1.5rem;
-  background-color: grey;
-  border-radius: 5px;
+  border: 1px solid gray;
+  background-color: #cedebd;
 }
 
 .bottomContainer {
@@ -23,6 +21,7 @@
   height: 85%;
   width: 100%;
   background-color: rgb(244, 238, 238, 0.5);
+  border: 1px solid gray;
   overflow-y: scroll;
 }
 
