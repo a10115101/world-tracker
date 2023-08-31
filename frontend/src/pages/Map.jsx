@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { MapContainer } from "react-leaflet/MapContainer";
 import { TileLayer } from "react-leaflet/TileLayer";
@@ -15,6 +16,19 @@ function Map() {
 
   const [selectPosition, setSelectPosition] = useState(null);
   const [mapPosition, setMapPosition] = useState([40, 0]);
+
+  // hook for lat and lng params
+  const [searchParams] = useSearchParams();
+  const getLat = searchParams.get("lat");
+  const getLng = searchParams.get("lng");
+
+  useEffect(
+    function () {
+      if (getLat && getLng) setMapPosition([getLat, getLng]);
+    },
+    [getLat, getLng]
+  );
+  ///////////////////////////////////////////
 
   const locationSelection = [
     Number(selectPosition?.lat),
@@ -52,6 +66,13 @@ function Map() {
               </Marker>
             )}
 
+            <Marker position={mapPosition}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+
+            <ChangeCenter position={mapPosition} />
             <ResetCenterView selectPosition={selectPosition} />
           </MapContainer>
         </div>
@@ -64,7 +85,16 @@ function Map() {
   );
 }
 
-// temp
+// temp getParams
+function ChangeCenter({ position }) {
+  // React Leaftlet自定hook
+  const map = useMap();
+  map.setView(position);
+  return null;
+}
+///////////////////////////////////////////
+
+// temp search
 function ResetCenterView({ selectPosition }) {
   const map = useMap();
 

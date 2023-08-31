@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./MapRecordListItem.module.css";
 
 function MapRecordListItem({ record }) {
-  const { id, countryCode, country, cityName, date } = record;
+  const { id, countryCode, country, cityName, date, position } = record;
 
   const formatDate = (date) =>
     new Intl.DateTimeFormat("en", {
@@ -14,7 +14,7 @@ function MapRecordListItem({ record }) {
 
   return (
     <li className={styles.container}>
-      <Link to={`${id}`}>
+      <Link to={`${id}?lat=${position.lat}&lng=${position.lng}`}>
         <span>
           <img
             src={`https://flagcdn.com/w20/${countryCode}.png`}

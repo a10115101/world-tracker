@@ -1,3 +1,57 @@
 .container {
+  padding: 1rem;
+}
+
+.formContainer {
   border: 2px solid pink;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.topFormContainer {
+  display: flex;
+  align-items: center;
+  border: 2px solid green;
+  padding-left: 0.75rem;
+}
+
+.topFormContainer div {
+  margin-left: 1rem;
+}
+
+.centerFormContainer {
+  border: 2px solid red;
+  height: 40vh;
+  margin: 0.5rem 0rem;
+  padding: 0rem 0.75rem;
+}
+
+.centerFormContainer div {
+  margin: 0.5rem 0rem;
+}
+
+.innerCenterFormContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottomFormContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid blue;
+  height: 8vh;
+  padding: 0rem 0.75rem;
+}
+
+.bottomFormContainer button {
+  height: 5vh;
+  width: 5vw;
+}
+
+.status {
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  border: 2px solid black;
 }
