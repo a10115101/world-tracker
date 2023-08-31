@@ -1,4 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import styles from "./MapRecord.module.css";
 
@@ -11,15 +14,18 @@ function MapRecord() {
 
   // test temp
   const record = records.find((r) => r.id === Number(id));
-  const { countryCode, country, cityName, date, notes, status, rating } =
+  const { countryCode, country, cityName, date, description, status, rating } =
     record;
 
-  const formatDate = (date) =>
+  const [isModified, setIsModified] = useState(false);
+  const [newdate, setNewDate] = useState(new Date());
+
+  const formatDate = (formattedDate) =>
     new Intl.DateTimeFormat("en", {
       day: "numeric",
       month: "short",
       year: "numeric",
-    }).format(new Date(date));
+    }).format(new Date(formattedDate));
 
   return (
     <div className={styles.container}>
@@ -31,44 +37,100 @@ function MapRecord() {
             alt="flag"
           />
           <div>
-            <h2>{country}</h2>
-            <h3>{cityName}</h3>
+            <h2>Country: {country}</h2>
+            <h3>City: {cityName}</h3>
           </div>
         </div>
 
         <div className={styles.centerFormContainer}>
-          <div className={styles.innerCenterFormContainer}>
-            <div>
-              <h3>Date</h3>
+          <div className={styles.date}>
+            <label htmlFor="date">Date: </label>
+            {!isModified ? (
               <p>{formatDate(date || null)}</p>
-            </div>
-            <div className={styles.status}>{status}</div>
+            ) : (
+              <DatePicker
+                id="date"
+                onChange={(date) => setNewDate(date)}
+                selected={newdate}
+                dateFormat="dd/MM/yyyy"
+                portalId="root-portal"
+                popperClassName={styles.datePicker}
+                wrapperClassName=""
+              />
+            )}
           </div>
 
-          {rating && (
-            <div>
-              <h3>Your Rating:</h3>
+          <div className={styles.status}>
+            <label htmlFor="status">Status: </label>
+            {!isModified ? (
+              <p>{status}</p>
+            ) : (
+              <select id="status">
+                <option value="">Plannig</option>
+                <option value="">Visited</option>
+              </select>
+            )}
+          </div>
+
+          <div className={styles.rating}>
+            <label htmlFor="rating">Rating: </label>
+            {!isModified ? (
               <p>{rating}</p>
-            </div>
-          )}
+            ) : (
+              <select id="rating">
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+                <option value="">4</option>
+                <option value="">5</option>
+              </select>
+            )}
+          </div>
 
           <div>
-            <h3>Your notes</h3>
-            <p>{notes}</p>
+            <label htmlFor="description">Description: </label>
+            {!isModified ? (
+              <p>{description}</p>
+            ) : (
+              <textarea id="description" rows={3} />
+            )}
           </div>
         </div>
 
         <div className={styles.bottomFormContainer}>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(-1);
-            }}
-          >
-            Back
-          </button>
-          <button onClick={(e) => e.preventDefault()}>Modify</button>
-          <button onClick={(e) => e.preventDefault()}>Delete</button>
+          {!isModified ? (
+            <>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(-1);
+                }}
+              >
+                Back
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsModified(true);
+                }}
+              >
+                Modify
+              </button>
+              <button onClick={(e) => e.preventDefault()}>Delete</button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsModified(false);
+                }}
+              >
+                Cancel
+              </button>
+              <button onClick={(e) => e.preventDefault()}>Confirm</button>
+            </>
+          )}
         </div>
       </form>
     </div>

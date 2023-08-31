@@ -4,15 +4,19 @@
 
 .formContainer {
   border: 2px solid pink;
-  padding: 1rem;
   border-radius: 5px;
+  padding: 1rem;
+}
+
+.formContainer label {
+  font-weight: 700;
+  font-size: 1.15rem;
 }
 
 .topFormContainer {
   display: flex;
   align-items: center;
   border: 2px solid green;
-  padding-left: 0.75rem;
 }
 
 .topFormContainer div {
@@ -21,24 +25,28 @@
 
 .centerFormContainer {
   border: 2px solid red;
-  height: 40vh;
-  margin: 0.5rem 0rem;
-  padding: 0rem 0.75rem;
-}
-
-.centerFormContainer div {
+  height: 42.5vh;
   margin: 0.5rem 0rem;
 }
 
-.innerCenterFormContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.date {
+  height: 22%;
+  width: 50%;
+}
+
+.status {
+  height: 22%;
+  width: 50%;
+}
+
+.rating {
+  height: 22%;
+  width: 50%;
 }
 
 .bottomFormContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   border: 2px solid blue;
   height: 8vh;
@@ -50,8 +58,6 @@
   width: 5vw;
 }
 
-.status {
-  font-size: 1.25rem;
-  padding: 0.5rem;
-  border: 2px solid black;
+.datePicker div {
+  z-index: 1;
 }

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { MapContainer } from "react-leaflet/MapContainer";
 import { TileLayer } from "react-leaflet/TileLayer";
 import { Marker } from "react-leaflet/Marker";
 import { Popup } from "react-leaflet/Popup";
-import { useMap } from "react-leaflet";
+import { useMap, useMapEvent } from "react-leaflet";
 
 import MapSidebar from "../features/map/MapSidebar";
 import MapSearch from "../ui/MapSearch";
@@ -73,6 +73,7 @@ function Map() {
             </Marker>
 
             <ChangeCenter position={mapPosition} />
+            {/* <DetectClick /> */}
             <ResetCenterView selectPosition={selectPosition} />
           </MapContainer>
         </div>
@@ -87,11 +88,17 @@ function Map() {
 
 // temp getParams
 function ChangeCenter({ position }) {
-  // React Leaftlet自定hook
   const map = useMap();
   map.setView(position);
   return null;
 }
+
+// function DetectClick() {
+//   // const navigate = useNavigate();
+//   useMapEvent({
+//     click: (e) => console.log(e),
+//   });
+// }
 ///////////////////////////////////////////
 
 // temp search

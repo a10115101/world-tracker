@@ -4,9 +4,9 @@ export default [
     country: "Portugal",
     countryCode: "pt",
     date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
+    description: "My favorite city so far!",
     status: "Plannig",
-    rating: "",
+    rating: "5",
     position: {
       lat: 38.727881642324164,
       lng: -9.140900099907554,
@@ -18,9 +18,9 @@ export default [
     country: "Spain",
     countryCode: "es",
     date: "2027-07-15T08:22:53.976Z",
-    notes: "test",
+    description: "test",
     status: "Plannig",
-    rating: "",
+    rating: "1",
     position: {
       lat: 40.46635901755316,
       lng: -3.7133789062500004,
@@ -32,7 +32,7 @@ export default [
     country: "Germany",
     countryCode: "de",
     date: "2027-02-12T09:24:11.863Z",
-    notes: "Amazing",
+    description: "Amazing",
     status: "Visited",
     rating: "3",
     position: {
@@ -46,7 +46,7 @@ export default [
     country: "Taiwan",
     countryCode: "tw",
     date: "2027-02-12T09:24:11.863Z",
-    notes: "Good",
+    description: "Good",
     status: "Visited",
     rating: "5",
     position: {

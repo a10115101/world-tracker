@@ -4,18 +4,18 @@ import Layout from "./ui/Layout";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Singup from "./pages/Singup";
+import PageNotFound from "./pages/PageNotFound";
 
 import Map from "./pages/Map";
 import MapRecordList from "./features/map/MapRecordList";
 import MapRecord from "./features/map/MapRecord";
-import AddMapRecord from "./features/map/AddMapRecord";
+import MapRecordForm from "./features/map/MapRecordForm";
 
 import Profile from "./pages/Profile";
 import ProfileAbout from "./features/profile/ProfileAbout";
 import ProfileDetails from "./features/profile/ProfileDetails";
 import ProfileFriends from "./features/profile/ProfileFriends";
 import ProfileSetting from "./features/profile/ProfileSetting";
-import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
           <Route path="map" element={<Map />}>
             <Route index element={<MapRecordList />} />
             <Route path="/map/:id" element={<MapRecord />} />
-            <Route path="add" element={<AddMapRecord />} />
+            <Route path="form" element={<MapRecordForm />} />
           </Route>
 
           <Route path="profile" element={<Profile />}>
