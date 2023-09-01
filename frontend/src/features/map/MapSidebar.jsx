@@ -6,7 +6,7 @@ function MapSidebar() {
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
-        <h3>Total 100 Records</h3>
+        <h3>Record List</h3>
       </div>
       <div className={styles.bottomContainer}>
         <Outlet />
