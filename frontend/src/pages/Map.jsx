@@ -31,8 +31,8 @@ function Map() {
   ///////////////////////////////////////////
 
   const locationSelection = [
-    Number(selectPosition?.lat),
-    Number(selectPosition?.lon),
+    Number(selectPosition?.geometry?.lat),
+    Number(selectPosition?.geometry?.lng),
   ];
 
   return (
@@ -107,7 +107,10 @@ function ResetCenterView({ selectPosition }) {
 
   useEffect(() => {
     if (selectPosition) {
-      map.setView([selectPosition?.lat, selectPosition?.lon]);
+      map.setView([
+        selectPosition?.geometry?.lat,
+        selectPosition?.geometry?.lng,
+      ]);
     }
   }, [selectPosition]);
 

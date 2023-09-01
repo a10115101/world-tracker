@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import styles from "./MapSearch.module.css";
 
-const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
+const OPENCAGE_BASE_URL = "https://api.opencagedata.com/geocode/v1/json?";
 
 function MapSearch({ setSelectPosition }) {
   const [searchText, setSearchText] = useState("");
@@ -13,18 +13,18 @@ function MapSearch({ setSelectPosition }) {
 
     const params = {
       q: searchText,
-      format: "json",
-      addressdetails: 1,
-      polygon_geojson: 0,
-      "accept-language": "en",
+      key: import.meta.env.VITE_OPENCAGE_API_KEY,
+      language: "en",
+      no_annotations: 1,
+      pretty: 1,
     };
 
     const queryString = new URLSearchParams(params).toString();
 
     try {
-      const response = await fetch(`${NOMINATIM_BASE_URL}${queryString}`);
+      const response = await fetch(`${OPENCAGE_BASE_URL}${queryString}`);
       const searchedData = await response.json();
-      setListPlace(searchedData);
+      setListPlace(searchedData.results);
     } catch (err) {
       console.log("Request api happen error!");
     }
@@ -48,15 +48,15 @@ function MapSearch({ setSelectPosition }) {
       <div className={styles.bottomContainer}>
         {listPlace && (
           <ul>
-            {listPlace.map((item) => {
+            {listPlace.map((item, id) => {
               return (
                 <li
-                  key={item?.place_id}
+                  key={id}
                   onClick={() => {
                     setSelectPosition(item);
                   }}
                 >
-                  {item.display_name}
+                  {item.formatted}
                 </li>
               );
             })}
