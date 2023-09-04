@@ -7,13 +7,18 @@ import styles from "./MapRecordForm.module.css";
 import { useRecords } from "../../contexts/RecordsContext";
 
 function MapRecordForm() {
-  const { setIsOpenForm, mapPosition } = useRecords();
+  const { setIsOpenForm, clickMapPosition, setMapPosition, isInit } =
+    useRecords();
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [countryCode, setCountryCode] = useState("");
   const [country, setCountry] = useState("");
   const [cityName, setCityName] = useState("");
   const [geocodingError, setGeocodingError] = useState("");
+
+  const navigate = useNavigate();
+  const [isRatingVisible, setIsRatingVisible] = useState(false);
+  const [newdate, setNewDate] = useState(new Date());
 
   useEffect(
     function () {
@@ -23,7 +28,7 @@ function MapRecordForm() {
           setGeocodingError("");
 
           const params = {
-            q: `${mapPosition[0]},+${mapPosition[1]}`,
+            q: `${clickMapPosition[0]},+${clickMapPosition[1]}`,
             key: import.meta.env.VITE_OPENCAGE_API_KEY,
             language: "en",
             no_annotations: 1,
@@ -32,15 +37,11 @@ function MapRecordForm() {
 
           const queryString = new URLSearchParams(params).toString();
 
-          // console.log(mapPosition[0], mapPosition[1]);
-
           const response = await fetch(
             `${import.meta.env.VITE_OPENCAGE_BASE_URL}${queryString}`
           );
           const searchedData = await response.json();
           const data = searchedData.results[0]?.components;
-
-          // console.log(data);
 
           if (!data.country_code || data === undefined)
             throw new Error(
@@ -67,17 +68,15 @@ function MapRecordForm() {
       getLocationInfo();
     },
 
-    [mapPosition]
+    [clickMapPosition]
   );
 
-  const navigate = useNavigate();
-
-  const [isRatingVisible, setIsRatingVisible] = useState(false);
-  const [newdate, setNewDate] = useState(new Date());
+  if (!isInit) return <div>Start by clicking somewhere on the map</div>;
 
   if (isLoadingGeocoding) return <div>Loading...</div>;
 
-  if (!mapPosition) return <div>Start by clicking somewhere on the map</div>;
+  if (!clickMapPosition)
+    return <div>Can not find this position on the map</div>;
 
   if (geocodingError) return <div>{geocodingError}</div>;
 
@@ -152,6 +151,7 @@ function MapRecordForm() {
               navigate(-1);
               setIsRatingVisible(false);
               setIsOpenForm(false);
+              setMapPosition(clickMapPosition);
             }}
           >
             Cancel

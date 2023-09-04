@@ -11,7 +11,7 @@ import records from "../../../testData";
 
 function MapRecordList() {
   const { setIsOpenForm } = useRecords();
-  const { setIsVisibleMarker } = useSearch();
+  const { setIsMapSearchMarkerVisible } = useSearch();
 
   return (
     <div className={styles.container}>
@@ -21,7 +21,7 @@ function MapRecordList() {
           to="/map/form"
           onClick={() => {
             setIsOpenForm(true);
-            setIsVisibleMarker(false);
+            setIsMapSearchMarkerVisible(false);
           }}
         >
           &#43;

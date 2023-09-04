@@ -3,7 +3,7 @@ import { useMap } from "react-leaflet";
 
 import { useSearch } from "../../../contexts/SearchContext";
 
-function SetSearchCenterView() {
+function SetSearchPositionView() {
   const { selectedPosition } = useSearch();
   const map = useMap();
 
@@ -19,4 +19,4 @@ function SetSearchCenterView() {
   return null;
 }
 
-export default SetSearchCenterView;
+export default SetSearchPositionView;

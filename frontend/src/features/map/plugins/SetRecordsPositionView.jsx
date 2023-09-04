@@ -5,7 +5,7 @@ import { useMap } from "react-leaflet";
 
 import { useRecords } from "../../../contexts/RecordsContext";
 
-function SetRecordsCenterView() {
+function SetRecordsPositionView() {
   const { mapPosition, setMapPosition } = useRecords();
 
   const [searchParams] = useSearchParams();
@@ -21,7 +21,8 @@ function SetRecordsCenterView() {
 
   const map = useMap();
   map.setView(mapPosition);
+
   return null;
 }
 
-export default SetRecordsCenterView;
+export default SetRecordsPositionView;

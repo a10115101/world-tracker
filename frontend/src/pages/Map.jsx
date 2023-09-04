@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 
 import { MapContainer } from "react-leaflet/MapContainer";
 import { TileLayer } from "react-leaflet/TileLayer";
 import { Marker } from "react-leaflet/Marker";
 import { Popup } from "react-leaflet/Popup";
-import { useMap } from "react-leaflet";
 
 import MapSidebar from "../features/map/MapSidebar";
 import MapSearch from "../features/map/MapSearch";
@@ -15,27 +13,28 @@ import { useRecords } from "../contexts/RecordsContext";
 import { useSearch } from "../contexts/SearchContext";
 
 import MapSearchMarker from "../features/map/MapSearchMarker";
-import SetSearchCenterView from "../features/map/plugins/SetSearchCenterView";
-import DetectClick from "../features/map/plugins/DetectClick";
+import SetSearchPositionView from "../features/map/plugins/SetSearchPositionView";
+import SetRecordsPositionView from "../features/map/plugins/SetRecordsPositionView";
+import SetClickPositionView from "../features/map/plugins/SetClickPositionView";
 
 // only for test
 import records from "../../testData";
-import SetRecordsCenterView from "../features/map/plugins/SetRecordsCenterView";
+import MapFormMarker from "../features/map/MapFormMarker";
 
 function Map() {
   const { isOpenForm, mapPosition } = useRecords();
-  const { isVisibleMarker } = useSearch();
+  const { isMapSearchMarkerVisible } = useSearch();
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpenSidebar, setIsOpenSidebar] = useState(true);
 
   return (
     <div className={styles.container}>
-      {isOpen ? <MapSidebar /> : null}
+      {isOpenSidebar ? <MapSidebar /> : null}
 
       <div className={styles.mapContainer}>
         <div className={styles.mapContainerLeft}>
-          <button onClick={() => setIsOpen(!isOpen)}>
-            {!isOpen ? "Open" : "Close"}
+          <button onClick={() => setIsOpenSidebar(!isOpenSidebar)}>
+            {!isOpenSidebar ? "Open" : "Close"}
           </button>
         </div>
 
@@ -52,14 +51,10 @@ function Map() {
             />
 
             {/* For search data */}
-            {isVisibleMarker && <MapSearchMarker />}
+            {isMapSearchMarkerVisible && <MapSearchMarker />}
 
             {/* For create data */}
-            <Marker position={mapPosition}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
+            {isOpenForm && <MapFormMarker />}
 
             {/* For db data */}
             {records.map((record) => (
@@ -74,9 +69,9 @@ function Map() {
               </Marker>
             ))}
 
-            <SetRecordsCenterView />
-            <SetSearchCenterView />
-            {isOpenForm && <DetectClick />}
+            <SetRecordsPositionView />
+            <SetSearchPositionView />
+            {isOpenForm && <SetClickPositionView />}
           </MapContainer>
         </div>
 

@@ -4,7 +4,7 @@ import styles from "./MapSearch.module.css";
 import { useSearch } from "../../contexts/SearchContext";
 
 function MapSearch() {
-  const { setSelectedPosition, setIsVisibleMarker } = useSearch();
+  const { setSelectedPosition, setIsMapSearchMarkerVisible } = useSearch();
 
   const [searchedText, setSearchedText] = useState("");
   const [isSearching, setIsSearching] = useState(false);
@@ -85,7 +85,7 @@ function MapSearch() {
                   key={id}
                   onClick={() => {
                     setSelectedPosition(searchedResult);
-                    setIsVisibleMarker(true);
+                    setIsMapSearchMarkerVisible(true);
                   }}
                 >
                   {searchedResult.formatted}

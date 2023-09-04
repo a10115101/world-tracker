@@ -5,7 +5,7 @@ import styles from "./MapRecordListItem.module.css";
 import { useSearch } from "../../contexts/SearchContext";
 
 function MapRecordListItem({ record }) {
-  const { setIsVisibleMarker } = useSearch();
+  const { setIsMapSearchMarkerVisible } = useSearch();
 
   const { id, countryCode, country, cityName, date, position } = record;
 
@@ -20,7 +20,7 @@ function MapRecordListItem({ record }) {
     <li className={styles.container}>
       <Link
         to={`${id}?lat=${position.lat}&lng=${position.lng}`}
-        onClick={() => setIsVisibleMarker(false)}
+        onClick={() => setIsMapSearchMarkerVisible(false)}
       >
         <span>
           <img
