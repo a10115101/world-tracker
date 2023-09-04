@@ -10,12 +10,16 @@ import { useMap, useMapEvent } from "react-leaflet";
 import MapSidebar from "../features/map/MapSidebar";
 import MapSearch from "../ui/MapSearch";
 import styles from "./Map.module.css";
+import { useRecords } from "../contexts/RecordsContext";
+
+// only for test
+import records from "../../testData";
 
 function Map() {
+  const { isOpenForm, mapPosition, setMapPosition } = useRecords();
   const [isOpen, setIsOpen] = useState(true);
 
   const [selectPosition, setSelectPosition] = useState(null);
-  const [mapPosition, setMapPosition] = useState([40, 0]);
 
   // hook for lat and lng params
   const [searchParams] = useSearchParams();
@@ -55,13 +59,16 @@ function Map() {
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
             />
 
+            {/* For search data */}
             {selectPosition && (
               <Marker position={locationSelection}>
                 <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
+                  <span>
+                    Lat: {locationSelection[0]}, Lng: {locationSelection[1]}
+                  </span>
                 </Popup>
               </Marker>
             )}
@@ -72,8 +79,22 @@ function Map() {
               </Popup>
             </Marker>
 
+            {/* For db data */}
+            {records.map((record) => (
+              <Marker
+                position={[record.position.lat, record.position.lng]}
+                key={record.id}
+              >
+                <Popup>
+                  <span>{record.countryCode}</span>
+                  <span>{record.cityName}</span>
+                </Popup>
+              </Marker>
+            ))}
+
             <ChangeCenter position={mapPosition} />
-            {/* <DetectClick /> */}
+
+            {isOpenForm && <DetectClick setMapPosition={setMapPosition} />}
             <ResetCenterView selectPosition={selectPosition} />
           </MapContainer>
         </div>
@@ -93,12 +114,12 @@ function ChangeCenter({ position }) {
   return null;
 }
 
-// function DetectClick() {
-//   // const navigate = useNavigate();
-//   useMapEvent({
-//     click: (e) => console.log(e),
-//   });
-// }
+function DetectClick({ setMapPosition }) {
+  // const navigate = useNavigate();
+  useMapEvent({
+    click: (e) => setMapPosition([e.latlng.wrap().lat, e.latlng.wrap().lng]),
+  });
+}
 ///////////////////////////////////////////
 
 // temp search

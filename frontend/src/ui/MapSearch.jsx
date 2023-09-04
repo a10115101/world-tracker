@@ -2,8 +2,6 @@ import { useState } from "react";
 
 import styles from "./MapSearch.module.css";
 
-const OPENCAGE_BASE_URL = "https://api.opencagedata.com/geocode/v1/json?";
-
 function MapSearch({ setSelectPosition }) {
   const [searchText, setSearchText] = useState("");
   const [listPlace, setListPlace] = useState([]);
@@ -22,7 +20,9 @@ function MapSearch({ setSelectPosition }) {
     const queryString = new URLSearchParams(params).toString();
 
     try {
-      const response = await fetch(`${OPENCAGE_BASE_URL}${queryString}`);
+      const response = await fetch(
+        `${import.meta.env.VITE_OPENCAGE_BASE_URL}${queryString}`
+      );
       const searchedData = await response.json();
       setListPlace(searchedData.results);
     } catch (err) {

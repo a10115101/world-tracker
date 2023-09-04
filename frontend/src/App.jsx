@@ -17,33 +17,37 @@ import ProfileDetails from "./features/profile/ProfileDetails";
 import ProfileFriends from "./features/profile/ProfileFriends";
 import ProfileSetting from "./features/profile/ProfileSetting";
 
+import { RecordsProvider } from "./contexts/RecordsContext";
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Homepage />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Singup />} />
+    <RecordsProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Homepage />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Singup />} />
 
-          <Route path="map" element={<Map />}>
-            <Route index element={<MapRecordList />} />
-            <Route path="/map/:id" element={<MapRecord />} />
-            <Route path="form" element={<MapRecordForm />} />
+            <Route path="map" element={<Map />}>
+              <Route index element={<MapRecordList />} />
+              <Route path="/map/:id" element={<MapRecord />} />
+              <Route path="form" element={<MapRecordForm />} />
+            </Route>
+
+            <Route path="profile" element={<Profile />}>
+              <Route index element={<ProfileAbout />} />
+              <Route path="about" element={<ProfileAbout />} />
+              <Route path="details" element={<ProfileDetails />} />
+              <Route path="friends" element={<ProfileFriends />} />
+              <Route path="setting" element={<ProfileSetting />} />
+            </Route>
+
+            <Route path="*" element={<PageNotFound />} />
           </Route>
-
-          <Route path="profile" element={<Profile />}>
-            <Route index element={<ProfileAbout />} />
-            <Route path="about" element={<ProfileAbout />} />
-            <Route path="details" element={<ProfileDetails />} />
-            <Route path="friends" element={<ProfileFriends />} />
-            <Route path="setting" element={<ProfileSetting />} />
-          </Route>
-
-          <Route path="*" element={<PageNotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </RecordsProvider>
   );
 }
 
