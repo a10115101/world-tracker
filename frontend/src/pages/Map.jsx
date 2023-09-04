@@ -1,43 +1,32 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import { MapContainer } from "react-leaflet/MapContainer";
 import { TileLayer } from "react-leaflet/TileLayer";
 import { Marker } from "react-leaflet/Marker";
 import { Popup } from "react-leaflet/Popup";
-import { useMap, useMapEvent } from "react-leaflet";
+import { useMap } from "react-leaflet";
 
 import MapSidebar from "../features/map/MapSidebar";
-import MapSearch from "../ui/MapSearch";
+import MapSearch from "../features/map/MapSearch";
 import styles from "./Map.module.css";
+
 import { useRecords } from "../contexts/RecordsContext";
+import { useSearch } from "../contexts/SearchContext";
+
+import MapSearchMarker from "../features/map/MapSearchMarker";
+import SetSearchCenterView from "../features/map/plugins/SetSearchCenterView";
+import DetectClick from "../features/map/plugins/DetectClick";
 
 // only for test
 import records from "../../testData";
+import SetRecordsCenterView from "../features/map/plugins/SetRecordsCenterView";
 
 function Map() {
-  const { isOpenForm, mapPosition, setMapPosition } = useRecords();
+  const { isOpenForm, mapPosition } = useRecords();
+  const { isVisibleMarker } = useSearch();
+
   const [isOpen, setIsOpen] = useState(true);
-
-  const [selectPosition, setSelectPosition] = useState(null);
-
-  // hook for lat and lng params
-  const [searchParams] = useSearchParams();
-  const getLat = searchParams.get("lat");
-  const getLng = searchParams.get("lng");
-
-  useEffect(
-    function () {
-      if (getLat && getLng) setMapPosition([getLat, getLng]);
-    },
-    [getLat, getLng]
-  );
-  ///////////////////////////////////////////
-
-  const locationSelection = [
-    Number(selectPosition?.geometry?.lat),
-    Number(selectPosition?.geometry?.lng),
-  ];
 
   return (
     <div className={styles.container}>
@@ -63,16 +52,9 @@ function Map() {
             />
 
             {/* For search data */}
-            {selectPosition && (
-              <Marker position={locationSelection}>
-                <Popup>
-                  <span>
-                    Lat: {locationSelection[0]}, Lng: {locationSelection[1]}
-                  </span>
-                </Popup>
-              </Marker>
-            )}
+            {isVisibleMarker && <MapSearchMarker />}
 
+            {/* For create data */}
             <Marker position={mapPosition}>
               <Popup>
                 A pretty CSS3 popup. <br /> Easily customizable.
@@ -92,50 +74,18 @@ function Map() {
               </Marker>
             ))}
 
-            <ChangeCenter position={mapPosition} />
-
-            {isOpenForm && <DetectClick setMapPosition={setMapPosition} />}
-            <ResetCenterView selectPosition={selectPosition} />
+            <SetRecordsCenterView />
+            <SetSearchCenterView />
+            {isOpenForm && <DetectClick />}
           </MapContainer>
         </div>
 
         <div className={styles.mapContainerRight}>
-          <MapSearch setSelectPosition={setSelectPosition} />
+          <MapSearch />
         </div>
       </div>
     </div>
   );
-}
-
-// temp getParams
-function ChangeCenter({ position }) {
-  const map = useMap();
-  map.setView(position);
-  return null;
-}
-
-function DetectClick({ setMapPosition }) {
-  // const navigate = useNavigate();
-  useMapEvent({
-    click: (e) => setMapPosition([e.latlng.wrap().lat, e.latlng.wrap().lng]),
-  });
-}
-///////////////////////////////////////////
-
-// temp search
-function ResetCenterView({ selectPosition }) {
-  const map = useMap();
-
-  useEffect(() => {
-    if (selectPosition) {
-      map.setView([
-        selectPosition?.geometry?.lat,
-        selectPosition?.geometry?.lng,
-      ]);
-    }
-  }, [selectPosition]);
-
-  return null;
 }
 
 export default Map;

@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 
 import styles from "./MapRecordListItem.module.css";
 
+import { useSearch } from "../../contexts/SearchContext";
+
 function MapRecordListItem({ record }) {
+  const { setIsVisibleMarker } = useSearch();
+
   const { id, countryCode, country, cityName, date, position } = record;
 
   const formatDate = (date) =>
@@ -14,7 +18,10 @@ function MapRecordListItem({ record }) {
 
   return (
     <li className={styles.container}>
-      <Link to={`${id}?lat=${position.lat}&lng=${position.lng}`}>
+      <Link
+        to={`${id}?lat=${position.lat}&lng=${position.lng}`}
+        onClick={() => setIsVisibleMarker(false)}
+      >
         <span>
           <img
             src={`https://flagcdn.com/w20/${countryCode}.png`}
