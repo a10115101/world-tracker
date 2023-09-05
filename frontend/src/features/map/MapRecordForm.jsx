@@ -9,7 +9,7 @@ import { useRecords } from "../../contexts/RecordsContext";
 import { getGeocoding } from "../../services/apiGeocoding";
 
 function MapRecordForm() {
-  const { setIsOpenForm, clickMapPosition, setMapPosition, isInit } =
+  const { setIsFormOpened, clickMapPosition, setMapPosition, isClicked } =
     useRecords();
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
@@ -63,7 +63,7 @@ function MapRecordForm() {
     [clickMapPosition]
   );
 
-  if (!isInit) return <div>Start by clicking somewhere on the map</div>;
+  if (!isClicked) return <div>Start by clicking somewhere on the map</div>;
 
   if (isLoadingGeocoding) return <div>Loading...</div>;
 
@@ -131,7 +131,6 @@ function MapRecordForm() {
 
           <div className={styles.description}>
             <label htmlFor="description">Description: </label>
-
             <textarea id="description" rows={3} />
           </div>
         </div>
@@ -142,7 +141,7 @@ function MapRecordForm() {
               e.preventDefault();
               navigate(-1);
               setIsRatingVisible(false);
-              setIsOpenForm(false);
+              setIsFormOpened(false);
               setMapPosition(clickMapPosition);
             }}
           >

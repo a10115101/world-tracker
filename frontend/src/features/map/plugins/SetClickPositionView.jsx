@@ -3,7 +3,7 @@ import { useMap, useMapEvent } from "react-leaflet";
 import { useRecords } from "../../../contexts/RecordsContext";
 
 function SetClickPositionView() {
-  const { clickMapPosition, setClickPosition, isInit, setIsInit } =
+  const { clickMapPosition, setClickPosition, isClicked, setIsClicked } =
     useRecords();
 
   const map = useMap();
@@ -11,11 +11,11 @@ function SetClickPositionView() {
   useMapEvent({
     click: (e) => {
       setClickPosition([e.latlng.wrap().lat, e.latlng.wrap().lng]);
-      setIsInit(true);
+      setIsClicked(true);
     },
   });
 
-  if (isInit) map.setView(clickMapPosition);
+  if (isClicked) map.setView(clickMapPosition);
 
   return null;
 }

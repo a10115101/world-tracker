@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 import styles from "./MapRecordList.module.css";
 import MapRecordListItem from "./MapRecordListItem";
@@ -10,8 +11,14 @@ import { useSearch } from "../../contexts/SearchContext";
 import records from "../../../testData";
 
 function MapRecordList() {
-  const { setIsOpenForm } = useRecords();
+  const { setIsFormOpened } = useRecords();
   const { setIsMapSearchMarkerVisible } = useSearch();
+
+  // initialize status for first time render
+  useEffect(function () {
+    setIsMapSearchMarkerVisible(false);
+    setIsFormOpened(false);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -20,8 +27,8 @@ function MapRecordList() {
         <Link
           to="/map/form"
           onClick={() => {
-            setIsOpenForm(true);
             setIsMapSearchMarkerVisible(false);
+            setIsFormOpened(true);
           }}
         >
           &#43;
