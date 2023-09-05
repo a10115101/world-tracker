@@ -1,13 +1,17 @@
 import { Marker, Popup } from "react-leaflet";
+
 import { useRecords } from "../../contexts/RecordsContext";
+import { LeafIcon } from "../../utilities/icon";
 
 function MapFormMarker() {
   const { clickMapPosition } = useRecords();
 
+  const redIcon = new LeafIcon({ iconUrl: "/red-pin.png" });
+
   return (
-    <Marker position={clickMapPosition}>
+    <Marker position={clickMapPosition} icon={redIcon}>
       <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
+        <h3>Current position</h3>
       </Popup>
     </Marker>
   );

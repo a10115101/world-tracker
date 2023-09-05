@@ -1,6 +1,7 @@
 import { Marker, Popup } from "react-leaflet";
 
 import { useSearch } from "../../contexts/SearchContext";
+import { LeafIcon } from "../../utilities/icon";
 
 function MapSearchMarker() {
   const { selectedPosition } = useSearch();
@@ -10,12 +11,14 @@ function MapSearchMarker() {
     Number(selectedPosition?.geometry?.lng),
   ];
 
+  const redIcon = new LeafIcon({ iconUrl: "/red-pin.png" });
+
   return (
-    <Marker position={locationSelection}>
+    <Marker position={locationSelection} icon={redIcon}>
       <Popup>
-        <span>
+        <h3>
           Lat: {locationSelection[0]}, Lng: {locationSelection[1]}
-        </span>
+        </h3>
       </Popup>
     </Marker>
   );

@@ -1,10 +1,8 @@
 import { useState } from "react";
 
-import { MapContainer } from "react-leaflet/MapContainer";
-import { TileLayer } from "react-leaflet/TileLayer";
-import { Marker } from "react-leaflet/Marker";
-import { Popup } from "react-leaflet/Popup";
+import { MapContainer, TileLayer } from "react-leaflet";
 
+import MapRecordMarker from "../features/map/MapRecordMarker";
 import MapSearchMarker from "../features/map/MapSearchMarker";
 import MapFormMarker from "../features/map/MapFormMarker";
 import MapSidebar from "../features/map/MapSidebar";
@@ -58,15 +56,7 @@ function Map() {
 
             {/* For db data */}
             {records.map((record) => (
-              <Marker
-                position={[record.position.lat, record.position.lng]}
-                key={record.id}
-              >
-                <Popup>
-                  <span>{record.countryCode}</span>
-                  <span>{record.cityName}</span>
-                </Popup>
-              </Marker>
+              <MapRecordMarker record={record} key={record.id} />
             ))}
 
             <SetRecordsPositionView />
