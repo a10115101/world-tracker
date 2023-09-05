@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import styles from "./MapRecordForm.module.css";
 import { useRecords } from "../../contexts/RecordsContext";
+import { getGeocoding } from "../../services/apiGeocoding";
 
 function MapRecordForm() {
   const { setIsOpenForm, clickMapPosition, setMapPosition, isInit } =
@@ -27,21 +29,11 @@ function MapRecordForm() {
           setIsLoadingGeocoding(true);
           setGeocodingError("");
 
-          const params = {
-            q: `${clickMapPosition[0]},+${clickMapPosition[1]}`,
-            key: import.meta.env.VITE_OPENCAGE_API_KEY,
-            language: "en",
-            no_annotations: 1,
-            pretty: 1,
-          };
-
-          const queryString = new URLSearchParams(params).toString();
-
-          const response = await fetch(
-            `${import.meta.env.VITE_OPENCAGE_BASE_URL}${queryString}`
+          const searchedData = await getGeocoding(
+            `${clickMapPosition[0]},+${clickMapPosition[1]}`
           );
-          const searchedData = await response.json();
-          const data = searchedData.results[0]?.components;
+
+          const data = searchedData[0]?.components;
 
           if (!data.country_code || data === undefined)
             throw new Error(

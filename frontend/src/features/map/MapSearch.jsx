@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import styles from "./MapSearch.module.css";
 import { useSearch } from "../../contexts/SearchContext";
+import { getGeocoding } from "../../services/apiGeocoding";
 
 function MapSearch() {
   const { setSelectedPosition, setIsMapSearchMarkerVisible } = useSearch();
@@ -18,25 +19,12 @@ function MapSearch() {
       setIsSearching(true);
       setSearchingError("");
 
-      const params = {
-        q: searchedText,
-        key: import.meta.env.VITE_OPENCAGE_API_KEY,
-        language: "en",
-        no_annotations: 1,
-        pretty: 1,
-      };
-
-      const queryString = new URLSearchParams(params).toString();
-
-      const response = await fetch(
-        `${import.meta.env.VITE_OPENCAGE_BASE_URL}${queryString}`
-      );
-      const searchedData = await response.json();
+      const searchedData = await getGeocoding(searchedText);
 
       if (!searchedData)
         throw new Error("Not found it, please search for another place again.");
 
-      setSearchedResults(searchedData.results);
+      setSearchedResults(searchedData);
     } catch (err) {
       setSearchingError(err.message);
     } finally {
