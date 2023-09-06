@@ -14,7 +14,9 @@ function SetRecordsPositionView() {
 
   useEffect(
     function () {
-      if (getLat && getLng) setMapPosition([getLat, getLng]);
+      if (getLat && getLng) {
+        setMapPosition([getLat, getLng]);
+      }
     },
     [getLat, getLng]
   );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 
 import MapRecordMarker from "../features/map/MapRecordMarker";
 import MapSearchMarker from "../features/map/MapSearchMarker";
@@ -31,7 +31,11 @@ function Map() {
 
       <div className={styles.mapContainer}>
         <div className={styles.mapContainerLeft}>
-          <button onClick={() => setIsSidebarOpened(!isSidebarOpened)}>
+          <button
+            onClick={() => {
+              setIsSidebarOpened(!isSidebarOpened);
+            }}
+          >
             {!isSidebarOpened ? "Open" : "Close"}
           </button>
         </div>

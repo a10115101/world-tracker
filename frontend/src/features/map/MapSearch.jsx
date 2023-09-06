@@ -5,14 +5,21 @@ import { useSearch } from "../../contexts/SearchContext";
 import { getGeocoding } from "../../services/apiGeocoding";
 
 function MapSearch() {
-  const { setSelectedPosition, setIsMapSearchMarkerVisible } = useSearch();
+  const {
+    setSelectedPosition,
+    isListOpened,
+    setIsListOpened,
+    setIsMapSearchMarkerVisible,
+  } = useSearch();
 
   const [searchedText, setSearchedText] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchingError, setSearchingError] = useState("");
 
-  const handleSearch = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     if (searchedText.length <= 1) return;
 
     try {
@@ -25,6 +32,8 @@ function MapSearch() {
         throw new Error("Not found it, please search for another place again.");
 
       setSearchedResults(searchedData);
+      // isListOpened.current = true;
+      setIsListOpened(true);
     } catch (err) {
       setSearchingError(err.message);
     } finally {
@@ -33,39 +42,41 @@ function MapSearch() {
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      onClick={() => {
+        setIsListOpened(!isListOpened);
+      }}
+    >
       <div className={styles.topContainer}>
-        {!isSearching ? (
-          <>
-            <i
-              className="fa-solid fa-magnifying-glass"
-              onClick={handleSearch}
-            />
+        <form onSubmit={handleSubmit}>
+          <button>
+            <i className="fa-solid fa-magnifying-glass" />
+          </button>
+          {isSearching ? (
             <input
               type="search"
               placeholder="Search for country or city"
+              disabled={isSearching}
+              value="Searching..."
+            />
+          ) : (
+            <input
+              type="search"
+              placeholder="Search for country or city"
+              disabled={isSearching}
               value={searchedText}
               onChange={(e) => {
                 setSearchedText(e.target.value);
                 setSearchedResults([]);
               }}
             />
-          </>
-        ) : (
-          <>
-            <i className="fa-solid fa-magnifying-glass" />
-            <input
-              type="search"
-              placeholder="Search for country or city"
-              disabled={true}
-              value={"Searching..."}
-            />
-          </>
-        )}
+          )}
+        </form>
       </div>
 
-      <div className={styles.bottomContainer}>
-        {searchedResults && (
+      {searchedResults && isListOpened && (
+        <div className={styles.bottomContainer}>
           <ul>
             {searchedResults.map((searchedResult, id) => {
               return (
@@ -81,8 +92,8 @@ function MapSearch() {
               );
             })}
           </ul>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

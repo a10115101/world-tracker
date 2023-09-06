@@ -1,9 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 
 const SearchContext = createContext();
 
 function SearchProvider({ children }) {
   const [selectedPosition, setSelectedPosition] = useState(null);
+  // const isListOpened = useRef(false);
+  const [isListOpened, setIsListOpened] = useState(false);
   const [isMapSearchMarkerVisible, setIsMapSearchMarkerVisible] =
     useState(false);
 
@@ -12,6 +14,8 @@ function SearchProvider({ children }) {
       value={{
         selectedPosition,
         setSelectedPosition,
+        isListOpened,
+        setIsListOpened,
         isMapSearchMarkerVisible,
         setIsMapSearchMarkerVisible,
       }}

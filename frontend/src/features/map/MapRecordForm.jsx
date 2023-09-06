@@ -9,8 +9,7 @@ import { useRecords } from "../../contexts/RecordsContext";
 import { getGeocoding } from "../../services/apiGeocoding";
 
 function MapRecordForm() {
-  const { setIsFormOpened, clickMapPosition, setMapPosition, isClicked } =
-    useRecords();
+  const { setIsFormOpened, mapPosition, isClicked } = useRecords();
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [countryCode, setCountryCode] = useState("");
@@ -30,7 +29,7 @@ function MapRecordForm() {
           setGeocodingError("");
 
           const searchedData = await getGeocoding(
-            `${clickMapPosition[0]},+${clickMapPosition[1]}`
+            `${mapPosition[0]},+${mapPosition[1]}`
           );
 
           const data = searchedData[0]?.components;
@@ -60,15 +59,14 @@ function MapRecordForm() {
       getLocationInfo();
     },
 
-    [clickMapPosition]
+    [mapPosition]
   );
 
   if (!isClicked) return <div>Start by clicking somewhere on the map</div>;
 
   if (isLoadingGeocoding) return <div>Loading...</div>;
 
-  if (!clickMapPosition)
-    return <div>Can not find this position on the map</div>;
+  if (!mapPosition) return <div>Can not find this position on the map</div>;
 
   if (geocodingError) return <div>{geocodingError}</div>;
 
@@ -142,7 +140,6 @@ function MapRecordForm() {
               navigate(-1);
               setIsRatingVisible(false);
               setIsFormOpened(false);
-              setMapPosition(clickMapPosition);
             }}
           >
             Cancel

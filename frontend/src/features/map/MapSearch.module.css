@@ -5,14 +5,31 @@
 }
 
 .topContainer {
-  display: flex;
-  align-items: center;
   border-bottom: 2px solid black;
   padding-left: 0.5rem;
 }
 
+.topContainer form {
+  display: flex;
+}
+
+.topContainer button {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.topContainer i {
+  margin-right: 0.5rem;
+}
+
+.topContainer input {
+  border: none;
+}
+
 .bottomContainer {
   padding-left: 0.5rem;
+  border: 2px solid green;
 }
 
 .bottomContainer ul {
@@ -22,13 +39,4 @@
 
 .bottomContainer li:hover {
   background-color: grey;
-}
-
-.container i {
-  margin-right: 0.5rem;
-  cursor: pointer;
-}
-
-.container input {
-  border: none;
 }
