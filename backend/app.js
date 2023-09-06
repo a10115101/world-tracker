@@ -3,25 +3,28 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 
-const app = express();
+const userRouter = require("./routers/userRouters");
+const recordRouter = require("./routers/recordRouters");
 
-const MONGODB = process.env.MONGO_DATABASE.replace(
+const app = express();
+app.use(express.json());
+
+const MongoDB = process.env.MONGO_DATABASE.replace(
   "<PASSWORD>",
   process.env.MONGO_DATABASE_PASSWORD
 );
 
 mongoose
-  .connect(MONGODB)
+  .connect(MongoDB)
   .then(() => {
-    console.log("MONGODB is connected");
+    console.log("MongoDB is connected");
   })
   .catch((err) => {
     console.log(err.message);
   });
 
-app.get("/", (req, res) => {
-  res.send("hello server");
-});
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/records", recordRouter);
 
 const port = 3000;
 app.listen(port, () => {
