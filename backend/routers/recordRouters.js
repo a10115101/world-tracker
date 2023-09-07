@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { recordValidator } = require("../config/validator");
+const { recordDataValidate } = require("../config/validator");
 const Record = require("../models/recordModel");
 
 // getAllRecords
@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const records = await Record.find({}).exec();
 
     res.status(200).json({
-      status: "succeed",
+      status: "success",
       results: records.length,
       data: {
         data: records,
@@ -26,7 +26,7 @@ router.get("/:id", async (req, res) => {
     const record = await Record.findById(req.params.id).exec();
 
     res.status(200).json({
-      status: "succeed",
+      status: "success",
       data: {
         data: record,
       },
@@ -38,7 +38,7 @@ router.get("/:id", async (req, res) => {
 
 // createRecord
 router.post("/", async (req, res) => {
-  const { error } = await recordValidator(req.body);
+  const { error } = await recordDataValidate(req.body);
 
   //   error.details.forEach((detail) => console.log(detail.message));
 
@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
     const newRecord = await Record.create(req.body);
 
     res.status(200).json({
-      status: "succeed",
+      status: "success",
       data: {
         data: newRecord,
       },
@@ -70,7 +70,7 @@ router.patch("/:id", async (req, res) => {
     }).exec();
 
     res.status(200).json({
-      status: "succeed",
+      status: "success",
       data: {
         data: record,
       },
@@ -86,7 +86,7 @@ router.delete("/:id", async (req, res) => {
     await Record.findByIdAndDelete(req.params.id).exec();
 
     res.status(204).json({
-      status: "succeed",
+      status: "success",
       data: null,
     });
   } catch (err) {

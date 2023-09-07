@@ -1,19 +1,25 @@
 const Joi = require("joi");
 
-exports.registerValidation = (data) => {
+exports.signupDataValidate = (data) => {
   const schema = Joi.object({
     username: Joi.string().min(2).max(20).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(8).max(20).required(),
-    passwordConfirm: Joi.ref("password"),
-  })
-    .with("password", "passwordConfirm")
-    .options({ abortEarly: false });
+  }).options({ abortEarly: false });
 
   return schema.validate(data);
 };
 
-exports.updateUserValidation = (data) => {
+exports.loginDataValidate = (data) => {
+  const schema = Joi.object({
+    email: Joi.string().required().email(),
+    password: Joi.string().min(8).max(20).required(),
+  });
+
+  return schema.validate(data);
+};
+
+exports.updateUserDataValidate = (data) => {
   const schema = Joi.object({
     username: Joi.string().min(2).max(20).required(),
     email: Joi.string().email().required(),
@@ -22,7 +28,7 @@ exports.updateUserValidation = (data) => {
   return schema.validate(data);
 };
 
-exports.recordValidator = (data) => {
+exports.recordDataValidate = (data) => {
   const schema = Joi.object({
     country: Joi.string().required(),
     countryCode: Joi.string().required(),

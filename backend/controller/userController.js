@@ -6,7 +6,7 @@ exports.getAllUsers = async (req, res) => {
     const users = await User.find({}).exec();
 
     res.status(200).json({
-      status: "succeed",
+      status: "success",
       results: users.length,
       data: {
         users,
@@ -30,7 +30,7 @@ exports.getUser = async (req, res) => {
       });
 
     res.status(200).json({
-      status: "succeed",
+      status: "success",
       data: {
         user,
       },
@@ -40,37 +40,8 @@ exports.getUser = async (req, res) => {
   }
 };
 
-exports.createUser = async (req, res) => {
-  const { error } = validator.registerValidation(req.body);
-
-  if (error)
-    return res
-      .status(400)
-      .json({ status: "fail", message: error.details[0].message });
-
-  const { username, email, password, passwordConfirm } = req.body;
-
-  try {
-    const newUser = await User.create({
-      username,
-      email,
-      password,
-      passwordConfirm,
-    });
-
-    res.status(201).json({
-      status: "succeed",
-      data: {
-        user: newUser,
-      },
-    });
-  } catch (err) {
-    res.status(500).json({ status: "fail", message: err.message });
-  }
-};
-
 exports.updateUser = async (req, res) => {
-  const { error } = validator.updateUserValidation(req.body);
+  const { error } = validator.updateUserDataValidate(req.body);
 
   if (error)
     return res
@@ -98,7 +69,7 @@ exports.updateUser = async (req, res) => {
       });
 
     res.status(200).json({
-      status: "succeed",
+      status: "success",
       data: {
         update: user,
       },
@@ -121,7 +92,7 @@ exports.deleteUser = async (req, res) => {
       });
 
     res.status(204).json({
-      status: "succeed",
+      status: "success",
       data: null,
     });
   } catch (err) {

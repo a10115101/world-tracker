@@ -27,27 +27,20 @@ const userSchema = new mongoose.Schema(
       maxlength: [20, "Password length must less than or equal to 20!"],
       select: false,
     },
-    passwordConfirm: {
-      type: String,
-      required: [true, "Please confirm your password!"],
-      validate: {
-        validator: function (element) {
-          return element === this.password;
-        },
-        message: "Passwords are not same!",
-      },
-    },
   },
   {
     timestamps: true,
   }
 );
 
+userSchema.methods.correctPassword = async (inputtedPassword, userPassword) => {
+  return await bycrpt.compare(inputtedPassword, userPassword);
+};
+
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   this.password = await bycrpt.hash(this.password, 12);
-  this.passwordConfirm = undefined;
   next();
 });
 
