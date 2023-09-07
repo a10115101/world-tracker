@@ -6,7 +6,18 @@ exports.registerValidation = (data) => {
     email: Joi.string().email().required(),
     password: Joi.string().min(8).max(20).required(),
     passwordConfirm: Joi.ref("password"),
-  });
+  })
+    .with("password", "passwordConfirm")
+    .options({ abortEarly: false });
+
+  return schema.validate(data);
+};
+
+exports.updateUserValidation = (data) => {
+  const schema = Joi.object({
+    username: Joi.string().min(2).max(20).required(),
+    email: Joi.string().email().required(),
+  }).options({ abortEarly: false });
 
   return schema.validate(data);
 };

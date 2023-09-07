@@ -2,11 +2,14 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
 
 const userRouter = require("./routers/userRouters");
 const recordRouter = require("./routers/recordRouters");
 
 const app = express();
+
+app.use(morgan("dev"));
 app.use(express.json());
 
 const MongoDB = process.env.MONGO_DATABASE.replace(

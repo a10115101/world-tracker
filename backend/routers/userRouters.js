@@ -1,6 +1,9 @@
 const router = require("express").Router();
 
-const { registerValidation } = require("../config/validator");
+const {
+  registerValidation,
+  updateUserValidation,
+} = require("../config/validator");
 const User = require("../models/userModel");
 
 // getAllUsers
@@ -12,7 +15,7 @@ router.get("/", async (req, res) => {
       status: "succeed",
       results: users.length,
       data: {
-        data: users,
+        users,
       },
     });
   } catch (err) {
@@ -25,10 +28,18 @@ router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id).exec();
 
+    if (!user)
+      return res.status(404).json({
+        status: "fail",
+        message: {
+          message: "No document found with that ID",
+        },
+      });
+
     res.status(200).json({
       status: "succeed",
       data: {
-        data: user,
+        user,
       },
     });
   } catch (err) {
@@ -38,22 +49,27 @@ router.get("/:id", async (req, res) => {
 
 // createUser
 router.post("/", async (req, res) => {
-  const { error } = await registerValidation(req.body);
-
-  //   error.details.forEach((detail) => console.log(detail.message));
+  const { error } = registerValidation(req.body);
 
   if (error)
     return res
       .status(400)
       .json({ status: "fail", message: error.details[0].message });
 
-  try {
-    const newUser = await User.create(req.body);
+  const { username, email, password, passwordConfirm } = req.body;
 
-    res.status(200).json({
+  try {
+    const newUser = await User.create({
+      username,
+      email,
+      password,
+      passwordConfirm,
+    });
+
+    res.status(201).json({
       status: "succeed",
       data: {
-        data: newUser,
+        user: newUser,
       },
     });
   } catch (err) {
@@ -63,16 +79,37 @@ router.post("/", async (req, res) => {
 
 // updateUser
 router.patch("/:id", async (req, res) => {
+  const { error } = updateUserValidation(req.body);
+
+  if (error)
+    return res
+      .status(400)
+      .json({ status: "fail", message: error.details[0].message });
+
+  const { username, email } = req.body;
+
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    }).exec();
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { username, email },
+      {
+        new: true,
+        runValidators: true,
+      }
+    ).exec();
+
+    if (!user)
+      return res.status(404).json({
+        status: "fail",
+        message: {
+          message: "No document found with that ID",
+        },
+      });
 
     res.status(200).json({
       status: "succeed",
       data: {
-        data: user,
+        update: user,
       },
     });
   } catch (err) {
