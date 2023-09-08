@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     photo: String,
-    friends: [String],
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "Friend" }],
     password: {
       type: String,
       required: [true, "User must have password!"],
