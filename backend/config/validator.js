@@ -30,16 +30,20 @@ exports.updateUserDataValidate = (data) => {
 
 exports.recordDataValidate = (data) => {
   const schema = Joi.object({
+    user: Joi.string().required(),
     country: Joi.string().required(),
     countryCode: Joi.string().required(),
     cityName: Joi.string().required(),
-    date: Joi.string().required(),
-    status: Joi.string().required().valid("plannig", "visited"),
+    date: Joi.date().required(),
+    status: Joi.string().required().valid("planning", "visited"),
     rating: Joi.when("status", {
       is: "visited",
-      then: Joi.string().min(1).max(5).required(),
+      then: Joi.number().min(1).max(5).required(),
+      otherwise: Joi.forbidden(),
     }),
-    position: Joi.string().required(),
+    position: {
+      coordinates: Joi.array().items(Joi.number().required()),
+    },
     description: Joi.string().min(1).max(100).required(),
   }).options({ abortEarly: false });
 

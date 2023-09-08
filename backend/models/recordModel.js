@@ -5,6 +5,7 @@ const recordSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
+      required: [true, "Review must belong to a user"],
     },
     country: {
       type: String,
@@ -19,16 +20,16 @@ const recordSchema = new mongoose.Schema(
       required: [true, "Record must hava city name"],
     },
     date: {
-      type: String,
+      type: Date,
       required: [true, "Record must hava date"],
     },
     status: {
       type: String,
       required: [true, "Record must hava status"],
-      enum: ["plannig", "visited"],
+      enum: ["planning", "visited"],
     },
     rating: {
-      type: String,
+      type: Number,
       required: function () {
         return this.status === "visited";
       },
@@ -43,7 +44,10 @@ const recordSchema = new mongoose.Schema(
       },
       // MongoDb: lng, lat
       // Leaflet: lat, lng
-      coordinates: [Number],
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
     },
     description: {
       type: String,
