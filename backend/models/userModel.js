@@ -22,7 +22,12 @@ const userSchema = new mongoose.Schema(
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "Friend" }],
     password: {
       type: String,
-      required: [true, "User must have password!"],
+      required: [
+        function () {
+          return this.googleID === null;
+        },
+        "User must have password!",
+      ],
       minlength: [8, "Password length must greater than or equal to 8!"],
       maxlength: [20, "Password length must less than or equal to 20!"],
       select: false,
