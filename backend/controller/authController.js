@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/userModel");
+const AppError = require("../utilities/appError");
 const validator = require("../config/validator");
 
 const signToken = (id) => {
@@ -9,31 +10,25 @@ const signToken = (id) => {
   });
 };
 
-exports.signup = async (req, res) => {
+exports.signup = async (req, res, next) => {
   const { error } = validator.signupDataValidate(req.body);
 
-  if (error)
-    return res
-      .status(400)
-      .json({ status: "fail", message: error.details[0].message });
-
-  const { username, email, password } = req.body;
+  if (error) return next(new AppError(`${error.details[0].message}`, 400));
 
   try {
+    const { username, email, password } = req.body;
     const isEmailExisted = await User.findOne({ email }).exec();
 
     if (isEmailExisted)
-      return res.status(400).json({
-        status: "fail",
-        message: "This email is used. Please use another one!",
-      });
+      return next(
+        new AppError("This email is used. Please use another one!", 400)
+      );
 
     const newUser = await User.create({
       username,
       email,
       password,
     });
-
     res.status(201).json({
       status: "success",
       data: {
@@ -41,35 +36,30 @@ exports.signup = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ status: "fail", message: err.message });
+    next(err);
   }
 };
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
   const { error } = validator.loginDataValidate(req.body);
 
-  if (error)
-    return res
-      .status(400)
-      .json({ status: "fail", message: error.details[0].message });
+  if (error) return next(new AppError(`${error.details[0].message}`, 400));
 
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email }).select("+password").exec();
 
-  const user = await User.findOne({ email }).select("+password").exec();
+    if (!user || !(await user.correctPassword(password, user.password)))
+      return next(new AppError("Email or Paassword is wrong!", 401));
 
-  if (!user || !(await user.correctPassword(password, user.password)))
-    return res.status(401).json({
-      status: "fail",
-      message: "Email or Paassword is wrong!",
+    const token = signToken(user._id);
+    user.password = undefined;
+    res.status(200).json({
+      status: "success",
+      token: `JWT ${token}`,
+      user,
     });
-
-  const token = signToken(user._id);
-
-  user.password = undefined;
-
-  return res.status(200).json({
-    status: "success",
-    token: `JWT ${token}`,
-    user,
-  });
+  } catch (err) {
+    next(err);
+  }
 };

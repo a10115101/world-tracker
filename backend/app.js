@@ -12,6 +12,9 @@ const userRouter = require("./routers/userRouters");
 const recordRouter = require("./routers/recordRouters");
 const friendRouter = require("./routers/friendRouters");
 
+const AppError = require("./utilities/appError");
+const errorController = require("./controller/errorController");
+
 const app = express();
 
 app.use(morgan("dev"));
@@ -37,6 +40,12 @@ app.use(passport.authenticate("jwt", { session: false }));
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/records", recordRouter);
 app.use("/api/v1/friends", friendRouter);
+
+app.all("*", (req, res, next) => {
+  next(new AppError("Can't find the api on this server", 404));
+});
+
+app.use(errorController);
 
 const port = 3000;
 app.listen(port, () => {
