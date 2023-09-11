@@ -12,7 +12,7 @@ router.get(
 );
 
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  res.send("Success Validation");
+  res.send("/Success");
 });
 
 router.post("/signup", authController.signup);

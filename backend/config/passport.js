@@ -14,7 +14,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById({ id }).exec();
+  const user = await User.findById(id).exec();
   done(null, user);
 });
 
@@ -38,16 +38,20 @@ passport.use(
       callbackURL: "http://localhost:3000/api/v1/auth/google/redirect",
     },
     async (accessToken, refreshToken, profile, done) => {
-      const user = await User.findOne({ googleID: profile.id }).exec();
-      if (user) {
-        done(null, user);
-      } else {
-        const newUser = await User.create({
-          username: profile.displayName,
-          email: profile.emails[0].value,
-          googleID: profile.id,
-        });
-        done(null, newUser);
+      try {
+        const user = await User.findOne({ googleID: profile.id }).exec();
+        if (user) {
+          done(null, user);
+        } else {
+          const newUser = await User.create({
+            username: profile.displayName,
+            email: profile.emails[0].value,
+            googleID: profile.id,
+          });
+          done(null, newUser);
+        }
+      } catch (err) {
+        done(err, false);
       }
     }
   )

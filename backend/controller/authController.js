@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 const User = require("../models/userModel");
 const AppError = require("../utilities/appError");
@@ -62,4 +63,20 @@ exports.login = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+exports.isAuth = (req, res, next) => {
+  if (req.isAuthenticated()) return next();
+
+  const passportJWT = passport.authenticate("jwt", {
+    session: false,
+  });
+
+  passportJWT(req, res, next);
+};
+
+exports.protect = (req, res, next) => {
+  if (!req.isAuthenticated())
+    return next(new AppError("You are not authorized!", 401));
+  next();
 };

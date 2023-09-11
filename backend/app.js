@@ -15,6 +15,7 @@ const friendRouter = require("./routers/friendRouters");
 
 const AppError = require("./utilities/appError");
 const errorController = require("./controller/errorController");
+const authController = require("./controller/authController");
 
 const app = express();
 
@@ -46,11 +47,11 @@ mongoose
   });
 
 app.use("/api/v1/auth", authRouter);
-app.use(passport.authenticate("jwt", { session: false }));
+app.use(authController.isAuth);
+app.use(authController.protect);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/records", recordRouter);
 app.use("/api/v1/friends", friendRouter);
-
 app.all("*", (req, res, next) => {
   next(new AppError("Can't find the url on this server", 404));
 });
