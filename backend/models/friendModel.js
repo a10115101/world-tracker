@@ -12,6 +12,9 @@ const frinedSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Friend = mongoose.model("Friend", frinedSchema);
+frinedSchema.pre(/^find/, function (next) {
+  this.populate("recipient", "username").select("-__v");
+  next();
+});
 
-module.exports = Friend;
+module.exports = mongoose.model("Friend", frinedSchema);
