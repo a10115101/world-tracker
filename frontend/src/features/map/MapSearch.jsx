@@ -5,17 +5,14 @@ import { useSearch } from "../../contexts/SearchContext";
 import { getGeocoding } from "../../services/apiGeocoding";
 
 function MapSearch() {
-  const {
-    setSelectedPosition,
-    isListOpened,
-    setIsListOpened,
-    setIsMapSearchMarkerVisible,
-  } = useSearch();
+  const { setSelectedPosition, setIsMapSearchMarkerVisible } = useSearch();
 
   const [searchedText, setSearchedText] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchingError, setSearchingError] = useState("");
+
+  const [isListOpened, setIsListOpened] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

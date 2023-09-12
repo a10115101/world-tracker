@@ -4,6 +4,7 @@ const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const cors = require("cors");
 
 require("./config/passport");
 const passport = require("passport");
@@ -19,6 +20,7 @@ const authController = require("./controller/authController");
 
 const app = express();
 
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(
