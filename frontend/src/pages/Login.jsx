@@ -1,8 +1,48 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 
+import { useAuth } from "../contexts/AuthContext";
+import { login } from "../services/apiAuth";
 import styles from "./Login.module.css";
 
 function Login() {
+  const navigate = useNavigate();
+  const { setCurrentUser } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await login(email, password);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      setCurrentUser(response);
+      enqueueSnackbar("Success Singup", {
+        variant: "success",
+        preventDuplicate: true,
+        autoHideDuration: 2000,
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+      });
+      navigate("/map");
+    } catch (err) {
+      const errorMessage = err.response.data.message;
+      enqueueSnackbar(errorMessage, {
+        variant: "error",
+        preventDuplicate: true,
+        autoHideDuration: 2000,
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "center",
+        },
+      });
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
@@ -14,24 +54,33 @@ function Login() {
       </div>
 
       <div className={styles.centerContainer}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email">
               <i className="fa-solid fa-envelope" />
               Email Address
             </label>
-            <input id="email" type="email" />
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div>
             <label htmlFor="password">
               <i className="fa-solid fa-key" />
               Password
             </label>
-            <input id="password" type="password" />
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
           <div>
             <button>Next</button>
-            <span>Error Message Here!</span>
           </div>
         </form>
       </div>
