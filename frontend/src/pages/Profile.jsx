@@ -5,10 +5,14 @@ import styles from "./Profile.module.css";
 
 function Profile() {
   return (
-    <main className={styles.container}>
-      <ProfileSiderbar />
-      <Outlet />
-    </main>
+    <div className={styles.container}>
+      <div className={styles.leftContainer}>
+        <ProfileSiderbar />
+      </div>
+      <div className={styles.rightContainer}>
+        <Outlet />
+      </div>
+    </div>
   );
 }
 

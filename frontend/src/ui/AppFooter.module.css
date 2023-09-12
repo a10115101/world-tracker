@@ -1,11 +1,11 @@
-.footer {
+/* .footer {
   display: flex;
   background-color: var(--color-dark0);
   width: 100%;
   margin-top: auto;
-}
+} */
 
-.footer p {
+.container p {
   padding: 0.5rem;
   color: var(--color-light1);
   font-size: 1rem;

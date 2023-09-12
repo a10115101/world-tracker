@@ -1,7 +1,7 @@
 .container {
   border: 2px solid blue;
-  width: 85vw;
   padding: 1.25rem;
+  height: 100%;
 }
 
 .data {

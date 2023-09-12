@@ -4,33 +4,39 @@ import styles from "./Login.module.css";
 
 function Login() {
   return (
-    <main className={styles.container}>
-      <h1>Log Into Your Account</h1>
-
-      <section>
-        <h2>Do not have an account?</h2>
-        <Link to="/signup">Sing Up</Link>
-      </section>
-
-      <form>
+    <div className={styles.container}>
+      <div className={styles.topContainer}>
+        <h1>Log Into Your Account</h1>
         <div>
-          <label htmlFor="email">
-            <i className="fa-solid fa-envelope" />
-            Email Address
-          </label>
-          <input id="email" type="email" />
+          <h2>Do not have an account?</h2>
+          <Link to="/signup">Sing Up</Link>
         </div>
-        <div>
-          <label htmlFor="password">
-            <i className="fa-solid fa-key" />
-            Password
-          </label>
-          <input id="password" type="password" />
-        </div>
-        <button>Next</button>
-      </form>
+      </div>
 
-      <section>
+      <div className={styles.centerContainer}>
+        <form>
+          <div>
+            <label htmlFor="email">
+              <i className="fa-solid fa-envelope" />
+              Email Address
+            </label>
+            <input id="email" type="email" />
+          </div>
+          <div>
+            <label htmlFor="password">
+              <i className="fa-solid fa-key" />
+              Password
+            </label>
+            <input id="password" type="password" />
+          </div>
+          <div>
+            <button>Next</button>
+            <span>Error Message Here!</span>
+          </div>
+        </form>
+      </div>
+
+      <div className={styles.bottomContainer}>
         <h2>Or with google?</h2>
         <Link>
           <img
@@ -39,8 +45,8 @@ function Login() {
           />
           <span>Google Account</span>
         </Link>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }
 

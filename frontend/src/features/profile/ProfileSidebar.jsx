@@ -4,7 +4,7 @@ import styles from "./ProfileSidebar.module.css";
 
 function ProfileSidebar() {
   return (
-    <section className={styles.container}>
+    <div className={styles.container}>
       <ul>
         <div>人物頭像&名稱</div>
         <li>
@@ -32,7 +32,7 @@ function ProfileSidebar() {
           </Link>
         </li>
       </ul>
-    </section>
+    </div>
   );
 }
 

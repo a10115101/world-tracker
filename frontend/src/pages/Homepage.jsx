@@ -4,8 +4,8 @@ import styles from "./Homepage.module.css";
 
 function Homepage() {
   return (
-    <main className={styles.container}>
-      <section>
+    <div className={styles.container}>
+      <div className={styles.leftContainer}>
         <img src="/logo.png" alt="logo" style={{ maxWidth: "375px" }} />
         <h1>Every wonderful journey is memorable!</h1>
         <p>
@@ -14,16 +14,16 @@ function Homepage() {
           <br /> Share it with your friends
         </p>
         <Link to="/login">Start</Link>
-      </section>
+      </div>
 
-      <section>
+      <div className={styles.rightContainer}>
         <img
           src="/background.jpg"
           alt="background"
           style={{ maxWidth: "800px", borderRadius: "5px" }}
         />
-      </section>
-    </main>
+      </div>
+    </div>
   );
 }
 

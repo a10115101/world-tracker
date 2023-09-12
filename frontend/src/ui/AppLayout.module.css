@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-light1);
+  min-height: 100vh;
+}
+
+.topContainer {
+  height: 8vh;
+}
+
+.centerContainer {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  height: 86vh;
+}
+
+.bottomContainer {
+  display: flex;
+  background-color: var(--color-dark0);
+  width: 100%;
+  height: 6vh;
+  /* margin-top: auto; */
+}

@@ -1,5 +1,17 @@
 .container {
   display: flex;
   border: solid 2px red;
-  flex: 1;
+  height: 100%;
+}
+
+.leftContainer {
+  width: 15%;
+}
+
+.rightContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px blue;
+  width: 85%;
 }

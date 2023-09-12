@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   background-color: var(--color-dark1);
-  border: 3px solid black;
-  width: 15vw;
+  border: 2px solid black;
+  height: 100%;
 }
 
 .container ul {

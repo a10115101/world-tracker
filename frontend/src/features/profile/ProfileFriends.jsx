@@ -79,32 +79,6 @@ function ProfileFriends() {
             <button>Remove</button>
           </div>
         </div>
-
-        <div className={styles.cardContainer}>
-          <div className={styles.cardContainerLeft}></div>
-          <div className={styles.cardContainerCenter}>
-            <div>Name: Patricddwdedwek</div>
-            <div>Coutry: USfdsfsdfdA</div>
-          </div>
-          <div className={styles.cardContainerRight}>
-            <button>Accept</button>
-            <button>Reject</button>
-            <button>Remove</button>
-          </div>
-        </div>
-
-        <div className={styles.cardContainer}>
-          <div className={styles.cardContainerLeft}></div>
-          <div className={styles.cardContainerCenter}>
-            <div>Name: Patricddwdedwek</div>
-            <div>Coutry: USfdsfsdfdA</div>
-          </div>
-          <div className={styles.cardContainerRight}>
-            <button>Accept</button>
-            <button>Reject</button>
-            <button>Remove</button>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -1,26 +1,36 @@
 .container {
   display: flex;
   justify-content: center;
-  margin: 4rem;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin: 0rem 1.75rem;
+  padding: 1rem;
+  height: 75%;
 }
 
-.container section {
+.leftContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding: 2rem;
-  border: 3px solid var(--color-dark1);
-  background-color: #ffffff;
+  margin-right: 1.5rem;
 }
 
-.container h1 {
+.leftContainer h1 {
   color: var(--color-dark1);
 }
 
-.container p {
+.leftContainer p {
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .container a:link,

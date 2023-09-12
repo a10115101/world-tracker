@@ -1,25 +1,26 @@
-.header {
+.container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: var(--color-dark0);
   padding: 0.5rem 2rem;
+  height: 100%;
 }
 
-.header ul {
+.rightContainer ul {
   list-style: none;
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
-.header i {
+.rightContainer i {
   color: var(--color-light1);
   padding: 0.5rem;
 }
 
-.header a:link,
-.header a:visited {
+.container a:link,
+.container a:visited {
   text-decoration: none;
   color: var(--color-light1);
   text-transform: uppercase;

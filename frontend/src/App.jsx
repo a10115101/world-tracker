@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Layout from "./ui/Layout";
+import AppLayout from "./ui/AppLayout";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Singup from "./pages/Singup";
@@ -26,7 +26,7 @@ function App() {
       <SearchProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/" element={<AppLayout />}>
               <Route index element={<Homepage />} />
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Singup />} />
