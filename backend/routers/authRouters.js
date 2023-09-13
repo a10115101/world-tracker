@@ -11,9 +11,15 @@ router.get(
   })
 );
 
-router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  res.send("/Success");
-});
+router.get(
+  "/google/redirect",
+  passport.authenticate("google", {
+    successRedirect: "http://localhost:5173/redirect",
+    failureRedirect: "http://localhost:5173",
+  })
+);
+
+router.get("/getGoogleUser", authController.getGoogleUser);
 
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);

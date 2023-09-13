@@ -40,6 +40,10 @@ function Singup() {
     }
   };
 
+  const hanldeClick = () => {
+    window.location.href = "http://localhost:3000/api/v1/auth/google";
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
@@ -96,7 +100,7 @@ function Singup() {
 
       <div className={styles.bottomContainer}>
         <h2>Or with google?</h2>
-        <Link>
+        <Link onClick={hanldeClick}>
           <img
             src="https://img.icons8.com/color/30/google-logo.png"
             alt="google-logo"

@@ -4,6 +4,7 @@ import AppLayout from "./ui/AppLayout";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Singup from "./pages/Singup";
+import Redirect from "./pages/Redirect";
 import PageNotFound from "./pages/PageNotFound";
 import ProtectedRoute from "./pages/ProtectedRoute";
 
@@ -33,6 +34,7 @@ function App() {
                 <Route index element={<Homepage />} />
                 <Route path="login" element={<Login />} />
                 <Route path="signup" element={<Singup />} />
+                <Route path="redirect" element={<Redirect />} />
 
                 <Route
                   path="map"

@@ -20,7 +20,12 @@ const authController = require("./controller/authController");
 
 const app = express();
 
-app.use(cors());
+const cofig = {
+  origin: "http://localhost:5173",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+};
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(
@@ -33,6 +38,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors(cofig));
 
 const MongoDB = process.env.MONGO_DATABASE.replace(
   "<PASSWORD>",

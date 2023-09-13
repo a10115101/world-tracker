@@ -65,6 +65,21 @@ exports.login = async (req, res, next) => {
   }
 };
 
+exports.getGoogleUser = async (req, res, next) => {
+  try {
+    if (!req.user) next(new AppError("You are not authenticated", 401));
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        user: req.user,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.isAuth = (req, res, next) => {
   if (req.isAuthenticated()) return next();
 

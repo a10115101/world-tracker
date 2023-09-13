@@ -24,7 +24,7 @@ function AppNav() {
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
-        <Link to="/">World Tracker</Link>
+        <Link to={!currentUser ? "/" : "/map"}>World Tracker</Link>
       </div>
       <div className={styles.rightContainer}>
         <ul>
