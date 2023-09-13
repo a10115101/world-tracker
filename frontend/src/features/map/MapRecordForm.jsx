@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { enqueueSnackbar } from "notistack";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import styles from "./MapRecordForm.module.css";
 import { useRecords } from "../../contexts/RecordsContext";
 import { getGeocoding } from "../../services/apiGeocoding";
+import { creataRecord } from "../../services/apiRecord";
+import { options } from "../../utilities/snackbar";
+import styles from "./MapRecordForm.module.css";
 
 function MapRecordForm() {
   const { setIsFormOpened, mapPosition, isClicked } = useRecords();
+  const navigate = useNavigate();
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [countryCode, setCountryCode] = useState("");
@@ -17,9 +20,37 @@ function MapRecordForm() {
   const [cityName, setCityName] = useState("");
   const [geocodingError, setGeocodingError] = useState("");
 
-  const navigate = useNavigate();
   const [isRatingVisible, setIsRatingVisible] = useState(false);
   const [newdate, setNewDate] = useState(new Date());
+  const [status, setStatus] = useState("");
+  const [rating, setRating] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const recordObject = {
+      country,
+      countryCode,
+      cityName,
+      date: newdate,
+      status,
+      rating,
+      position: {
+        coordinates: mapPosition.reverse(),
+      },
+      description,
+    };
+
+    try {
+      await creataRecord(recordObject);
+      enqueueSnackbar("Success Creation!", options("success"));
+      navigate("/map");
+    } catch (err) {
+      console.log(err);
+      const errorMessage = err.response.data.message;
+      enqueueSnackbar(errorMessage, options("error"));
+    }
+  };
 
   useEffect(
     function () {
@@ -100,16 +131,19 @@ function MapRecordForm() {
             <label htmlFor="status">Status: </label>
             <select
               id="status"
-              defaultValue={status}
+              value={status}
               onChange={(e) => {
                 if (e.target.value === "visited") {
                   setIsRatingVisible(true);
+                  setStatus(e.target.value);
                 } else {
                   setIsRatingVisible(false);
+                  setStatus(e.target.value);
                 }
               }}
             >
-              <option value="plannig">Plannig</option>
+              <option></option>
+              <option value="planning">Plannig</option>
               <option value="visited">Visited</option>
             </select>
           </div>
@@ -117,7 +151,12 @@ function MapRecordForm() {
           {isRatingVisible && (
             <div className={styles.rating}>
               <label htmlFor="rating">Rating: </label>
-              <select id="rating">
+              <select
+                id="rating"
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+              >
+                <option></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -129,7 +168,12 @@ function MapRecordForm() {
 
           <div className={styles.description}>
             <label htmlFor="description">Description: </label>
-            <textarea id="description" rows={3} />
+            <textarea
+              id="description"
+              rows={3}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
         </div>
 
@@ -144,7 +188,7 @@ function MapRecordForm() {
           >
             Cancel
           </button>
-          <button onClick={(e) => e.preventDefault()}>Add</button>
+          <button onClick={handleClick}>Add</button>
         </div>
       </form>
     </div>

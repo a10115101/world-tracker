@@ -5,13 +5,14 @@ import MapSidebar from "../features/map/MapSidebar";
 import MapSearch from "../features/map/MapSearch";
 import styles from "./Map.module.css";
 
+// import records from "../../testData";
+
 function Map() {
   const [isSidebarOpened, setIsSidebarOpened] = useState(true);
 
   return (
     <div className={styles.container}>
       {isSidebarOpened ? <MapSidebar /> : null}
-
       <div className={styles.mapContainer}>
         <div className={styles.mapContainerLeft}>
           <button
@@ -22,11 +23,9 @@ function Map() {
             {!isSidebarOpened ? "Open" : "Close"}
           </button>
         </div>
-
         <div className={styles.mapContainerCenter}>
           <MapComponent />
         </div>
-
         <div className={styles.mapContainerRight}>
           <MapSearch />
         </div>

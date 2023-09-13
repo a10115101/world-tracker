@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./MapRecordList.module.css";
 import MapRecordListItem from "./MapRecordListItem";
@@ -7,12 +7,15 @@ import MapRecordListItem from "./MapRecordListItem";
 import { useRecords } from "../../contexts/RecordsContext";
 import { useSearch } from "../../contexts/SearchContext";
 
-// only for test
-import records from "../../../testData";
-
 function MapRecordList() {
   const { setIsFormOpened } = useRecords();
   const { setIsMapSearchMarkerVisible } = useSearch();
+
+  const [records, setRecord] = useState("");
+
+  useEffect(function () {
+    setRecord("");
+  }, []);
 
   // initialize status for first time render
   useEffect(function () {
@@ -34,12 +37,15 @@ function MapRecordList() {
           &#43;
         </Link>
       </div>
+
       <div className={styles.bottomContainer}>
-        <ul>
-          {records.map((record) => (
-            <MapRecordListItem record={record} key={record.id} />
-          ))}
-        </ul>
+        {records && (
+          <ul>
+            {records.map((record) => (
+              <MapRecordListItem record={record} key={record.id} />
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ const validator = require("../config/validator");
 
 exports.getAllRecords = async (req, res, next) => {
   try {
-    const records = await Record.find({}).exec();
+    const records = await Record.find({ user: req.user.id }).exec();
     res.status(200).json({
       status: "success",
       results: records.length,
@@ -36,6 +36,10 @@ exports.getRecord = async (req, res, next) => {
 };
 
 exports.createRecord = async (req, res, next) => {
+  req.body = { ...req.body.recordObject };
+
+  if (req.body.status === "planning") delete req.body.rating;
+
   if (!req.body.user) req.body.user = req.user.id;
 
   const { error } = await validator.recordDataValidate(req.body);
