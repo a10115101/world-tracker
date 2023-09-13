@@ -30,6 +30,7 @@ exports.signup = async (req, res, next) => {
       email,
       password,
     });
+
     res.status(201).json({
       status: "success",
       data: {
@@ -65,9 +66,17 @@ exports.login = async (req, res, next) => {
   }
 };
 
+exports.logout = async (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+
+    res.status(200).json({ status: "success" });
+  });
+};
+
 exports.getGoogleUser = async (req, res, next) => {
   try {
-    if (!req.user) next(new AppError("You are not authenticated", 401));
+    if (!req.user) next(new AppError("You are not authorized", 401));
 
     res.status(200).json({
       status: "success",
@@ -93,5 +102,6 @@ exports.isAuth = (req, res, next) => {
 exports.protect = (req, res, next) => {
   if (!req.isAuthenticated())
     return next(new AppError("You are not authorized!", 401));
+
   next();
 };

@@ -4,6 +4,7 @@ import { enqueueSnackbar } from "notistack";
 
 import { useAuth } from "../contexts/AuthContext";
 import { login } from "../services/apiAuth";
+import { options } from "../utilities/snackbar";
 import styles from "./Login.module.css";
 
 function Login() {
@@ -19,27 +20,11 @@ function Login() {
       const response = await login(email, password);
       localStorage.setItem("user", JSON.stringify(response.data));
       setCurrentUser(response);
-      enqueueSnackbar("Success Login", {
-        variant: "success",
-        preventDuplicate: true,
-        autoHideDuration: 2000,
-        anchorOrigin: {
-          vertical: "bottom",
-          horizontal: "center",
-        },
-      });
+      enqueueSnackbar("Success Login", options("success"));
       navigate("/map");
     } catch (err) {
       const errorMessage = err.response.data.message;
-      enqueueSnackbar(errorMessage, {
-        variant: "error",
-        preventDuplicate: true,
-        autoHideDuration: 2000,
-        anchorOrigin: {
-          vertical: "bottom",
-          horizontal: "center",
-        },
-      });
+      enqueueSnackbar(errorMessage, options("error"));
     }
   };
 

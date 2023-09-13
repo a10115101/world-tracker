@@ -1,24 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
 import { useAuth } from "../contexts/AuthContext";
+import { logout } from "../services/apiAuth";
+import { options } from "../utilities/snackbar";
 import styles from "./AppNav.module.css";
 
 function AppNav() {
   const { currentUser, setCurrentUser } = useAuth();
+  const navigate = useNavigate();
 
-  const handleClick = () => {
-    localStorage.removeItem("user");
-    setCurrentUser(null);
-    enqueueSnackbar("Success Logout", {
-      variant: "success",
-      preventDuplicate: true,
-      autoHideDuration: 2000,
-      anchorOrigin: {
-        vertical: "bottom",
-        horizontal: "center",
-      },
-    });
+  const handleClick = async () => {
+    try {
+      await logout();
+      localStorage.removeItem("user");
+      setCurrentUser(null);
+      enqueueSnackbar("Success Logout", options("success"));
+    } catch (err) {
+      const errorMessage = err.response.data.message;
+      enqueueSnackbar(errorMessage, options("error"));
+      navigate("/");
+    }
   };
 
   return (

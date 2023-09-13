@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
 import { signup } from "../services/apiAuth";
+import { options } from "../utilities/snackbar";
 import styles from "./Singup.module.css";
 
 function Singup() {
@@ -16,27 +17,11 @@ function Singup() {
     try {
       e.preventDefault();
       await signup(username, email, password);
-      enqueueSnackbar("Success Singup", {
-        variant: "success",
-        preventDuplicate: true,
-        autoHideDuration: 2000,
-        anchorOrigin: {
-          vertical: "bottom",
-          horizontal: "center",
-        },
-      });
+      enqueueSnackbar("Success Singup", options("success"));
       navigate("/login");
     } catch (err) {
       const errorMessage = err.response.data.message;
-      enqueueSnackbar(errorMessage, {
-        variant: "error",
-        preventDuplicate: true,
-        autoHideDuration: 2000,
-        anchorOrigin: {
-          vertical: "bottom",
-          horizontal: "center",
-        },
-      });
+      enqueueSnackbar(errorMessage, options("error"));
     }
   };
 

@@ -4,6 +4,7 @@ import { enqueueSnackbar } from "notistack";
 
 import { google } from "../services/apiAuth";
 import { useAuth } from "../contexts/AuthContext";
+import { options } from "../utilities/snackbar";
 
 function Redirect() {
   const { setCurrentUser } = useAuth();
@@ -15,27 +16,12 @@ function Redirect() {
         const response = await google();
         localStorage.setItem("user", JSON.stringify(response.data));
         setCurrentUser(response);
-        enqueueSnackbar("Success Login", {
-          variant: "success",
-          preventDuplicate: true,
-          autoHideDuration: 2000,
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "center",
-          },
-        });
+        enqueueSnackbar("Success Login", options("success"));
         navigate("/map");
       } catch (err) {
+        console.log(err);
         const errorMessage = err.response.data.message;
-        enqueueSnackbar(errorMessage, {
-          variant: "error",
-          preventDuplicate: true,
-          autoHideDuration: 2000,
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "center",
-          },
-        });
+        enqueueSnackbar(errorMessage, options("error"));
         navigate("/");
       }
     }
