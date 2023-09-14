@@ -2,6 +2,8 @@ const router = require("express").Router();
 
 const recordController = require("../controller/recordController");
 
+router.route("/getHistory").get(recordController.getHistoryRecords);
+
 router
   .route("/")
   .get(recordController.getAllRecords)

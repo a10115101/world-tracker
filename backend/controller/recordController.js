@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const Record = require("../models/recordModel");
 const AppError = require("../utilities/appError");
 const validator = require("../config/validator");
@@ -100,6 +102,35 @@ exports.deleteRecord = async (req, res, next) => {
     res.status(204).json({
       status: "success",
       data: null,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getHistoryRecords = async (req, res, next) => {
+  try {
+    const stats = await Record.aggregate([
+      {
+        $match: {
+          $expr: {
+            $eq: ["$user", { $toObjectId: "65000a5f9e42f36f29ea5486" }],
+          },
+        },
+      },
+      {
+        $match: { status: { $eq: "visited" } },
+      },
+      {
+        $group: { _id: "$country", num: { $sum: 1 } },
+      },
+    ]);
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        stats,
+      },
     });
   } catch (err) {
     next(err);

@@ -42,8 +42,6 @@ const recordSchema = new mongoose.Schema(
         default: "Point",
         enum: ["Point"],
       },
-      // MongoDb: lng, lat
-      // Leaflet: lat, lng
       coordinates: {
         type: [Number],
         required: true,
