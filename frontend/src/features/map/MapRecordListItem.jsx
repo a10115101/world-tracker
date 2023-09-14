@@ -1,26 +1,21 @@
 import { Link } from "react-router-dom";
 
-import styles from "./MapRecordListItem.module.css";
-
 import { useSearch } from "../../contexts/SearchContext";
+import { formatDate } from "../../utilities/formatDate";
+import styles from "./MapRecordListItem.module.css";
 
 function MapRecordListItem({ record }) {
   const { setIsMapSearchMarkerVisible } = useSearch();
 
   const { _id, countryCode, country, cityName, date, position } = record;
-  // console.log(_id, countryCode, country, cityName, date, position.coordinates);
 
-  const formatDate = (date) =>
-    new Intl.DateTimeFormat("en", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    }).format(new Date(date));
+  const lng = position.coordinates[0];
+  const lat = position.coordinates[1];
 
   return (
     <li className={styles.container}>
       <Link
-        to={`${_id}?lat=${position.coordinates[1]}&lng=${position.coordinates[0]}`}
+        to={`${_id}?lat=${lat}&lng=${lng}`}
         onClick={() => setIsMapSearchMarkerVisible(false)}
       >
         <span>

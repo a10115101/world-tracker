@@ -39,3 +39,15 @@ export async function updateRecord(id, updateRecordObject) {
     { headers: { Authorization: token }, withCredentials: true }
   );
 }
+
+export async function deleteRecord(id) {
+  let token = "";
+
+  if (localStorage.getItem("user"))
+    token = JSON.parse(localStorage.getItem("user")).token;
+
+  return await axios.delete(`${API_URL}/${id}`, {
+    headers: { Authorization: token },
+    withCredentials: true,
+  });
+}

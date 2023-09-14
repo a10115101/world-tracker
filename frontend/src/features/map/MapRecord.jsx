@@ -5,15 +5,15 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { useRecords } from "../../contexts/RecordsContext";
 import { formatDate } from "../../utilities/formatDate";
-import { updateRecord } from "../../services/apiRecord";
-import { enqueueSnackbar } from "notistack";
+import { deleteRecord, updateRecord } from "../../services/apiRecord";
+import { closeSnackbar, enqueueSnackbar } from "notistack";
 import { options } from "../../utilities/snackbar";
 import styles from "./MapRecord.module.css";
 
 function MapRecord() {
+  const navigate = useNavigate();
   const { records } = useRecords();
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const record = records.find((r) => r._id === `${id}`);
   const { countryCode, country, cityName, date, description, status, rating } =
@@ -29,16 +29,45 @@ function MapRecord() {
   const handleModified = async (e) => {
     try {
       e.preventDefault();
-
       const updateRecordObject = {
         date: newdate,
         status: currentStatus,
         rating: currentRating,
         description: currentDescription,
       };
-
       await updateRecord(id, updateRecordObject);
       enqueueSnackbar("Success Update!", options("success"));
+      navigate("/map");
+    } catch (err) {
+      const errorMessage = err.response.data.message;
+      enqueueSnackbar(errorMessage, options("error"));
+    }
+  };
+
+  const handleDeleteConfirm = async (e) => {
+    e.preventDefault();
+    enqueueSnackbar("Are you sure?", {
+      ...options("warning"),
+      action: (key) => (
+        <div>
+          <button onClick={handleDelete}>Yes</button>
+          <button
+            onClick={() => {
+              closeSnackbar(key);
+            }}
+          >
+            No
+          </button>
+        </div>
+      ),
+    });
+  };
+
+  const handleDelete = async (e) => {
+    try {
+      e.preventDefault();
+      await deleteRecord(id);
+      enqueueSnackbar("Success Delete!", options("success"));
       navigate("/map");
     } catch (err) {
       const errorMessage = err.response.data.message;
@@ -165,7 +194,7 @@ function MapRecord() {
               >
                 Modify
               </button>
-              <button onClick={(e) => e.preventDefault()}>Delete</button>
+              <button onClick={handleDeleteConfirm}>Delete</button>
             </>
           ) : (
             <>
