@@ -36,17 +36,17 @@ exports.getRecord = async (req, res, next) => {
 };
 
 exports.createRecord = async (req, res, next) => {
-  req.body = { ...req.body.recordObject };
-
-  if (req.body.status === "planning") delete req.body.rating;
-
-  if (!req.body.user) req.body.user = req.user.id;
-
-  const { error } = await validator.recordDataValidate(req.body);
-
-  if (error) return next(new AppError(`${error.details[0].message}`, 400));
-
   try {
+    req.body = { ...req.body.recordObject };
+
+    if (req.body.status === "planning") delete req.body.rating;
+
+    if (!req.body.user) req.body.user = req.user.id;
+
+    const { error } = await validator.recordDataValidate(req.body);
+
+    if (error) return next(new AppError(`${error.details[0].message}`, 400));
+
     const newRecord = await Record.create(req.body);
     res.status(200).json({
       status: "success",
@@ -60,13 +60,17 @@ exports.createRecord = async (req, res, next) => {
 };
 
 exports.updateRecord = async (req, res, next) => {
-  if (!req.body.user) req.body.user = req.user.id;
-
-  const { error } = validator.recordDataValidate(req.body);
-
-  if (error) return next(new AppError(`${error.details[0].message}`, 400));
-
   try {
+    req.body = { ...req.body.updateRecordObject };
+
+    if (req.body.status === "planning") delete req.body.rating;
+
+    if (!req.body.user) req.body.user = req.user.id;
+
+    const { error } = validator.updateRecordDataValidate(req.body);
+
+    if (error) return next(new AppError(`${error.details[0].message}`, 400));
+
     const record = await Record.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,

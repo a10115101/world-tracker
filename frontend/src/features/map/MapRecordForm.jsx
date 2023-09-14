@@ -145,7 +145,7 @@ function MapRecordForm() {
               }}
             >
               <option></option>
-              <option value="planning">Plannig</option>
+              <option value="planning">Planning</option>
               <option value="visited">Visited</option>
             </select>
           </div>

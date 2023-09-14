@@ -26,3 +26,16 @@ export async function creataRecord(recordObject) {
     { headers: { Authorization: token }, withCredentials: true }
   );
 }
+
+export async function updateRecord(id, updateRecordObject) {
+  let token = "";
+
+  if (localStorage.getItem("user"))
+    token = JSON.parse(localStorage.getItem("user")).token;
+
+  return await axios.post(
+    `${API_URL}/${id}`,
+    { updateRecordObject },
+    { headers: { Authorization: token }, withCredentials: true }
+  );
+}

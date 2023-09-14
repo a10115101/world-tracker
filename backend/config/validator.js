@@ -49,3 +49,19 @@ exports.recordDataValidate = (data) => {
 
   return schema.validate(data);
 };
+
+exports.updateRecordDataValidate = (data) => {
+  const schema = Joi.object({
+    user: Joi.string().required(),
+    date: Joi.date().required(),
+    status: Joi.string().required().valid("planning", "visited"),
+    rating: Joi.when("status", {
+      is: "visited",
+      then: Joi.number().min(1).max(5).required(),
+      otherwise: Joi.forbidden(),
+    }),
+    description: Joi.string().min(1).max(100).required(),
+  }).options({ abortEarly: false });
+
+  return schema.validate(data);
+};

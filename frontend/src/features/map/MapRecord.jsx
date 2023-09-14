@@ -5,6 +5,9 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { useRecords } from "../../contexts/RecordsContext";
 import { formatDate } from "../../utilities/formatDate";
+import { updateRecord } from "../../services/apiRecord";
+import { enqueueSnackbar } from "notistack";
+import { options } from "../../utilities/snackbar";
 import styles from "./MapRecord.module.css";
 
 function MapRecord() {
@@ -19,6 +22,29 @@ function MapRecord() {
   const [isModified, setIsModified] = useState(false);
   const [isRatingVisible, setIsRatingVisible] = useState(false);
   const [newdate, setNewDate] = useState(date ? new Date(date) : new Date());
+  const [currentStatus, setCurrentStatus] = useState(status);
+  const [currentRating, setCurrentRating] = useState(rating);
+  const [currentDescription, setCurrentDescription] = useState(description);
+
+  const handleModified = async (e) => {
+    try {
+      e.preventDefault();
+
+      const updateRecordObject = {
+        date: newdate,
+        status: currentStatus,
+        rating: currentRating,
+        description: currentDescription,
+      };
+
+      await updateRecord(id, updateRecordObject);
+      enqueueSnackbar("Success Update!", options("success"));
+      navigate("/map");
+    } catch (err) {
+      const errorMessage = err.response.data.message;
+      enqueueSnackbar(errorMessage, options("error"));
+    }
+  };
 
   useEffect(function () {
     if (status === "visited") setIsRatingVisible(true);
@@ -61,28 +87,38 @@ function MapRecord() {
             ) : (
               <select
                 id="status"
-                defaultValue={status}
+                value={currentStatus}
                 onChange={(e) => {
                   if (e.target.value === "visited") {
                     setIsRatingVisible(true);
+                    setCurrentStatus(e.target.value);
                   } else {
                     setIsRatingVisible(false);
+                    setCurrentStatus(e.target.value);
                   }
                 }}
               >
-                <option value="plannig">Plannig</option>
+                <option></option>
+                <option value="planning">Planning</option>
                 <option value="visited">Visited</option>
               </select>
             )}
           </div>
 
-          {isRatingVisible && (
+          {(isRatingVisible || currentStatus === "visited") && (
             <div className={styles.rating}>
               <label htmlFor="rating">Rating: </label>
               {!isModified ? (
                 <p>{rating}</p>
               ) : (
-                <select id="rating" defaultValue={rating}>
+                <select
+                  id="rating"
+                  value={currentRating}
+                  onChange={(e) => {
+                    setCurrentRating(e.target.value);
+                  }}
+                >
+                  <option></option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -98,7 +134,14 @@ function MapRecord() {
             {!isModified ? (
               <p>{description}</p>
             ) : (
-              <textarea id="description" rows={3} defaultValue={description} />
+              <textarea
+                id="description"
+                rows={3}
+                value={currentDescription}
+                onChange={(e) => {
+                  setCurrentDescription(e.target.value);
+                }}
+              />
             )}
           </div>
         </div>
@@ -131,11 +174,15 @@ function MapRecord() {
                   e.preventDefault();
                   setIsModified(false);
                   setIsRatingVisible(false);
+                  setNewDate(new Date(date));
+                  setCurrentStatus(status);
+                  setCurrentRating(rating);
+                  setCurrentDescription(description);
                 }}
               >
                 Cancel
               </button>
-              <button onClick={(e) => e.preventDefault()}>Confirm</button>
+              <button onClick={handleModified}>Confirm</button>
             </>
           )}
         </div>
