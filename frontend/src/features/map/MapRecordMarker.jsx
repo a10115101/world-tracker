@@ -6,9 +6,12 @@ function MapRecordMarker({ record }) {
   const greenIcon = new LeafIcon({ iconUrl: "/green-pin.png" });
   const yellowIcon = new LeafIcon({ iconUrl: "/yellow-pin.png" });
 
+  const lng = record.position.coordinates[0];
+  const lat = record.position.coordinates[1];
+
   return (
     <Marker
-      position={[record.position.lat, record.position.lng]}
+      position={[lat, lng]}
       icon={record.status === "visited" ? greenIcon : yellowIcon}
     >
       <Popup>

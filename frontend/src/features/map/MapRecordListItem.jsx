@@ -7,7 +7,8 @@ import { useSearch } from "../../contexts/SearchContext";
 function MapRecordListItem({ record }) {
   const { setIsMapSearchMarkerVisible } = useSearch();
 
-  const { id, countryCode, country, cityName, date, position } = record;
+  const { _id, countryCode, country, cityName, date, position } = record;
+  // console.log(_id, countryCode, country, cityName, date, position.coordinates);
 
   const formatDate = (date) =>
     new Intl.DateTimeFormat("en", {
@@ -19,7 +20,7 @@ function MapRecordListItem({ record }) {
   return (
     <li className={styles.container}>
       <Link
-        to={`${id}?lat=${position.lat}&lng=${position.lng}`}
+        to={`${_id}?lat=${position.coordinates[1]}&lng=${position.coordinates[0]}`}
         onClick={() => setIsMapSearchMarkerVisible(false)}
       >
         <span>

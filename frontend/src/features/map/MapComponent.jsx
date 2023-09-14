@@ -11,10 +11,8 @@ import SetClickPositionView from "./plugins/SetClickPositionView";
 import { useSearch } from "../../contexts/SearchContext";
 import { useRecords } from "../../contexts/RecordsContext";
 
-// import records from "../../../testData";
-
-function MapComponent({ records }) {
-  const { isFormOpened, mapPosition, isClicked } = useRecords();
+function MapComponent() {
+  const { isFormOpened, mapPosition, isClicked, records } = useRecords();
   const { isMapSearchMarkerVisible } = useSearch();
 
   return (
@@ -36,10 +34,10 @@ function MapComponent({ records }) {
       {isFormOpened && isClicked && <MapFormMarker />}
 
       {/* For db data */}
-      {/* {records &&
+      {records &&
         records.map((record) => (
-          <MapRecordMarker record={record} key={record.id} />
-        ))} */}
+          <MapRecordMarker record={record} key={record._id} />
+        ))}
 
       <SetRecordsPositionView />
       <SetSearchPositionView />

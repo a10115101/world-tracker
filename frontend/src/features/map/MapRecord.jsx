@@ -1,20 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { useRecords } from "../../contexts/RecordsContext";
+import { formatDate } from "../../utilities/formatDate";
 import styles from "./MapRecord.module.css";
 
-// only for test
-import records from "../../../testData";
-
 function MapRecord() {
-  const navigate = useNavigate();
+  const { records } = useRecords();
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  // test temp
-  const record = records.find((r) => r.id === Number(id));
+  const record = records.find((r) => r._id === `${id}`);
   const { countryCode, country, cityName, date, description, status, rating } =
     record;
 
@@ -25,13 +23,6 @@ function MapRecord() {
   useEffect(function () {
     if (status === "visited") setIsRatingVisible(true);
   }, []);
-
-  const formatDate = (formattedDate) =>
-    new Intl.DateTimeFormat("en", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    }).format(new Date(formattedDate));
 
   return (
     <div className={styles.container}>

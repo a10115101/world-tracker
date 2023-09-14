@@ -7,6 +7,7 @@ function RecordsProvider({ children }) {
   const [isClicked, setIsClicked] = useState(false);
 
   const [mapPosition, setMapPosition] = useState([24, 121.5]);
+  const [records, setRecords] = useState([]);
 
   return (
     <RecordsContext.Provider
@@ -17,6 +18,8 @@ function RecordsProvider({ children }) {
         setIsClicked,
         mapPosition,
         setMapPosition,
+        records,
+        setRecords,
       }}
     >
       {children}

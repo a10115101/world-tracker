@@ -27,26 +27,28 @@ function MapRecordForm() {
   const [description, setDescription] = useState("");
 
   const handleClick = async (e) => {
-    e.preventDefault();
-    const recordObject = {
-      country,
-      countryCode,
-      cityName,
-      date: newdate,
-      status,
-      rating,
-      position: {
-        coordinates: mapPosition.reverse(),
-      },
-      description,
-    };
-
     try {
+      e.preventDefault();
+
+      const lat = mapPosition[0];
+      const lng = mapPosition[1];
+      const recordObject = {
+        country,
+        countryCode,
+        cityName,
+        date: newdate,
+        status,
+        rating,
+        position: {
+          coordinates: [lng, lat],
+        },
+        description,
+      };
+
       await creataRecord(recordObject);
       enqueueSnackbar("Success Creation!", options("success"));
       navigate("/map");
     } catch (err) {
-      console.log(err);
       const errorMessage = err.response.data.message;
       enqueueSnackbar(errorMessage, options("error"));
     }

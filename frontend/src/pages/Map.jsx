@@ -5,8 +5,6 @@ import MapSidebar from "../features/map/MapSidebar";
 import MapSearch from "../features/map/MapSearch";
 import styles from "./Map.module.css";
 
-// import records from "../../testData";
-
 function Map() {
   const [isSidebarOpened, setIsSidebarOpened] = useState(true);
 
