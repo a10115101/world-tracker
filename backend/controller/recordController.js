@@ -1,5 +1,3 @@
-const mongoose = require("mongoose");
-
 const Record = require("../models/recordModel");
 const AppError = require("../utilities/appError");
 const validator = require("../config/validator");
@@ -108,13 +106,13 @@ exports.deleteRecord = async (req, res, next) => {
   }
 };
 
-exports.getHistoryRecords = async (req, res, next) => {
+exports.getStatisCountries = async (req, res, next) => {
   try {
-    const stats = await Record.aggregate([
+    const visitedCountries = await Record.aggregate([
       {
         $match: {
           $expr: {
-            $eq: ["$user", { $toObjectId: "65000a5f9e42f36f29ea5486" }],
+            $eq: ["$user", { $toObjectId: `${req.user.id}` }],
           },
         },
       },
@@ -122,14 +120,75 @@ exports.getHistoryRecords = async (req, res, next) => {
         $match: { status: { $eq: "visited" } },
       },
       {
-        $group: { _id: "$country", num: { $sum: 1 } },
+        $group: {
+          _id: "$country",
+          num: { $sum: 1 },
+        },
+      },
+    ]);
+
+    const planningCountries = await Record.aggregate([
+      {
+        $match: {
+          $expr: {
+            $eq: ["$user", { $toObjectId: `${req.user.id}` }],
+          },
+        },
+      },
+      {
+        $match: { status: { $eq: "planning" } },
+      },
+      {
+        $group: {
+          _id: "$country",
+          num: { $sum: 1 },
+        },
       },
     ]);
 
     res.status(200).json({
       status: "success",
       data: {
-        stats,
+        visitedCountries: {
+          results: visitedCountries.length,
+          countryName: visitedCountries,
+        },
+        planningCountries: {
+          results: planningCountries.length,
+          countryName: planningCountries,
+        },
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getStatisContinents = async (req, res, next) => {
+  try {
+    const statis = await Record.aggregate([
+      {
+        $match: {
+          $expr: {
+            $eq: ["$user", { $toObjectId: `${req.user.id}` }],
+          },
+        },
+      },
+      {
+        $match: { status: { $eq: "visited" } },
+      },
+      {
+        $group: {
+          _id: "$continent",
+          num: { $sum: 1 },
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        statis,
       },
     });
   } catch (err) {

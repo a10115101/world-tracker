@@ -31,6 +31,7 @@ exports.updateUserDataValidate = (data) => {
 exports.recordDataValidate = (data) => {
   const schema = Joi.object({
     user: Joi.string().required(),
+    continent: Joi.string().required(),
     country: Joi.string().required(),
     countryCode: Joi.string().required(),
     cityName: Joi.string().required(),

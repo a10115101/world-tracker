@@ -7,6 +7,10 @@ const recordSchema = new mongoose.Schema(
       ref: "User",
       required: [true, "Review must belong to a user"],
     },
+    continent: {
+      type: String,
+      required: [true, "Record must hava continent"],
+    },
     country: {
       type: String,
       required: [true, "Record must hava country"],

@@ -15,6 +15,7 @@ function MapRecordForm() {
   const navigate = useNavigate();
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
+  const [continent, setContinent] = useState("");
   const [countryCode, setCountryCode] = useState("");
   const [country, setCountry] = useState("");
   const [cityName, setCityName] = useState("");
@@ -33,6 +34,7 @@ function MapRecordForm() {
       const lat = mapPosition[0];
       const lng = mapPosition[1];
       const recordObject = {
+        continent,
         country,
         countryCode,
         cityName,
@@ -66,12 +68,14 @@ function MapRecordForm() {
           );
 
           const data = searchedData[0]?.components;
+          console.log(data);
 
           if (!data.country_code || data === undefined)
             throw new Error(
               "Oops! It doesn't seem like a country or a city. Please click somewhere else on the map"
             );
 
+          setContinent(data.continent);
           setCountryCode(data.country_code);
           setCountry(data.country);
           setCityName(

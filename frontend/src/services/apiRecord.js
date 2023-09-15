@@ -8,7 +8,7 @@ export async function getAllRecords() {
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  return axios.get(API_URL, {
+  return await axios.get(API_URL, {
     headers: { Authorization: token },
     withCredentials: true,
   });
@@ -47,6 +47,30 @@ export async function deleteRecord(id) {
     token = JSON.parse(localStorage.getItem("user")).token;
 
   return await axios.delete(`${API_URL}/${id}`, {
+    headers: { Authorization: token },
+    withCredentials: true,
+  });
+}
+
+export async function getStatisCountries() {
+  let token = "";
+
+  if (localStorage.getItem("user"))
+    token = JSON.parse(localStorage.getItem("user")).token;
+
+  return await axios.get(`${API_URL}/statisCountries`, {
+    headers: { Authorization: token },
+    withCredentials: true,
+  });
+}
+
+export async function getStatisContinents() {
+  let token = "";
+
+  if (localStorage.getItem("user"))
+    token = JSON.parse(localStorage.getItem("user")).token;
+
+  return await axios.get(`${API_URL}/statisContinents`, {
     headers: { Authorization: token },
     withCredentials: true,
   });

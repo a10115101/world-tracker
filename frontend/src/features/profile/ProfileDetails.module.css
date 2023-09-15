@@ -1,44 +1,66 @@
 .container {
-  border: 2px solid blue;
-  padding: 1.25rem;
+  display: flex;
+  border: 1px solid blue;
   height: 100%;
 }
 
-.data {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.leftContainer {
+  border: 2px solid red;
+  width: 40vw;
 }
 
-.data div {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.topleftContainer {
+  border: 2px solid red;
+  height: 25%;
+}
+
+.bottomLeftContainer {
+  border: 2px solid red;
+  height: 75%;
+}
+
+.rightContainer {
   border: 2px solid green;
-  font-size: 1.25rem;
-  width: 30vw;
+  width: 40vw;
+  padding: 2rem 3rem;
 }
 
-.chart {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  font-size: 1.5rem;
+.bottomRightContainer ul {
+  height: 72vh;
+  border: 1px solid green;
+  border-radius: 5px;
   padding: 1rem;
+  overflow-y: scroll;
 }
 
-.chart div {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border: 2px solid orange;
-  font-size: 1.25rem;
-  width: 37.5vw;
-  height: 70vh;
+.bottomRightContainer ul::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
 }
 
-.container i {
-  /* color: var(--color-light1); */
-  padding: 0.75rem;
+.bottomRightContainer li {
+  list-style-type: none;
+  position: relative;
+  width: 3px;
+  padding-top: 1.5rem;
+  background-color: #f45b69;
+}
+
+.bottomRightContainer li::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #f45b69;
+  transform: translateX(-50%) translateY(-350%);
+}
+
+.bottomRightContainer div {
+  min-width: 480px;
+  padding: 1rem;
+  /* border: 1px solid #f45b69; */
+  background-color: #f45b6810;
 }
