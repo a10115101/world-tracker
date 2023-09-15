@@ -14,9 +14,9 @@ function ProfileSidebar() {
           </Link>
         </li>
         <li>
-          <Link to="/profile/details">
+          <Link to="/profile/statis">
             <i className="fa-solid fa-suitcase" />
-            Records
+            Statis
           </Link>
         </li>
         <li>

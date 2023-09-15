@@ -15,7 +15,7 @@ import MapRecordForm from "./features/map/MapRecordForm";
 
 import Profile from "./pages/Profile";
 import ProfileAbout from "./features/profile/ProfileAbout";
-import ProfileDetails from "./features/profile/ProfileDetails";
+import ProfileStatis from "./features/profile/ProfileStatis";
 import ProfileFriends from "./features/profile/ProfileFriends";
 import ProfileSetting from "./features/profile/ProfileSetting";
 
@@ -59,7 +59,7 @@ function App() {
                 >
                   <Route index element={<ProfileAbout />} />
                   <Route path="about" element={<ProfileAbout />} />
-                  <Route path="details" element={<ProfileDetails />} />
+                  <Route path="statis" element={<ProfileStatis />} />
                   <Route path="friends" element={<ProfileFriends />} />
                   <Route path="setting" element={<ProfileSetting />} />
                 </Route>

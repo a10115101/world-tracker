@@ -58,10 +58,12 @@ export async function getStatisCountries() {
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  return await axios.get(`${API_URL}/statisCountries`, {
+  const response = await axios.get(`${API_URL}/statisCountries`, {
     headers: { Authorization: token },
     withCredentials: true,
   });
+
+  return response.data.data;
 }
 
 export async function getStatisContinents() {
@@ -70,13 +72,15 @@ export async function getStatisContinents() {
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  return await axios.get(`${API_URL}/statisContinents`, {
+  const response = await axios.get(`${API_URL}/statisContinents`, {
     headers: { Authorization: token },
     withCredentials: true,
   });
+
+  return response.data.data.statis;
 }
 
-export async function recentlyVisited() {
+export async function getRecentlyVisited() {
   let token = "";
 
   if (localStorage.getItem("user"))

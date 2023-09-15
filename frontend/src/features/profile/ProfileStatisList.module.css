@@ -1,31 +1,4 @@
-.container {
-  display: flex;
-  border: 1px solid blue;
-  height: 100%;
-}
-
-.leftContainer {
-  border: 2px solid red;
-  width: 40vw;
-}
-
-.topleftContainer {
-  border: 2px solid red;
-  height: 25%;
-}
-
-.bottomLeftContainer {
-  border: 2px solid red;
-  height: 75%;
-}
-
-.rightContainer {
-  border: 2px solid green;
-  width: 40vw;
-  padding: 2rem 3rem;
-}
-
-.bottomRightContainer ul {
+.container ul {
   height: 72vh;
   border: 1px solid green;
   border-radius: 5px;
@@ -33,12 +6,12 @@
   overflow-y: scroll;
 }
 
-.bottomRightContainer ul::-webkit-scrollbar {
+.container ul::-webkit-scrollbar {
   display: none;
   scroll-behavior: smooth;
 }
 
-.bottomRightContainer li {
+.container li {
   list-style-type: none;
   position: relative;
   width: 3px;
@@ -46,7 +19,7 @@
   background-color: #f45b69;
 }
 
-.bottomRightContainer li::after {
+.container li::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -58,7 +31,7 @@
   transform: translateX(-50%) translateY(-350%);
 }
 
-.bottomRightContainer div {
+.container div {
   min-width: 480px;
   padding: 1rem;
   /* border: 1px solid #f45b69; */
