@@ -6,8 +6,10 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 import {
   getStatisCountries,
   getStatisContinents,
+  recentlyVisited,
 } from "../../services/apiRecord";
 import styles from "./ProfileDetails.module.css";
+import { formatDate } from "../../utilities/formatDate";
 
 function ProfileDetails() {
   const [isLoadingStat, setIsLoadingStat] = useState(false);
@@ -18,6 +20,9 @@ function ProfileDetails() {
   const [pieChartOptions, setPieChartOptions] = useState({
     datasets: [],
   });
+
+  const [isLoadingRecently, setIsLoadingRecently] = useState(false);
+  const [data, setData] = useState([]);
 
   useEffect(function () {
     async function getStat() {
@@ -74,6 +79,24 @@ function ProfileDetails() {
     getPieData();
   }, []);
 
+  useEffect(function () {
+    async function getRecently() {
+      try {
+        setIsLoadingRecently(true);
+
+        const data = await recentlyVisited();
+        setData(data.informaiton);
+      } catch (err) {
+        // handle later
+        console.log(err.response.data);
+      } finally {
+        setIsLoadingRecently(false);
+      }
+    }
+
+    getRecently();
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
@@ -95,55 +118,33 @@ function ProfileDetails() {
 
       <div className={styles.rightContainer}>
         <div className={styles.topRightContainer}>
-          <h2>Latest Activities</h2>
+          <h2>Latest Visited</h2>
         </div>
 
-        <div className={styles.bottomRightContainer}>
-          <ul>
-            <li>
-              <div>
-                <p>Canada</p>
-                <p>2023/02/03</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p>Canada</p>
-                <p>2023/02/03</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p>Canada</p>
-                <p>2023/02/03</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p>Canada</p>
-                <p>2023/02/03</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p>Canada</p>
-                <p>2023/02/03</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p>Canada</p>
-                <p>2023/02/03</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p>Canada</p>
-                <p>2023/02/03</p>
-              </div>
-            </li>
-          </ul>
-        </div>
+        {isLoadingRecently ? (
+          "Loading"
+        ) : (
+          <div className={styles.bottomRightContainer}>
+            <ul>
+              {data.length > 0 ? (
+                data.map((d) => (
+                  <li key={d._id}>
+                    <div>
+                      <p>
+                        {d.country} <span>({d.cityName})</span>
+                      </p>
+                      <p>
+                        {formatDate(d.date)} <span>{d.rating}</span>
+                      </p>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <p>No Data</p>
+              )}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

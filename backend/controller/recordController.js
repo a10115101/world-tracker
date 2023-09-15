@@ -195,3 +195,38 @@ exports.getStatisContinents = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getRecentlyVisited = async (req, res, next) => {
+  try {
+    const informaiton = await Record.aggregate([
+      {
+        $match: {
+          $expr: {
+            $eq: ["$user", { $toObjectId: `${req.user.id}` }],
+          },
+        },
+      },
+      {
+        $match: { status: { $eq: "visited" } },
+      },
+      {
+        $sort: { date: -1 },
+      },
+      {
+        $project: { country: 1, cityName: 1, date: 1, rating: 1 },
+      },
+    ]);
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        recentlyVisited: {
+          results: informaiton.length,
+          informaiton,
+        },
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};

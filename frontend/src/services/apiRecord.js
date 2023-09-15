@@ -75,3 +75,17 @@ export async function getStatisContinents() {
     withCredentials: true,
   });
 }
+
+export async function recentlyVisited() {
+  let token = "";
+
+  if (localStorage.getItem("user"))
+    token = JSON.parse(localStorage.getItem("user")).token;
+
+  const response = await axios.get(`${API_URL}/recentlyVisited`, {
+    headers: { Authorization: token },
+    withCredentials: true,
+  });
+
+  return response.data.data.recentlyVisited;
+}

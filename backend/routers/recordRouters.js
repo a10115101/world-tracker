@@ -4,6 +4,7 @@ const recordController = require("../controller/recordController");
 
 router.route("/statisCountries").get(recordController.getStatisCountries);
 router.route("/statisContinents").get(recordController.getStatisContinents);
+router.route("/recentlyVisited").get(recordController.getRecentlyVisited);
 
 router
   .route("/")
