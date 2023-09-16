@@ -4,33 +4,60 @@ function ProfileAbout() {
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
-        <h1>About me</h1>
+        <div className={styles.topHeaderContainer}>
+          <h2>Basic Information</h2>
+          <i className="fa-regular fa-pen-to-square fa-lg" />
+        </div>
+
+        <div className={styles.topBodyContainer}>
+          <div className={styles.topLeftBodyContainer}>
+            <div>Avatar</div>
+          </div>
+          <div className={styles.topRightBodyContainer}>
+            <h4>User Name: Patrick Wu</h4>
+            <h4>Email Address: bear@mail.com</h4>
+            <h4>Created At: 2023/09/16</h4>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.centerPart1Container}>
+        <div className={styles.centerPart1HeaderContainer}>
+          <h2>Additional Information</h2>
+          <i className="fa-regular fa-pen-to-square fa-lg" />
+        </div>
+        <div className={styles.centerPart1BodyContainer}>
+          <h4>Gender: Male</h4>
+          <h4>Birthday: 1995/09/10</h4>
+          <h4>Language: Chinese</h4>
+        </div>
+      </div>
+
+      <div className={styles.centerPart2Container}>
+        <div className={styles.centerPart2HeaderContainer}>
+          <h2>Introduction</h2>
+          <i className="fa-regular fa-pen-to-square fa-lg" />
+        </div>
+        <div className={styles.centerPart2BodyContainer}>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Blanditiis, dolorem vitae sapiente eos sunt fugiat fugit nemo
+            numquam voluptates a illo ratione dicta harum officiis repellat
+            molestiae cum error aspernatur in repudiandae eaque sed adipisci
+            beatae. Dignissimos, temporibus fugit vitae iure quidem id ratione
+            corrupti, dolorum numquam odit, nisi tempora.
+          </p>
+        </div>
       </div>
 
       <div className={styles.bottomContainer}>
-        <form>
-          <div>
-            <label htmlFor="name">Name</label>
-            <input id="name" type="text" />
-          </div>
-          <div>
-            <label htmlFor="country">Country</label>
-            <input id="country" type="text" />
-          </div>
-          <div>
-            <label htmlFor="birthday">Birthday</label>
-            <input id="birthday" type="text" />
-          </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input id="email" type="text" />
-          </div>
-          <div>
-            <label htmlFor="introduction">Introduction</label>
-            <textarea id="introduction" rows={6}></textarea>
-          </div>
-          <button>Save</button>
-        </form>
+        <div className={styles.bottomHeaderContainer}>
+          <h2>Privacy Setting</h2>
+          <i className="fa-regular fa-pen-to-square fa-lg" />
+        </div>
+        <div className={styles.bottomBodyContainer}>
+          <p>Now is public</p>
+        </div>
       </div>
     </div>
   );

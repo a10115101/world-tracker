@@ -1,37 +1,88 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  border: 2px solid purple;
   height: 100%;
+  width: 70%;
+  padding: 1rem;
 }
 
-.bottomContainer form {
+.topContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border: solid #3c2a21 3px;
-  background-color: #cedebd;
-  padding: 1rem 2rem;
+  height: 25%;
+  border: 2px solid green;
 }
 
-.bottomContainer div {
-  display: grid;
+.topHeaderContainer {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  grid-template-columns: 125px 350px 125px;
-  border-bottom: 1px solid gray;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  font-weight: 700;
-  font-size: 1.2rem;
 }
 
-.container button {
-  padding: 0.8rem 1.6rem;
-  font-size: 1rem;
-  border: solid #3c2a21 2px;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 20%;
-  float: right;
+.topBodyContainer {
+  display: flex;
+  border-top: 2px solid red;
+  padding: 0.5rem 0rem;
+}
+
+.topLeftBodyContainer {
+  border: 2px solid orange;
+}
+
+.topLeftBodyContainer div {
+  border: 2px solid black;
+  height: 100px;
+  width: 100px;
+}
+
+.topRightBodyContainer {
+  width: 100%;
+  margin-left: 0.75rem;
+}
+
+.centerPart1Container {
+  border: 2px solid green;
+  height: 25%;
+}
+
+.centerPart1HeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.centerPart1BodyContainer {
+  border-top: 2px solid red;
+  padding: 0.5rem 0rem;
+}
+
+.centerPart2Container {
+  border: 2px solid green;
+  height: 25%;
+}
+
+.centerPart2HeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.centerPart2BodyContainer {
+  border-top: 2px solid red;
+  padding: 0.5rem 0rem;
+}
+
+.bottomContainer {
+  border: 2px solid green;
+  height: 25%;
+}
+
+.bottomHeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottomBodyContainer {
+  border-top: 2px solid red;
+  padding: 0.5rem 0rem;
 }
