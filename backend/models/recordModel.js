@@ -30,7 +30,10 @@ const recordSchema = new mongoose.Schema(
     status: {
       type: String,
       required: [true, "Record must hava status"],
-      enum: ["planning", "visited"],
+      enum: {
+        values: ["planning", "visited"],
+        message: "Status only can be planning or visited",
+      },
     },
     rating: {
       type: Number,
@@ -54,6 +57,14 @@ const recordSchema = new mongoose.Schema(
     description: {
       type: String,
       required: [true, "Record must hava description"],
+      minlength: [
+        1,
+        "Record's description length must greater than or equal to 1!",
+      ],
+      maxlength: [
+        100,
+        "Record's description length must less than or equal to 100!",
+      ],
     },
   },
   {

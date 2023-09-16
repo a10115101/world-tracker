@@ -14,7 +14,7 @@ router
 router
   .route("/:id")
   .get(recordController.getRecord)
-  .post(recordController.updateRecord)
+  .patch(recordController.updateRecord)
   .delete(recordController.deleteRecord);
 
 module.exports = router;

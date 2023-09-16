@@ -33,7 +33,7 @@ export async function updateRecord(id, updateRecordObject) {
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  return await axios.post(
+  return await axios.patch(
     `${API_URL}/${id}`,
     { updateRecordObject },
     { headers: { Authorization: token }, withCredentials: true }

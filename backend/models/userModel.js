@@ -32,6 +32,32 @@ const userSchema = new mongoose.Schema(
       maxlength: [20, "Password length must less than or equal to 20!"],
       select: false,
     },
+    gender: {
+      type: String,
+      enum: {
+        values: ["male", "female"],
+        message: "gender only can be male or female",
+      },
+    },
+    birthday: {
+      type: Date,
+      max: [Date.now(), "Birthday can not over today"],
+    },
+    language: {
+      type: String,
+      enum: {
+        values: ["zh", "en"],
+        message: "language only can be Chinese or English",
+      },
+    },
+    introduction: {
+      type: String,
+      maxlength: [100, "Introduction length must less than or equal to 100!"],
+    },
+    isOpen: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

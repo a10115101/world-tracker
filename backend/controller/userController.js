@@ -35,20 +35,17 @@ exports.getUser = async (req, res, next) => {
 };
 
 exports.updateUser = async (req, res, next) => {
+  console.log(req.body);
+
   const { error } = validator.updateUserDataValidate(req.body);
 
   if (error) return next(new AppError(`${error.details[0].message}`, 400));
 
   try {
-    const { username, email } = req.body;
-    const user = await User.findByIdAndUpdate(
-      req.params.id,
-      { username, email },
-      {
-        new: true,
-        runValidators: true,
-      }
-    ).exec();
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    }).exec();
 
     if (!user) return next(new AppError("No document found with that ID", 404));
 
