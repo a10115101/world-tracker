@@ -1,6 +1,14 @@
+import { useState } from "react";
+
+import ProfileAboutModal from "./ProfileAboutModal";
 import styles from "./ProfileAbout.module.css";
 
 function ProfileAbout() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAdditionInfo, setIsAdditionInfo] = useState(false);
+  const [isIntroduction, setIsIntroduction] = useState(false);
+  const [isSetting, setIsSetting] = useState(false);
+
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
@@ -24,7 +32,13 @@ function ProfileAbout() {
       <div className={styles.centerPart1Container}>
         <div className={styles.centerPart1HeaderContainer}>
           <h2>Additional Information</h2>
-          <i className="fa-regular fa-pen-to-square fa-lg" />
+          <i
+            className="fa-regular fa-pen-to-square fa-lg"
+            onClick={() => {
+              setIsModalOpen(true);
+              setIsAdditionInfo(true);
+            }}
+          />
         </div>
         <div className={styles.centerPart1BodyContainer}>
           <h4>Gender: Male</h4>
@@ -36,7 +50,13 @@ function ProfileAbout() {
       <div className={styles.centerPart2Container}>
         <div className={styles.centerPart2HeaderContainer}>
           <h2>Introduction</h2>
-          <i className="fa-regular fa-pen-to-square fa-lg" />
+          <i
+            className="fa-regular fa-pen-to-square fa-lg"
+            onClick={() => {
+              setIsModalOpen(true);
+              setIsIntroduction(true);
+            }}
+          />
         </div>
         <div className={styles.centerPart2BodyContainer}>
           <p>
@@ -53,12 +73,32 @@ function ProfileAbout() {
       <div className={styles.bottomContainer}>
         <div className={styles.bottomHeaderContainer}>
           <h2>Privacy Setting</h2>
-          <i className="fa-regular fa-pen-to-square fa-lg" />
+          <i
+            className="fa-regular fa-pen-to-square fa-lg"
+            onClick={() => {
+              setIsModalOpen(true);
+              setIsSetting(true);
+            }}
+          />
         </div>
         <div className={styles.bottomBodyContainer}>
           <p>Now is public</p>
         </div>
       </div>
+
+      {isModalOpen && (
+        <ProfileAboutModal
+          closeModal={() => {
+            setIsModalOpen(false);
+            setIsAdditionInfo(false);
+            setIsIntroduction(false);
+            setIsSetting(false);
+          }}
+          isAdditionInfo={isAdditionInfo}
+          isIntroduction={isIntroduction}
+          isSetting={isSetting}
+        />
+      )}
     </div>
   );
 }

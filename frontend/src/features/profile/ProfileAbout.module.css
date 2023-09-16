@@ -5,6 +5,10 @@
   padding: 1rem;
 }
 
+.container i {
+  cursor: pointer;
+}
+
 .topContainer {
   display: flex;
   flex-direction: column;
