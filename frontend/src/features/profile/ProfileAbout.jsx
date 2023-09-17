@@ -4,7 +4,7 @@ import AdditionalInfo from "./modal/AdditionalInfo";
 import Introduction from "./modal/Introduction";
 import Setting from "./modal/Setting";
 
-import { formatDate } from "../../utilities/formatDate";
+import { formatDate, formatLanguage } from "../../utilities/format";
 import { getUser } from "../../services/apiAuth";
 import styles from "./ProfileAbout.module.css";
 
@@ -50,7 +50,9 @@ function ProfileAbout() {
           <h4>
             Birthday: {userInfo.birthday && formatDate(userInfo.birthday)}
           </h4>
-          <h4>Language: {userInfo.language && userInfo.language}</h4>
+          <h4>
+            Language: {userInfo.language && formatLanguage(userInfo.language)}
+          </h4>
         </div>
       </div>
 

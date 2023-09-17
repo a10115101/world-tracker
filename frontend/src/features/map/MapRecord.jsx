@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { useRecords } from "../../contexts/RecordsContext";
-import { formatDate } from "../../utilities/formatDate";
+import { formatDate } from "../../utilities/format";
 import { deleteRecord, updateRecord } from "../../services/apiRecord";
 import { closeSnackbar, enqueueSnackbar } from "notistack";
 import { options } from "../../utilities/snackbar";

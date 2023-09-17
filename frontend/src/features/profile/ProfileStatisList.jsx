@@ -1,4 +1,4 @@
-import { formatDate } from "../../utilities/formatDate";
+import { formatDate } from "../../utilities/format";
 import styles from "./ProfileStatisList.module.css";
 
 function ProfileStatisList({ listData }) {

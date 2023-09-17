@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useAuth } from "../../../contexts/AuthContext";
 import { updateUser } from "../../../services/apiUser";
 import { options } from "../../../utilities/snackbar";
+import { updateLocalStorage } from "../../../utilities/updateLoaclStorage";
 import styles from "./AdditionalInfo.module.css";
 
 function AdditionInfo({ closeModal, userInfo }) {
@@ -26,12 +27,7 @@ function AdditionInfo({ closeModal, userInfo }) {
         language,
       };
       const newUpadte = await updateUser(userInfo._id, updateMeObject);
-
-      let newData = {};
-      const oldData = JSON.parse(localStorage.getItem("user"));
-      newData = { ...oldData };
-      newData.user = { ...newUpadte.data.data.update };
-      localStorage.setItem("user", JSON.stringify(newData));
+      updateLocalStorage(newUpadte);
       setCurrentUser(newUpadte);
       closeModal();
       navigate("/profile");
