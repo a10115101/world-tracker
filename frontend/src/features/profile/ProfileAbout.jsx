@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ProfileAboutModal from "./ProfileAboutModal";
+import { formatDate } from "../../utilities/formatDate";
+import { getUser } from "../../services/apiAuth";
 import styles from "./ProfileAbout.module.css";
+// import { getUserInfo } from "../../services/apiUser";
 
 function ProfileAbout() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAdditionInfo, setIsAdditionInfo] = useState(false);
   const [isIntroduction, setIsIntroduction] = useState(false);
   const [isSetting, setIsSetting] = useState(false);
+
+  const userInfo = getUser().user;
+  // console.log(userInfo);
 
   return (
     <div className={styles.container}>
@@ -22,9 +28,11 @@ function ProfileAbout() {
             <div>Avatar</div>
           </div>
           <div className={styles.topRightBodyContainer}>
-            <h4>User Name: Patrick Wu</h4>
-            <h4>Email Address: bear@mail.com</h4>
-            <h4>Created At: 2023/09/16</h4>
+            <h4>User Name: {userInfo.username && userInfo.username}</h4>
+            <h4>Email Address: {userInfo.email && userInfo.email}</h4>
+            <h4>
+              Created At: {userInfo.createdAt && formatDate(userInfo.createdAt)}
+            </h4>
           </div>
         </div>
       </div>
@@ -41,9 +49,11 @@ function ProfileAbout() {
           />
         </div>
         <div className={styles.centerPart1BodyContainer}>
-          <h4>Gender: Male</h4>
-          <h4>Birthday: 1995/09/10</h4>
-          <h4>Language: Chinese</h4>
+          <h4>Gender: {userInfo.gender && userInfo.gender}</h4>
+          <h4>
+            Birthday: {userInfo.birthday && formatDate(userInfo.birthday)}
+          </h4>
+          <h4>Language: {userInfo.language && userInfo.language}</h4>
         </div>
       </div>
 
@@ -59,14 +69,7 @@ function ProfileAbout() {
           />
         </div>
         <div className={styles.centerPart2BodyContainer}>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Blanditiis, dolorem vitae sapiente eos sunt fugiat fugit nemo
-            numquam voluptates a illo ratione dicta harum officiis repellat
-            molestiae cum error aspernatur in repudiandae eaque sed adipisci
-            beatae. Dignissimos, temporibus fugit vitae iure quidem id ratione
-            corrupti, dolorum numquam odit, nisi tempora.
-          </p>
+          <p>{userInfo.introduction && userInfo.introduction}</p>
         </div>
       </div>
 
@@ -82,7 +85,11 @@ function ProfileAbout() {
           />
         </div>
         <div className={styles.bottomBodyContainer}>
-          <p>Now is public</p>
+          <p>
+            {userInfo.isOpen && userInfo.isOpen
+              ? "Everyone can see"
+              : "Only you can see."}
+          </p>
         </div>
       </div>
 
@@ -97,6 +104,7 @@ function ProfileAbout() {
           isAdditionInfo={isAdditionInfo}
           isIntroduction={isIntroduction}
           isSetting={isSetting}
+          userInfo={userInfo}
         />
       )}
     </div>

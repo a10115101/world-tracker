@@ -80,9 +80,7 @@ exports.getGoogleUser = async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
-      data: {
-        user: req.user,
-      },
+      user: req.user,
     });
   } catch (err) {
     next(err);

@@ -1,4 +1,6 @@
 export const formatDate = (formattedDate) => {
+  // console.log(formattedDate);
+
   return new Intl.DateTimeFormat("en", {
     day: "numeric",
     month: "short",

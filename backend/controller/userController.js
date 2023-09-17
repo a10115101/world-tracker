@@ -35,6 +35,19 @@ exports.getUser = async (req, res, next) => {
 };
 
 exports.updateUser = async (req, res, next) => {
+  req.body = { ...req.body.updateMeObject };
+  console.log(req.body);
+
+  function cleanData(obj) {
+    for (let prop in obj) {
+      if (obj[prop] === "" || obj[prop] === null || obj[prop] === undefined) {
+        delete obj[prop];
+      }
+    }
+  }
+
+  cleanData(req.body);
+
   console.log(req.body);
 
   const { error } = validator.updateUserDataValidate(req.body);
