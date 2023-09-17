@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import ProfileAboutModal from "./ProfileAboutModal";
+import AdditionalInfo from "./modal/AdditionalInfo";
+import Introduction from "./modal/Introduction";
+import Setting from "./modal/Setting";
+
 import { formatDate } from "../../utilities/formatDate";
 import { getUser } from "../../services/apiAuth";
 import styles from "./ProfileAbout.module.css";
-// import { getUserInfo } from "../../services/apiUser";
 
 function ProfileAbout() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAdditionInfo, setIsAdditionInfo] = useState(false);
   const [isIntroduction, setIsIntroduction] = useState(false);
   const [isSetting, setIsSetting] = useState(false);
 
   const userInfo = getUser().user;
-  // console.log(userInfo);
 
   return (
     <div className={styles.container}>
@@ -42,10 +42,7 @@ function ProfileAbout() {
           <h2>Additional Information</h2>
           <i
             className="fa-regular fa-pen-to-square fa-lg"
-            onClick={() => {
-              setIsModalOpen(true);
-              setIsAdditionInfo(true);
-            }}
+            onClick={() => setIsAdditionInfo(true)}
           />
         </div>
         <div className={styles.centerPart1BodyContainer}>
@@ -62,10 +59,7 @@ function ProfileAbout() {
           <h2>Introduction</h2>
           <i
             className="fa-regular fa-pen-to-square fa-lg"
-            onClick={() => {
-              setIsModalOpen(true);
-              setIsIntroduction(true);
-            }}
+            onClick={() => setIsIntroduction(true)}
           />
         </div>
         <div className={styles.centerPart2BodyContainer}>
@@ -78,34 +72,34 @@ function ProfileAbout() {
           <h2>Privacy Setting</h2>
           <i
             className="fa-regular fa-pen-to-square fa-lg"
-            onClick={() => {
-              setIsModalOpen(true);
-              setIsSetting(true);
-            }}
+            onClick={() => setIsSetting(true)}
           />
         </div>
         <div className={styles.bottomBodyContainer}>
           <p>
-            {userInfo.isOpen && userInfo.isOpen
+            {userInfo.isPublic && userInfo.isPublic
               ? "Everyone can see"
               : "Only you can see."}
           </p>
         </div>
       </div>
 
-      {isModalOpen && (
-        <ProfileAboutModal
-          closeModal={() => {
-            setIsModalOpen(false);
-            setIsAdditionInfo(false);
-            setIsIntroduction(false);
-            setIsSetting(false);
-          }}
-          isAdditionInfo={isAdditionInfo}
-          isIntroduction={isIntroduction}
-          isSetting={isSetting}
+      {isAdditionInfo && (
+        <AdditionalInfo
+          closeModal={() => setIsAdditionInfo(false)}
           userInfo={userInfo}
         />
+      )}
+
+      {isIntroduction && (
+        <Introduction
+          closeModal={() => setIsIntroduction(false)}
+          userInfo={userInfo}
+        />
+      )}
+
+      {isSetting && (
+        <Setting closeModal={() => setIsSetting(false)} userInfo={userInfo} />
       )}
     </div>
   );

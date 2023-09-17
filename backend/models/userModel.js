@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
     gender: {
       type: String,
       enum: {
-        values: ["male", "female"],
+        values: ["", "male", "female"],
         message: "gender only can be male or female",
       },
     },
@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema(
     language: {
       type: String,
       enum: {
-        values: ["zh", "en"],
+        values: ["", "zh", "en"],
         message: "language only can be Chinese or English",
       },
     },
@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       maxlength: [100, "Introduction length must less than or equal to 100!"],
     },
-    isOpen: {
+    isPublic: {
       type: Boolean,
       default: true,
     },

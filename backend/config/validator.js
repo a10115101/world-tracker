@@ -21,11 +21,11 @@ exports.loginDataValidate = (data) => {
 
 exports.updateUserDataValidate = (data) => {
   const schema = Joi.object({
-    gender: Joi.string().valid("male", "female"),
-    birthday: Joi.date().max("now"),
-    language: Joi.string().valid("zh", "en"),
-    introduction: Joi.string().max(100),
-    isOpen: Joi.boolean(),
+    gender: Joi.string().allow("").valid("male", "female"),
+    birthday: Joi.date().allow("").max("now"),
+    language: Joi.string().allow("").valid("zh", "en"),
+    introduction: Joi.string().allow("").max(100),
+    isPublic: Joi.boolean(),
   }).options({ abortEarly: false });
 
   return schema.validate(data);

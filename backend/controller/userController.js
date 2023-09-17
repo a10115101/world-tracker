@@ -36,19 +36,16 @@ exports.getUser = async (req, res, next) => {
 
 exports.updateUser = async (req, res, next) => {
   req.body = { ...req.body.updateMeObject };
-  console.log(req.body);
 
-  function cleanData(obj) {
-    for (let prop in obj) {
-      if (obj[prop] === "" || obj[prop] === null || obj[prop] === undefined) {
-        delete obj[prop];
-      }
-    }
+  if (req.body.setting === "public") {
+    delete req.body.setting;
+    req.body.isPublic = true;
   }
 
-  cleanData(req.body);
-
-  console.log(req.body);
+  if (req.body.setting === "privacy") {
+    delete req.body.setting;
+    req.body.isPublic = false;
+  }
 
   const { error } = validator.updateUserDataValidate(req.body);
 
