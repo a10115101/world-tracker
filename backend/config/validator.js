@@ -21,6 +21,7 @@ exports.loginDataValidate = (data) => {
 
 exports.updateUserDataValidate = (data) => {
   const schema = Joi.object({
+    photo: Joi.any(),
     gender: Joi.string().allow("").valid("male", "female"),
     birthday: Joi.date().allow("").max("now"),
     language: Joi.string().allow("").valid("zh", "en"),

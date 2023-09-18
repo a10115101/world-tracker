@@ -25,6 +25,7 @@ exports.resizeUserPhoto = async (req, res, next) => {
     if (!req.file) return next();
 
     req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+    req.body.photo = req.file.filename;
 
     await sharp(req.file.buffer)
       .resize(300, 300)
@@ -71,7 +72,8 @@ exports.getUser = async (req, res, next) => {
 };
 
 exports.updateUser = async (req, res, next) => {
-  req.body = { ...req.body.updateMeObject };
+  console.log("updateUser");
+  console.log(req.body);
 
   if (req.body.setting === "public") {
     delete req.body.setting;

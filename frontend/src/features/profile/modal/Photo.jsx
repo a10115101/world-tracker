@@ -8,18 +8,19 @@ import { options } from "../../../utilities/snackbar";
 import { updateLocalStorage } from "../../../utilities/updateLoaclStorage";
 import styles from "./modal.module.css";
 
-function Setting({ closeModal, userInfo }) {
+function Photo({ closeModal, userInfo }) {
   const { setCurrentUser } = useAuth();
   const navigate = useNavigate();
 
-  const [setting, setSetting] = useState("public");
+  const [photoFile, setPhotoFile] = useState(null);
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const updateMeObject = {
-        setting,
-      };
+
+      let updateMeObject = new FormData();
+      updateMeObject.append("photo", photoFile);
+
       const newUpadte = await updateUser(userInfo._id, updateMeObject);
       updateLocalStorage(newUpadte);
       setCurrentUser(newUpadte);
@@ -42,21 +43,18 @@ function Setting({ closeModal, userInfo }) {
       <div className={styles.innerContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.field}>
-            <label htmlFor="setting">Setting</label>
-            <select
-              id="setting"
-              value={setting}
-              onChange={(e) => setSetting(e.target.value)}
-            >
-              <option value="public">Public</option>
-              <option value="privacy">Privacy</option>
-            </select>
+            <label htmlFor="photo">Photo</label>
+            <input
+              id="photo"
+              type="file"
+              onChange={(e) => setPhotoFile(e.target.files[0])}
+            />
           </div>
-          <button>Submit</button>
+          <button>Upload</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default Setting;
+export default Photo;

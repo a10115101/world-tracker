@@ -29,6 +29,10 @@ const cofig = {
 app.use(morgan("dev"));
 app.use("/public/users/", express.static("public/users"));
 app.use(express.json());
+//
+
+// app.use(express.urlencoded({ extended: true }));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRETE,

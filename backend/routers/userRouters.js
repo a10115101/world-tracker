@@ -5,13 +5,13 @@ const userController = require("../controller/userController");
 router.route("/").get(userController.getAllUsers);
 
 router
-  .route("/upload")
-  .post(userController.uploadUserPhoto, userController.resizeUserPhoto);
-
-router
   .route("/:id")
   .get(userController.getUser)
-  .patch(userController.updateUser)
+  .patch(
+    userController.uploadUserPhoto,
+    userController.resizeUserPhoto,
+    userController.updateUser
+  )
   .delete(userController.deleteUser);
 
 module.exports = router;

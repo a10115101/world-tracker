@@ -8,7 +8,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { updateUser } from "../../../services/apiUser";
 import { options } from "../../../utilities/snackbar";
 import { updateLocalStorage } from "../../../utilities/updateLoaclStorage";
-import styles from "./AdditionalInfo.module.css";
+import styles from "./modal.module.css";
 
 function AdditionInfo({ closeModal, userInfo }) {
   const { setCurrentUser } = useAuth();

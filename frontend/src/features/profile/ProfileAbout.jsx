@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import Photo from "./modal/Photo";
 import AdditionalInfo from "./modal/AdditionalInfo";
 import Introduction from "./modal/Introduction";
 import Setting from "./modal/Setting";
@@ -9,6 +10,7 @@ import { getUser } from "../../services/apiAuth";
 import styles from "./ProfileAbout.module.css";
 
 function ProfileAbout() {
+  const [isPhoto, setIsPhoto] = useState(false);
   const [isAdditionInfo, setIsAdditionInfo] = useState(false);
   const [isIntroduction, setIsIntroduction] = useState(false);
   const [isSetting, setIsSetting] = useState(false);
@@ -20,7 +22,10 @@ function ProfileAbout() {
       <div className={styles.topContainer}>
         <div className={styles.topHeaderContainer}>
           <h2>Basic Information</h2>
-          <i className="fa-regular fa-pen-to-square fa-lg" />
+          <i
+            className="fa-regular fa-pen-to-square fa-lg"
+            onClick={() => setIsPhoto(true)}
+          />
         </div>
 
         <div className={styles.topBodyContainer}>
@@ -91,6 +96,10 @@ function ProfileAbout() {
           </p>
         </div>
       </div>
+
+      {isPhoto && (
+        <Photo closeModal={() => setIsPhoto(false)} userInfo={userInfo} />
+      )}
 
       {isAdditionInfo && (
         <AdditionalInfo
