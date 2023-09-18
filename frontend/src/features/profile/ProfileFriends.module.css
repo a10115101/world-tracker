@@ -15,13 +15,43 @@
 }
 
 .topContainerLeft {
-  width: 67.5%;
+  width: 70%;
 }
 
-.topContainerRight {
+/* .topContainerRight {
   display: flex;
   width: 32.5%;
   align-items: center;
+} */
+
+.topContainerRight {
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid black;
+  width: 30%;
+}
+
+.topContainerRight {
+  border-bottom: 2px solid black;
+  padding-left: 0.5rem;
+}
+
+.topContainerRight form {
+  display: flex;
+}
+
+.topContainerRight button {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.topContainerRight i {
+  margin-right: 0.5rem;
+}
+
+.topContainer input {
+  border: none;
 }
 
 .bottomContainer {
@@ -36,47 +66,4 @@
 .bottomContainer::-webkit-scrollbar {
   display: none;
   scroll-behavior: smooth;
-}
-
-.cardContainer {
-  display: flex;
-  border: 2px solid gray;
-  background-color: rgb(244, 238, 238, 0.5);
-  border-radius: 10px;
-  justify-content: space-between;
-  align-items: center;
-  height: 22.5%;
-  width: 95%;
-  padding: 1rem;
-  margin: 0.75rem;
-}
-
-.cardContainerLeft {
-  background-color: greenyellow;
-  height: 75px;
-  width: 75px;
-  border-radius: 50%;
-  border: 2px black solid;
-}
-
-.cardContainerCenter {
-  font-size: 1.25rem;
-  border: 2px black solid;
-}
-
-.cardContainerRight {
-  display: flex;
-  border: 2px black solid;
-}
-
-.container button {
-  padding: 0.4rem 0.8rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100px;
-}
-
-.container i {
-  margin-right: 0.75rem;
 }

@@ -72,9 +72,6 @@ exports.getUser = async (req, res, next) => {
 };
 
 exports.updateUser = async (req, res, next) => {
-  console.log("updateUser");
-  console.log(req.body);
-
   if (req.body.setting === "public") {
     delete req.body.setting;
     req.body.isPublic = true;
