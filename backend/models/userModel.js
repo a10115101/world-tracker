@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
     googleID: {
       type: String,
     },
-    photo: String,
+    photo: { type: String, default: "default.jpeg" },
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "Friend" }],
     password: {
       type: String,

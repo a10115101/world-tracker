@@ -25,7 +25,13 @@ function ProfileAbout() {
 
         <div className={styles.topBodyContainer}>
           <div className={styles.topLeftBodyContainer}>
-            <div>Avatar</div>
+            <div>
+              <img
+                src={`http://localhost:3000/public/users/${userInfo.photo}`}
+                alt="pic"
+                width="80"
+              />
+            </div>
           </div>
           <div className={styles.topRightBodyContainer}>
             <h4>User Name: {userInfo.username && userInfo.username}</h4>
