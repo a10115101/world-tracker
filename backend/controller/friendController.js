@@ -4,8 +4,8 @@ const Friend = require("../models/friendModel");
 exports.request = async (req, res, next) => {
   try {
     //test
-    const userA = "64fb04aed4da797a369607d0";
-    const userB = "64fb0444d4da797a369607c6";
+    const userA = "64fb0444d4da797a369607c6";
+    const userB = "65000a5f9e42f36f29ea5486";
 
     const docA = await Friend.findOneAndUpdate(
       { requester: userA, recipient: userB },

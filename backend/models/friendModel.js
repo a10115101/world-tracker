@@ -13,7 +13,7 @@ const frinedSchema = new mongoose.Schema(
 );
 
 frinedSchema.pre(/^find/, function (next) {
-  this.populate("recipient", "username").select("-__v");
+  this.populate("recipient", ["username", "photo"]).select("-__v");
   next();
 });
 

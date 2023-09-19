@@ -15,6 +15,7 @@ function ProfileFriendsList({ searchResults }) {
             </div>
             <div className={styles.centerContainer}>
               <div>Name: {result.username}</div>
+              <div></div>
             </div>
             <div className={styles.rightContainer}>
               <button>Add</button>

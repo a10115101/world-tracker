@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 
-import styles from "./ProfileFriends.module.css";
+import ProfileFriendsSearchList from "./ProfileFriendsSearchList";
+import ProfileFriendsAllList from "./ProfileFriendsAllList";
+
 import { getAllUsers } from "../../services/apiUser";
 import { getUser } from "../../services/apiAuth";
 import { getFriends } from "../../services/apiFriend";
-import ProfileFriendsList from "./ProfileFriendsList";
+import styles from "./ProfileFriends.module.css";
 
 function ProfileFriends() {
   const [isSearching, setIsSearching] = useState(false);
@@ -12,7 +14,12 @@ function ProfileFriends() {
   const [searchedText, setSearchedText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  // const [relationshipResults, setRelationshipResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState("");
+  const [relationship, setRelationship] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [pending, setPending] = useState([]);
+  const [requesting, setRequesting] = useState([]);
 
   const userInfo = getUser().user;
 
@@ -37,19 +44,29 @@ function ProfileFriends() {
     }
   };
 
-  // useEffect(function () {
-  //   async function getRelationship() {
-  //     try {
-  //       const data = await getFriends();
-  //       setRelationshipResults(data);
-  //       console.log(data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
+  useEffect(function () {
+    async function getRelationship() {
+      try {
+        setIsLoading(true);
+        setLoadingError("");
 
-  //   getRelationship();
-  // }, []);
+        const data = await getFriends();
+        setRelationship(data);
+        console.log(data);
+
+        setFriends(data.filter((el) => el.status === 3 || el.status === 1));
+        setPending(data.filter((el) => el.status === 2));
+        // setRequesting(data.filter((el) => el.status === 1));
+      } catch (err) {
+        setLoadingError("Loading Error");
+        console.log(err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    getRelationship();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -73,10 +90,20 @@ function ProfileFriends() {
         </div>
       </div>
 
+      {/* {console.log(friends)}
+      {console.log(pending)}
+      {console.log(requesting)} */}
+
       <div className={styles.bottomContainer}>
+        {isLoading && <p>Loading...</p>}
+        {!isLoading && !loadingError && (
+          <ProfileFriendsAllList friends={friends} />
+        )}
+        {loadingError && loadingError}
+
         {isSearching && <p>Searching...</p>}
         {!isSearching && !searchingError && (
-          <ProfileFriendsList searchResults={searchResults} />
+          <ProfileFriendsSearchList searchResults={searchResults} />
         )}
         {searchingError && searchingError}
       </div>
