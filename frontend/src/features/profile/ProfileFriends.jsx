@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
-import ProfileFriendsSearchList from "./ProfileFriendsSearchList";
 import ProfileFriendsAllList from "./ProfileFriendsAllList";
+import ProfileFriendsPendingList from "./ProfileFriendsPendingList";
+import ProfileFriendsSearchList from "./ProfileFriendsSearchList";
 
 import { getAllUsers } from "../../services/apiUser";
 import { getUser } from "../../services/apiAuth";
@@ -21,6 +22,8 @@ function ProfileFriends() {
   const [pending, setPending] = useState([]);
   const [requesting, setRequesting] = useState([]);
 
+  const [mode, setMode] = useState("all");
+
   const userInfo = getUser().user;
 
   const handleSubmit = async (e) => {
@@ -28,14 +31,15 @@ function ProfileFriends() {
       e.preventDefault();
 
       if (!searchedText) return;
-
+      setMode("search");
       setIsSearching(true);
       setSearchingError("");
 
-      const data = await getAllUsers();
-      const results = data.filter(
-        (el) => el.username.includes(searchedText) && el._id !== userInfo._id
-      );
+      const results = await getAllUsers(searchedText);
+      // console.log(results);
+      // const results = data.filter(
+      //   (el) => el.username.includes(searchedText) && el._id !== userInfo._id
+      // );
       setSearchResults(results);
     } catch (err) {
       setSearchingError("Searching Error");
@@ -52,14 +56,12 @@ function ProfileFriends() {
 
         const data = await getFriends();
         setRelationship(data);
-        console.log(data);
 
-        setFriends(data.filter((el) => el.status === 3 || el.status === 1));
+        setFriends(data.filter((el) => el.status === 1 || el.status === 3));
         setPending(data.filter((el) => el.status === 2));
         // setRequesting(data.filter((el) => el.status === 1));
       } catch (err) {
         setLoadingError("Loading Error");
-        console.log(err);
       } finally {
         setIsLoading(false);
       }
@@ -72,8 +74,8 @@ function ProfileFriends() {
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <div className={styles.topContainerLeft}>
-          <button>All</button>
-          <button>Pending</button>
+          <button onClick={() => setMode("all")}>All</button>
+          <button onClick={() => setMode("pending")}>Pending</button>
         </div>
         <div className={styles.topContainerRight}>
           <form onSubmit={handleSubmit}>
@@ -95,17 +97,38 @@ function ProfileFriends() {
       {console.log(requesting)} */}
 
       <div className={styles.bottomContainer}>
-        {isLoading && <p>Loading...</p>}
-        {!isLoading && !loadingError && (
-          <ProfileFriendsAllList friends={friends} />
+        {mode === "all" && (
+          <>
+            {isLoading && <p>Loading...</p>}
+            {!isLoading && !loadingError && (
+              <ProfileFriendsAllList friends={friends} />
+            )}
+            {loadingError && loadingError}
+          </>
         )}
-        {loadingError && loadingError}
 
-        {isSearching && <p>Searching...</p>}
-        {!isSearching && !searchingError && (
-          <ProfileFriendsSearchList searchResults={searchResults} />
+        {mode === "pending" && (
+          <>
+            {isLoading && <p>Loading...</p>}
+            {!isLoading && !loadingError && (
+              <ProfileFriendsPendingList pending={pending} />
+            )}
+            {loadingError && loadingError}
+          </>
         )}
-        {searchingError && searchingError}
+
+        {mode === "search" && (
+          <>
+            {isSearching && <p>Searching...</p>}
+            {!isSearching && !searchingError && (
+              <ProfileFriendsSearchList
+                searchResults={searchResults}
+                relationship={relationship}
+              />
+            )}
+            {searchingError && searchingError}
+          </>
+        )}
       </div>
     </div>
   );

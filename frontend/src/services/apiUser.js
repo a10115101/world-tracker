@@ -2,16 +2,18 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3000/api/v1/users";
 
-export async function getAllUsers() {
+export async function getAllUsers(queryText) {
   let token = "";
 
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  const response = await axios.get(API_URL, {
+  const response = await axios.get(`${API_URL}/?username=${queryText}`, {
     headers: { Authorization: token },
     withCredentials: true,
   });
+
+  console.log(response);
 
   return response.data.data.users;
 }

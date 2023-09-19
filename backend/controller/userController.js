@@ -41,7 +41,11 @@ exports.resizeUserPhoto = async (req, res, next) => {
 
 exports.getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.find({}).exec();
+    const { username } = req.query;
+    const users = await User.find({
+      username: { $regex: `${username}` },
+    }).exec();
+
     res.status(200).json({
       status: "success",
       results: users.length,

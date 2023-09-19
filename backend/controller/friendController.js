@@ -95,15 +95,9 @@ exports.reject = async (req, res, next) => {
 
 exports.getFriends = async (req, res, next) => {
   try {
-    // const results = await Friend.find({
-    //   requester: req.user.id,
-    // })
-    //   .populate("recipient", "username")
-    //   .select("-__v")
-    //   .exec();
     const results = await User.findById(req.user.id)
-      .populate("friends")
-      .select("-__v")
+      .populate({ path: "friends", options: { sort: { status: 1 } } })
+      .select(["-__v", "-introduction"])
       .exec();
 
     res.status(200).json({

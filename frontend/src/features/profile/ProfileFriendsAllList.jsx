@@ -3,7 +3,7 @@ import styles from "./ProfileFriendsList.module.css";
 function ProfileFriendsAllList({ friends }) {
   return (
     <>
-      {console.log(friends)}
+      {/* {console.log(friends)} */}
       {friends.length > 0 ? (
         friends.map((friend) => (
           <div className={styles.container} key={friend._id}>
@@ -19,9 +19,6 @@ function ProfileFriendsAllList({ friends }) {
               <div>Status: {friend.status}</div>
             </div>
             <div className={styles.rightContainer}>
-              <button>Add</button>
-              <button>Accept</button>
-              <button>Reject</button>
               <button>Remove</button>
             </div>
           </div>
