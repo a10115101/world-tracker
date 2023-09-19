@@ -17,11 +17,12 @@ import Profile from "./pages/Profile";
 import ProfileAbout from "./features/profile/ProfileAbout";
 import ProfileStatis from "./features/profile/ProfileStatis";
 import ProfileFriends from "./features/profile/ProfileFriends";
-import ProfileSetting from "./features/profile/ProfileSetting";
+import ProfileFriendsData from "./features/profile/ProfileFriendsData";
 
 import { RecordsProvider } from "./contexts/RecordsContext";
 import { SearchProvider } from "./contexts/SearchContext";
 import { AuthProvider } from "./contexts/AuthContext";
+import { FriendsProvider } from "./contexts/FriendsContext";
 
 function App() {
   return (
@@ -60,8 +61,15 @@ function App() {
                   <Route index element={<ProfileAbout />} />
                   <Route path="about" element={<ProfileAbout />} />
                   <Route path="statis" element={<ProfileStatis />} />
-                  <Route path="friends" element={<ProfileFriends />} />
-                  <Route path="setting" element={<ProfileSetting />} />
+                  <Route
+                    path="friends"
+                    element={
+                      <FriendsProvider>
+                        <ProfileFriends />
+                      </FriendsProvider>
+                    }
+                  />
+                  <Route path="user/:id" element={<ProfileFriendsData />} />
                 </Route>
 
                 <Route path="*" element={<PageNotFound />} />

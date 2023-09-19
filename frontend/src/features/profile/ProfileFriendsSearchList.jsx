@@ -1,3 +1,5 @@
+import AddFriendButton from "./button/AddFriendButton";
+
 import { getUser } from "../../services/apiAuth";
 import styles from "./ProfileFriendsList.module.css";
 
@@ -21,21 +23,23 @@ function ProfileFriendsList({ searchResults, relationship }) {
   return (
     <>
       {matchResults.length > 0 ? (
-        matchResults.map((result) => (
-          <div className={styles.container} key={result._id}>
+        matchResults.map((el) => (
+          <div className={styles.container} key={el._id}>
             <div className={styles.leftContainer}>
               <img
-                src={`http://localhost:3000/public/users/${result.photo}`}
+                src={`http://localhost:3000/public/users/${el.photo}`}
                 alt="avatar"
                 width="80"
               />
             </div>
             <div className={styles.centerContainer}>
-              <div>Name: {result.username}</div>
-              <div>Status: {result.status}</div>
+              <div>Name: {el.username}</div>
+              <div>Status: {el.status}</div>
             </div>
             <div className={styles.rightContainer}>
-              {userInfo._id !== result._id && <button>Add</button>}
+              {userInfo._id !== el._id && el.status === 0 && (
+                <AddFriendButton user={el} />
+              )}
             </div>
           </div>
         ))

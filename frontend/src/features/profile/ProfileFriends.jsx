@@ -5,11 +5,13 @@ import ProfileFriendsPendingList from "./ProfileFriendsPendingList";
 import ProfileFriendsSearchList from "./ProfileFriendsSearchList";
 
 import { getAllUsers } from "../../services/apiUser";
-import { getUser } from "../../services/apiAuth";
 import { getFriends } from "../../services/apiFriend";
 import styles from "./ProfileFriends.module.css";
+import { useFriends } from "../../contexts/FriendsContext";
 
 function ProfileFriends() {
+  const { update } = useFriends();
+
   const [isSearching, setIsSearching] = useState(false);
   const [searchingError, setSearchingError] = useState("");
   const [searchedText, setSearchedText] = useState("");
@@ -20,26 +22,20 @@ function ProfileFriends() {
   const [relationship, setRelationship] = useState([]);
   const [friends, setFriends] = useState([]);
   const [pending, setPending] = useState([]);
-  const [requesting, setRequesting] = useState([]);
 
   const [mode, setMode] = useState("all");
-
-  const userInfo = getUser().user;
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
 
       if (!searchedText) return;
+
       setMode("search");
       setIsSearching(true);
       setSearchingError("");
 
       const results = await getAllUsers(searchedText);
-      // console.log(results);
-      // const results = data.filter(
-      //   (el) => el.username.includes(searchedText) && el._id !== userInfo._id
-      // );
       setSearchResults(results);
     } catch (err) {
       setSearchingError("Searching Error");
@@ -48,27 +44,29 @@ function ProfileFriends() {
     }
   };
 
-  useEffect(function () {
-    async function getRelationship() {
-      try {
-        setIsLoading(true);
-        setLoadingError("");
+  useEffect(
+    function () {
+      async function getRelationship() {
+        try {
+          setIsLoading(true);
+          setLoadingError("");
 
-        const data = await getFriends();
-        setRelationship(data);
+          const data = await getFriends();
+          setRelationship(data);
 
-        setFriends(data.filter((el) => el.status === 1 || el.status === 3));
-        setPending(data.filter((el) => el.status === 2));
-        // setRequesting(data.filter((el) => el.status === 1));
-      } catch (err) {
-        setLoadingError("Loading Error");
-      } finally {
-        setIsLoading(false);
+          setFriends(data.filter((el) => el.status === 1 || el.status === 3));
+          setPending(data.filter((el) => el.status === 2));
+        } catch (err) {
+          setLoadingError("Loading Error");
+        } finally {
+          setIsLoading(false);
+        }
       }
-    }
 
-    getRelationship();
-  }, []);
+      getRelationship();
+    },
+    [update]
+  );
 
   return (
     <div className={styles.container}>
@@ -91,10 +89,6 @@ function ProfileFriends() {
           </form>
         </div>
       </div>
-
-      {/* {console.log(friends)}
-      {console.log(pending)}
-      {console.log(requesting)} */}
 
       <div className={styles.bottomContainer}>
         {mode === "all" && (

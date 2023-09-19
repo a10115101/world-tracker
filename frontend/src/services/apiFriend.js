@@ -8,10 +8,56 @@ export async function getFriends() {
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  const response = await axios.get(`${API_URL}/getFriends`, {
+  const response = await axios.get(API_URL, {
     headers: { Authorization: token },
     withCredentials: true,
   });
 
   return response.data.results.friends;
+}
+
+export async function addFriend(id) {
+  let token = "";
+
+  if (localStorage.getItem("user"))
+    token = JSON.parse(localStorage.getItem("user")).token;
+
+  const response = await axios.get(`${API_URL}/${id}`, {
+    headers: { Authorization: token },
+    withCredentials: true,
+  });
+
+  return response.data;
+}
+
+export async function acceptFriend(id) {
+  let token = "";
+
+  if (localStorage.getItem("user"))
+    token = JSON.parse(localStorage.getItem("user")).token;
+
+  const response = await axios.patch(
+    `${API_URL}/${id}`,
+    {},
+    {
+      headers: { Authorization: token },
+      withCredentials: true,
+    }
+  );
+
+  return response.data;
+}
+
+export async function cancelFriend(id) {
+  let token = "";
+
+  if (localStorage.getItem("user"))
+    token = JSON.parse(localStorage.getItem("user")).token;
+
+  const response = await axios.delete(`${API_URL}/${id}`, {
+    headers: { Authorization: token },
+    withCredentials: true,
+  });
+
+  return response.data;
 }

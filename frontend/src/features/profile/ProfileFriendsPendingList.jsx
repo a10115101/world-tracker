@@ -1,9 +1,10 @@
 import styles from "./ProfileFriendsList.module.css";
+import AcceptFriendButton from "./button/AcceptFriendButton";
+import CancelFriendButton from "./button/CancelFriendButton";
 
 function ProfileFriendsPendingList({ pending }) {
   return (
     <>
-      {/* {console.log(pending)} */}
       {pending.length > 0 ? (
         pending.map((el) => (
           <div className={styles.container} key={el._id}>
@@ -19,13 +20,13 @@ function ProfileFriendsPendingList({ pending }) {
               <div>Status: {el.status}</div>
             </div>
             <div className={styles.rightContainer}>
-              <button>Accept</button>
-              <button>Reject</button>
+              <AcceptFriendButton user={el} />
+              <CancelFriendButton user={el} />
             </div>
           </div>
         ))
       ) : (
-        <p>Not Data!</p>
+        <p>No Data!</p>
       )}
     </>
   );

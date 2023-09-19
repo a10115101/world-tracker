@@ -1,11 +1,28 @@
 const User = require("../models/userModel");
 const Friend = require("../models/friendModel");
 
+exports.getFriends = async (req, res, next) => {
+  try {
+    const results = await User.findById(req.user.id)
+      .populate({ path: "friends", options: { sort: { status: 1 } } })
+      .select(["-__v", "-introduction"])
+      .exec();
+
+    res.status(200).json({
+      status: "success",
+      results,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.request = async (req, res, next) => {
   try {
-    //test
-    const userA = "64fb0444d4da797a369607c6";
-    const userB = "65000a5f9e42f36f29ea5486";
+    const { id } = req.params;
+
+    const userA = req.user.id;
+    const userB = id;
 
     const docA = await Friend.findOneAndUpdate(
       { requester: userA, recipient: userB },
@@ -21,16 +38,20 @@ exports.request = async (req, res, next) => {
 
     const updateUserA = await User.findOneAndUpdate(
       { _id: userA },
-      { $push: { friends: docA._id } }
+      { $push: { friends: docA._id } },
+      { new: true }
     );
 
     const updateUserB = await User.findOneAndUpdate(
       { _id: userB },
-      { $push: { friends: docB._id } }
+      { $push: { friends: docB._id } },
+      { new: true }
     );
 
     res.status(200).json({
       status: "success",
+      UserA: { docA, updateUserA },
+      userB: { docB, updateUserB },
     });
   } catch (err) {
     next(err);
@@ -39,8 +60,10 @@ exports.request = async (req, res, next) => {
 
 exports.accept = async (req, res, next) => {
   try {
-    const userA = "64fb04aed4da797a369607d0";
-    const userB = "64fb0444d4da797a369607c6";
+    const { id } = req.params;
+
+    const userA = req.user.id;
+    const userB = id;
 
     await Friend.findOneAndUpdate(
       { requester: userA, recipient: userB },
@@ -60,10 +83,12 @@ exports.accept = async (req, res, next) => {
   }
 };
 
-exports.reject = async (req, res, next) => {
+exports.cancel = async (req, res, next) => {
   try {
-    const userA = "64fb04aed4da797a369607d0";
-    const userB = "64fb0444d4da797a369607c6";
+    const { id } = req.params;
+
+    const userA = req.user.id;
+    const userB = id;
 
     const docA = await Friend.findOneAndRemove({
       requester: userA,
@@ -75,34 +100,18 @@ exports.reject = async (req, res, next) => {
       recipient: userA,
     });
 
-    const updateUserA = await User.findOneAndUpdate(
+    await User.findOneAndUpdate(
       { _id: userA },
       { $pull: { friends: docA._id } }
     );
 
-    const updateUserB = await User.findOneAndUpdate(
+    await User.findOneAndUpdate(
       { _id: userB },
       { $pull: { friends: docB._id } }
     );
 
-    res.status(200).json({
+    res.status(204).json({
       status: "success",
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.getFriends = async (req, res, next) => {
-  try {
-    const results = await User.findById(req.user.id)
-      .populate({ path: "friends", options: { sort: { status: 1 } } })
-      .select(["-__v", "-introduction"])
-      .exec();
-
-    res.status(200).json({
-      status: "success",
-      results,
     });
   } catch (err) {
     next(err);

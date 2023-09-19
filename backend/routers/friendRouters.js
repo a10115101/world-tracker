@@ -2,9 +2,12 @@ const router = require("express").Router();
 
 const friendController = require("../controller/friendController");
 
-router.route("/request").get(friendController.request);
-router.route("/accept").get(friendController.accept);
-router.route("/rejecet").get(friendController.reject);
-router.route("/getFriends").get(friendController.getFriends);
+router.route("/").get(friendController.getFriends);
+
+router
+  .route("/:id")
+  .get(friendController.request)
+  .patch(friendController.accept)
+  .delete(friendController.cancel);
 
 module.exports = router;

@@ -13,8 +13,6 @@ export async function getAllUsers(queryText) {
     withCredentials: true,
   });
 
-  console.log(response);
-
   return response.data.data.users;
 }
 

@@ -1,30 +1,32 @@
+import { Link } from "react-router-dom";
+import CancelFriendButton from "./button/CancelFriendButton";
+
 import styles from "./ProfileFriendsList.module.css";
 
 function ProfileFriendsAllList({ friends }) {
   return (
     <>
-      {/* {console.log(friends)} */}
       {friends.length > 0 ? (
-        friends.map((friend) => (
-          <div className={styles.container} key={friend._id}>
+        friends.map((el) => (
+          <div className={styles.container} key={el._id}>
             <div className={styles.leftContainer}>
               <img
-                src={`http://localhost:3000/public/users/${friend.recipient.photo}`}
+                src={`http://localhost:3000/public/users/${el.recipient.photo}`}
                 alt="avatar"
                 width="80"
               />
             </div>
             <div className={styles.centerContainer}>
-              <div>Name: {friend.recipient.username}</div>
-              <div>Status: {friend.status}</div>
+              <div>Name: {el.recipient.username}</div>
+              <div>Status: {el.status}</div>
             </div>
             <div className={styles.rightContainer}>
-              <button>Remove</button>
+              <CancelFriendButton user={el} />
             </div>
           </div>
         ))
       ) : (
-        <p>Not Friends!</p>
+        <p>No Friends!</p>
       )}
     </>
   );
