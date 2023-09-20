@@ -12,6 +12,7 @@ import {
   doughnutDatasetSetting,
   doughnutLegendSetting,
 } from "../../utilities/doughnutConfig";
+import { getUser } from "../../services/apiAuth";
 import ProfileStatisList from "./ProfileStatisList";
 import styles from "./ProfileStatis.module.css";
 
@@ -31,13 +32,15 @@ function ProfileDetails() {
   const [listError, setListError] = useState("");
   const [listData, setListData] = useState([]);
 
+  const userInfo = getUser().user;
+
   // Statis
   useEffect(function () {
     async function getStatis() {
       try {
         setIsLoadingStatisData(true);
         setStatisError("");
-        const data = await getStatisCountries();
+        const data = await getStatisCountries(userInfo._id);
         setNumVisitedCountries(data.visitedCountries.results);
         setNumPlanningCountries(data.planningCountries.results);
       } catch (err) {
@@ -55,7 +58,7 @@ function ProfileDetails() {
       try {
         setIsLoadingDoughnutData(true);
         setDoughnutError("");
-        const data = await getStatisContinents();
+        const data = await getStatisContinents(userInfo._id);
         setDoughnutData(doughnutDatasetSetting(data));
       } catch (err) {
         setDoughnutError("Loading Doughnut Data Error!");
@@ -72,7 +75,7 @@ function ProfileDetails() {
       try {
         setIsLoadingListData(true);
         setListError("");
-        const data = await getRecentlyVisited();
+        const data = await getRecentlyVisited(userInfo._id);
         setListData(data.informaiton);
       } catch (err) {
         setListError("Loading List Data Error!");

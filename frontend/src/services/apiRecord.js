@@ -52,13 +52,13 @@ export async function deleteRecord(id) {
   });
 }
 
-export async function getStatisCountries() {
+export async function getStatisCountries(id) {
   let token = "";
 
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  const response = await axios.get(`${API_URL}/statisCountries`, {
+  const response = await axios.get(`${API_URL}/statisCountries/${id}`, {
     headers: { Authorization: token },
     withCredentials: true,
   });
@@ -66,13 +66,13 @@ export async function getStatisCountries() {
   return response.data.data;
 }
 
-export async function getStatisContinents() {
+export async function getStatisContinents(id) {
   let token = "";
 
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  const response = await axios.get(`${API_URL}/statisContinents`, {
+  const response = await axios.get(`${API_URL}/statisContinents/${id}`, {
     headers: { Authorization: token },
     withCredentials: true,
   });
@@ -80,13 +80,13 @@ export async function getStatisContinents() {
   return response.data.data.statis;
 }
 
-export async function getRecentlyVisited() {
+export async function getRecentlyVisited(id) {
   let token = "";
 
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  const response = await axios.get(`${API_URL}/recentlyVisited`, {
+  const response = await axios.get(`${API_URL}/recentlyVisited/${id}`, {
     headers: { Authorization: token },
     withCredentials: true,
   });

@@ -112,7 +112,7 @@ exports.getStatisCountries = async (req, res, next) => {
       {
         $match: {
           $expr: {
-            $eq: ["$user", { $toObjectId: `${req.user.id}` }],
+            $eq: ["$user", { $toObjectId: `${req.params.id}` }],
           },
         },
       },
@@ -131,7 +131,7 @@ exports.getStatisCountries = async (req, res, next) => {
       {
         $match: {
           $expr: {
-            $eq: ["$user", { $toObjectId: `${req.user.id}` }],
+            $eq: ["$user", { $toObjectId: `${req.params.id}` }],
           },
         },
       },
@@ -170,7 +170,7 @@ exports.getStatisContinents = async (req, res, next) => {
       {
         $match: {
           $expr: {
-            $eq: ["$user", { $toObjectId: `${req.user.id}` }],
+            $eq: ["$user", { $toObjectId: `${req.params.id}` }],
           },
         },
       },
@@ -202,7 +202,7 @@ exports.getRecentlyVisited = async (req, res, next) => {
       {
         $match: {
           $expr: {
-            $eq: ["$user", { $toObjectId: `${req.user.id}` }],
+            $eq: ["$user", { $toObjectId: `${req.params.id}` }],
           },
         },
       },

@@ -16,6 +16,20 @@ export async function getAllUsers(queryText) {
   return response.data.data.users;
 }
 
+export async function getUser(id) {
+  let token = "";
+
+  if (localStorage.getItem("user"))
+    token = JSON.parse(localStorage.getItem("user")).token;
+
+  const response = await axios.get(`${API_URL}/${id}`, {
+    headers: { Authorization: token },
+    withCredentials: true,
+  });
+
+  return response.data.data.user;
+}
+
 export async function updateUser(id, updateMeObject) {
   let token = "";
 

@@ -2,9 +2,9 @@ const router = require("express").Router();
 
 const recordController = require("../controller/recordController");
 
-router.route("/statisCountries").get(recordController.getStatisCountries);
-router.route("/statisContinents").get(recordController.getStatisContinents);
-router.route("/recentlyVisited").get(recordController.getRecentlyVisited);
+router.route("/statisCountries/:id").get(recordController.getStatisCountries);
+router.route("/statisContinents/:id").get(recordController.getStatisContinents);
+router.route("/recentlyVisited/:id").get(recordController.getRecentlyVisited);
 
 router
   .route("/")
