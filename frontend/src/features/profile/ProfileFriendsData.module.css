@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  height: 100%;
+  padding: 1.5rem;
+  border: 2px solid green;
+}
+
+.topContainer {
+  display: flex;
+  height: 15%;
+}
+
+.topContainer div {
+  margin-right: 1rem;
+}
+
+.bottomContainer {
+  background-color: white;
+  border-radius: 5px;
+  height: 85%;
+}
+
+.bottomPart1Container {
+  background-color: grey;
+  height: 8%;
+  padding: 0.5rem;
+}
+
+.bottomPart1Container button {
+  height: 100%;
+  width: 7.5%;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.bottomPart2Container {
+  border: 1px solid grey;
+  height: 92%;
+  padding: 1rem;
+  overflow-y: scroll;
+}
+
+.bottomPart2Container ::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}
+
+.profileContainer {
+  height: 100%;
+}
+
+.profileContainer h2 {
+  border-bottom: 1.5px solid gray;
+}
+
+.profileField1Container {
+  height: 30%;
+}
+
+.profileField2Container {
+  height: 70%;
+}
+
+.statisBasicContainer {
+  border-bottom: 2px solid gray;
+  height: 22.5%;
+  margin-bottom: 1rem;
+}
+
+.statisFigureContainer {
+  display: flex;
+  height: 77.5%;
+}
+
+.statisDoughnutContainer {
+  width: 30%;
+}
+
+.statisListContainer {
+  padding-left: 1.25rem;
+  width: 70%;
+}
