@@ -4,29 +4,29 @@ import { enqueueSnackbar } from "notistack";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { useAuth } from "../../../contexts/AuthContext";
-import { updateUser } from "../../../services/apiUser";
-import { options } from "../../../utilities/snackbar";
-import { updateLocalStorage } from "../../../utilities/updateLoaclStorage";
+import { useAuth } from "src/contexts/AuthContext";
+import { updateUser } from "src/services/apiUser";
+import { options } from "src/utilities/snackbar";
+import { updateLocalStorage } from "src/utilities/updateLoaclStorage";
 import styles from "./modal.module.css";
 
 function AdditionInfo({ closeModal, userInfo }) {
-  const { setCurrentUser } = useAuth();
   const navigate = useNavigate();
+  const { setCurrentUser } = useAuth();
 
-  const [gender, setGender] = useState("");
-  const [birthday, setBirthdaye] = useState("");
-  const [language, setLanguage] = useState("");
+  const [gender, setGender] = useState(userInfo.gender);
+  const [birthday, setBirthday] = useState(
+    userInfo.birthday ? new Date(userInfo.birthday) : ""
+  );
+  const [language, setLanguage] = useState(userInfo.language);
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const updateMeObject = {
-        gender,
-        birthday,
-        language,
-      };
+
+      const updateMeObject = { gender, birthday, language };
       const newUpadte = await updateUser(userInfo._id, updateMeObject);
+
       updateLocalStorage(newUpadte);
       setCurrentUser(newUpadte);
       closeModal();
@@ -55,15 +55,15 @@ function AdditionInfo({ closeModal, userInfo }) {
               onChange={(e) => setGender(e.target.value)}
             >
               <option></option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </select>
           </div>
           <div className={styles.field}>
             <label htmlFor="birthday">Birthday</label>
             <DatePicker
               id="birthday"
-              onChange={(date) => setBirthdaye(date)}
+              onChange={(date) => setBirthday(date ? date : "")}
               selected={birthday}
               maxDate={new Date()}
               dateFormat="MMM dd, yyyy"

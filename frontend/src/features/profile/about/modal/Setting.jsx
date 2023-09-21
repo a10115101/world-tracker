@@ -2,26 +2,25 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
-import { useAuth } from "../../../contexts/AuthContext";
-import { updateUser } from "../../../services/apiUser";
-import { options } from "../../../utilities/snackbar";
-import { updateLocalStorage } from "../../../utilities/updateLoaclStorage";
+import { useAuth } from "src/contexts/AuthContext";
+import { updateUser } from "src/services/apiUser";
+import { options } from "src/utilities/snackbar";
+import { updateLocalStorage } from "src/utilities/updateLoaclStorage";
 import styles from "./modal.module.css";
 
-function Photo({ closeModal, userInfo }) {
-  const { setCurrentUser } = useAuth();
+function Setting({ closeModal, userInfo }) {
   const navigate = useNavigate();
+  const { setCurrentUser } = useAuth();
 
-  const [photoFile, setPhotoFile] = useState(null);
+  const [setting, setSetting] = useState("public");
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
 
-      let updateMeObject = new FormData();
-      updateMeObject.append("photo", photoFile);
-
+      const updateMeObject = { setting };
       const newUpadte = await updateUser(userInfo._id, updateMeObject);
+
       updateLocalStorage(newUpadte);
       setCurrentUser(newUpadte);
       closeModal();
@@ -43,18 +42,21 @@ function Photo({ closeModal, userInfo }) {
       <div className={styles.innerContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.field}>
-            <label htmlFor="photo">Photo</label>
-            <input
-              id="photo"
-              type="file"
-              onChange={(e) => setPhotoFile(e.target.files[0])}
-            />
+            <label htmlFor="setting">Setting</label>
+            <select
+              id="setting"
+              value={setting}
+              onChange={(e) => setSetting(e.target.value)}
+            >
+              <option value="public">Public</option>
+              <option value="privacy">Privacy</option>
+            </select>
           </div>
-          <button>Upload</button>
+          <button>Submit</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default Photo;
+export default Setting;

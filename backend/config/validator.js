@@ -22,7 +22,7 @@ exports.loginDataValidate = (data) => {
 exports.updateUserDataValidate = (data) => {
   const schema = Joi.object({
     photo: Joi.any(),
-    gender: Joi.string().allow("").valid("male", "female"),
+    gender: Joi.string().allow("").valid("Male", "Female"),
     birthday: Joi.date().allow("").max("now"),
     language: Joi.string().allow("").valid("zh", "en"),
     introduction: Joi.string().allow("").max(100),

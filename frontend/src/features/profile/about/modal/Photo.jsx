@@ -2,25 +2,26 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
-import { useAuth } from "../../../contexts/AuthContext";
-import { updateUser } from "../../../services/apiUser";
-import { options } from "../../../utilities/snackbar";
-import { updateLocalStorage } from "../../../utilities/updateLoaclStorage";
+import { useAuth } from "src/contexts/AuthContext";
+import { updateUser } from "src/services/apiUser";
+import { options } from "src/utilities/snackbar";
+import { updateLocalStorage } from "src/utilities/updateLoaclStorage";
 import styles from "./modal.module.css";
 
-function Introduction({ closeModal, userInfo }) {
-  const { setCurrentUser } = useAuth();
+function Photo({ closeModal, userInfo }) {
   const navigate = useNavigate();
+  const { setCurrentUser } = useAuth();
 
-  const [introduction, setIntroduction] = useState("");
+  const [photoFile, setPhotoFile] = useState(null);
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const updateMeObject = {
-        introduction,
-      };
+
+      let updateMeObject = new FormData();
+      updateMeObject.append("photo", photoFile);
       const newUpadte = await updateUser(userInfo._id, updateMeObject);
+
       updateLocalStorage(newUpadte);
       setCurrentUser(newUpadte);
       closeModal();
@@ -42,18 +43,19 @@ function Introduction({ closeModal, userInfo }) {
       <div className={styles.innerContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.field}>
-            <label htmlFor="introduction">Introduction</label>
-            <textarea
-              id="introduction"
-              value={introduction}
-              onChange={(e) => setIntroduction(e.target.value)}
+            <label htmlFor="photo">Photo</label>
+            <input
+              className={styles.upload}
+              id="photo"
+              type="file"
+              onChange={(e) => setPhotoFile(e.target.files[0])}
             />
           </div>
-          <button>Submit</button>
+          <button>Upload</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default Introduction;
+export default Photo;

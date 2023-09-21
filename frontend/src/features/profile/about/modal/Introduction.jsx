@@ -2,25 +2,25 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
-import { useAuth } from "../../../contexts/AuthContext";
-import { updateUser } from "../../../services/apiUser";
-import { options } from "../../../utilities/snackbar";
-import { updateLocalStorage } from "../../../utilities/updateLoaclStorage";
+import { useAuth } from "src/contexts/AuthContext";
+import { updateUser } from "src/services/apiUser";
+import { options } from "src/utilities/snackbar";
+import { updateLocalStorage } from "src/utilities/updateLoaclStorage";
 import styles from "./modal.module.css";
 
-function Setting({ closeModal, userInfo }) {
-  const { setCurrentUser } = useAuth();
+function Introduction({ closeModal, userInfo }) {
   const navigate = useNavigate();
+  const { setCurrentUser } = useAuth();
 
-  const [setting, setSetting] = useState("public");
+  const [introduction, setIntroduction] = useState(userInfo.introduction);
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const updateMeObject = {
-        setting,
-      };
+
+      const updateMeObject = { introduction };
       const newUpadte = await updateUser(userInfo._id, updateMeObject);
+
       updateLocalStorage(newUpadte);
       setCurrentUser(newUpadte);
       closeModal();
@@ -42,15 +42,12 @@ function Setting({ closeModal, userInfo }) {
       <div className={styles.innerContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.field}>
-            <label htmlFor="setting">Setting</label>
-            <select
-              id="setting"
-              value={setting}
-              onChange={(e) => setSetting(e.target.value)}
-            >
-              <option value="public">Public</option>
-              <option value="privacy">Privacy</option>
-            </select>
+            <label htmlFor="introduction">Introduction</label>
+            <textarea
+              id="introduction"
+              value={introduction}
+              onChange={(e) => setIntroduction(e.target.value)}
+            />
           </div>
           <button>Submit</button>
         </form>
@@ -59,4 +56,4 @@ function Setting({ closeModal, userInfo }) {
   );
 }
 
-export default Setting;
+export default Introduction;

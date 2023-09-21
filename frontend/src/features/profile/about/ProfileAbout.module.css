@@ -1,0 +1,66 @@
+.container {
+  padding: 1.25rem;
+  height: 100%;
+  width: 75%;
+}
+
+.container i {
+  cursor: pointer;
+}
+
+.container p {
+  font-size: 1.15rem;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bodyContainer {
+  border-top: 2px solid black;
+  padding: 0.5rem 0rem;
+}
+
+.topContainer {
+  padding: 0rem 1rem;
+  margin-bottom: 1.25rem;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 25%;
+}
+
+.topBodyContainer {
+  display: flex;
+  border-top: 2px solid black;
+  padding: 0.5rem 0rem;
+}
+
+.topBodyContainer img {
+  height: 90px;
+  width: 90px;
+  border: 2px black solid;
+}
+
+.topBodyContainer div {
+  margin-left: 0.75rem;
+}
+
+.centerContainer {
+  padding: 0rem 1rem;
+  margin-bottom: 1.25rem;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 25%;
+}
+
+.bottomContainer {
+  padding: 0rem 1rem;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 15%;
+}

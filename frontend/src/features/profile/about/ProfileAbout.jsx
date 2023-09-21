@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Photo from "./modal/Photo";
 import AdditionalInfo from "./modal/AdditionalInfo";
 import Introduction from "./modal/Introduction";
 import Setting from "./modal/Setting";
 
-import { formatDate, formatLanguage } from "../../utilities/format";
-import { getUser } from "../../services/apiAuth";
+import { formatDate, formatLanguage } from "src/utilities/format";
+import { getUser } from "src/services/apiAuth";
 import styles from "./ProfileAbout.module.css";
 
 function ProfileAbout() {
@@ -20,79 +20,71 @@ function ProfileAbout() {
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
-        <div className={styles.topHeaderContainer}>
+        <div className={styles.headerContainer}>
           <h2>Basic Information</h2>
           <i
             className="fa-regular fa-pen-to-square fa-lg"
             onClick={() => setIsPhoto(true)}
           />
         </div>
-
         <div className={styles.topBodyContainer}>
-          <div className={styles.topLeftBodyContainer}>
-            <div>
-              <img
-                src={`http://localhost:3000/public/users/${userInfo.photo}`}
-                alt="pic"
-                width="80"
-              />
-            </div>
-          </div>
-          <div className={styles.topRightBodyContainer}>
-            <h4>User Name: {userInfo.username && userInfo.username}</h4>
-            <h4>Email Address: {userInfo.email && userInfo.email}</h4>
-            <h4>
+          <img
+            src={`http://localhost:3000/public/users/${userInfo.photo}`}
+            alt="photo"
+          />
+          <div>
+            <p>User Name: {userInfo.username && userInfo.username}</p>
+            <p>Email Address: {userInfo.email && userInfo.email}</p>
+            <p>
               Created At: {userInfo.createdAt && formatDate(userInfo.createdAt)}
-            </h4>
+            </p>
           </div>
         </div>
       </div>
 
-      <div className={styles.centerPart1Container}>
-        <div className={styles.centerPart1HeaderContainer}>
+      <div className={styles.centerContainer}>
+        <div className={styles.headerContainer}>
           <h2>Additional Information</h2>
           <i
             className="fa-regular fa-pen-to-square fa-lg"
             onClick={() => setIsAdditionInfo(true)}
           />
         </div>
-        <div className={styles.centerPart1BodyContainer}>
-          <h4>Gender: {userInfo.gender && userInfo.gender}</h4>
-          <h4>
-            Birthday: {userInfo.birthday && formatDate(userInfo.birthday)}
-          </h4>
-          <h4>
+        <div className={styles.bodyContainer}>
+          <p>Gender: {userInfo.gender && userInfo.gender}</p>
+          <p>Birthday: {userInfo.birthday && formatDate(userInfo.birthday)}</p>
+          <p>
             Language: {userInfo.language && formatLanguage(userInfo.language)}
-          </h4>
+          </p>
         </div>
       </div>
 
-      <div className={styles.centerPart2Container}>
-        <div className={styles.centerPart2HeaderContainer}>
+      <div className={styles.centerContainer}>
+        <div className={styles.headerContainer}>
           <h2>Introduction</h2>
           <i
             className="fa-regular fa-pen-to-square fa-lg"
             onClick={() => setIsIntroduction(true)}
           />
         </div>
-        <div className={styles.centerPart2BodyContainer}>
+        <div className={styles.bodyContainer}>
           <p>{userInfo.introduction && userInfo.introduction}</p>
         </div>
       </div>
 
       <div className={styles.bottomContainer}>
-        <div className={styles.bottomHeaderContainer}>
+        <div className={styles.headerContainer}>
           <h2>Privacy Setting</h2>
           <i
             className="fa-regular fa-pen-to-square fa-lg"
             onClick={() => setIsSetting(true)}
           />
         </div>
-        <div className={styles.bottomBodyContainer}>
+        <div className={styles.bodyContainer}>
           <p>
             {userInfo.isPublic && userInfo.isPublic
-              ? "Everyone can see"
-              : "Only you can see."}
+              ? "Now is public!"
+              : "Only you can see!"}
           </p>
         </div>
       </div>

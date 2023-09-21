@@ -12,16 +12,35 @@
 }
 
 .innerContainer {
+  border: 2px solid black;
   border-radius: 10px;
   padding: 1.5rem;
   background-color: white;
   width: 30%;
 }
 
+.innerContainer label {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.innerContainer button {
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 75px;
+}
+
+.upload {
+  padding: 0rem;
+  border: 2px solid black;
+}
+
 .field {
   display: flex;
   flex-direction: column;
-  margin: 1.25rem 0rem;
+  margin-bottom: 1.25rem;
 }
 
 .datePicker div {

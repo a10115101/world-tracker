@@ -36,8 +36,10 @@ export async function updateUser(id, updateMeObject) {
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  return await axios.patch(`${API_URL}/${id}`, updateMeObject, {
+  const response = await axios.patch(`${API_URL}/${id}`, updateMeObject, {
     headers: { Authorization: token, "Content-Type": "multipart/form-data" },
     withCredentials: true,
   });
+
+  return response;
 }

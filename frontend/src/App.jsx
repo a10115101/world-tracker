@@ -14,7 +14,7 @@ import MapRecord from "./features/map/MapRecord";
 import MapRecordForm from "./features/map/MapRecordForm";
 
 import Profile from "./pages/Profile";
-import ProfileAbout from "./features/profile/ProfileAbout";
+import ProfileAbout from "./features/profile/about/ProfileAbout";
 import ProfileStatis from "./features/profile/ProfileStatis";
 import ProfileFriends from "./features/profile/ProfileFriends";
 import ProfileFriendsData from "./features/profile/ProfileFriendsData";

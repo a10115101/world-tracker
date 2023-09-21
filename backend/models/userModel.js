@@ -35,8 +35,8 @@ const userSchema = new mongoose.Schema(
     gender: {
       type: String,
       enum: {
-        values: ["", "male", "female"],
-        message: "gender only can be male or female",
+        values: ["", "Male", "Female"],
+        message: "Gender only can be Male or Female",
       },
     },
     birthday: {
@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: {
         values: ["", "zh", "en"],
-        message: "language only can be Chinese or English",
+        message: "Language only can be Chinese or English",
       },
     },
     introduction: {
