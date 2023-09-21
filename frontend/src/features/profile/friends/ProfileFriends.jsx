@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-import AllFriendsList from "./friends/list/AllFriendsList";
-import PendingFriendsList from "./friends/list/PendingFriendsList";
-import SearchFriendsList from "./friends/list/SearchFriendsList";
+import AllFriendsList from "./list/AllFriendsList";
+import PendingFriendsList from "./list/PendingFriendsList";
+import SearchFriendsList from "./list/SearchFriendsList";
 
-import { useFriends } from "../../contexts/FriendsContext";
-import { getAllUsers } from "../../services/apiUser";
-import { getFriends } from "../../services/apiFriend";
+import { useFriends } from "src/contexts/FriendsContext";
+import { getAllUsers } from "src/services/apiUser";
+import { getFriends } from "src/services/apiFriend";
 import styles from "./ProfileFriends.module.css";
 
 function ProfileFriends() {

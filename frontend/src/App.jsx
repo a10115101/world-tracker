@@ -16,7 +16,7 @@ import MapRecordForm from "./features/map/MapRecordForm";
 import Profile from "./pages/Profile";
 import ProfileAbout from "./features/profile/about/ProfileAbout";
 import ProfileStatis from "./features/profile/ProfileStatis";
-import ProfileFriends from "./features/profile/ProfileFriends";
+import ProfileFriends from "./features/profile/friends/ProfileFriends";
 import ProfileFriendsData from "./features/profile/ProfileFriendsData";
 
 import { RecordsProvider } from "./contexts/RecordsContext";

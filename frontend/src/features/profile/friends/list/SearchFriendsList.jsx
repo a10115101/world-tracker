@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import AddFriendButton from "../button/AddFriendButton";
-import { getUser } from "../../../../services/apiAuth";
+import { getUser } from "src/services/apiAuth";
 import styles from "./list.module.css";
 
 function SearchFriendsList({ searchResults, relationship }) {

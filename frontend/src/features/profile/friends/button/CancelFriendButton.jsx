@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { useFriends } from "../../../../contexts/FriendsContext";
-import { cancelFriend } from "../../../../services/apiFriend";
+import { useFriends } from "src/contexts/FriendsContext";
+import { cancelFriend } from "src/services/apiFriend";
 
 function CancelFriendButton({ user }) {
   const { setUpdate } = useFriends();
