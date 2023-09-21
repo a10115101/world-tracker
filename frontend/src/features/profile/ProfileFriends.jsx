@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-import ProfileFriendsAllList from "./ProfileFriendsAllList";
-import ProfileFriendsPendingList from "./ProfileFriendsPendingList";
-import ProfileFriendsSearchList from "./ProfileFriendsSearchList";
+import AllFriendsList from "./friends/list/AllFriendsList";
+import PendingFriendsList from "./friends/list/PendingFriendsList";
+import SearchFriendsList from "./friends/list/SearchFriendsList";
 
+import { useFriends } from "../../contexts/FriendsContext";
 import { getAllUsers } from "../../services/apiUser";
 import { getFriends } from "../../services/apiFriend";
 import styles from "./ProfileFriends.module.css";
-import { useFriends } from "../../contexts/FriendsContext";
 
 function ProfileFriends() {
   const { update } = useFriends();
@@ -72,8 +72,22 @@ function ProfileFriends() {
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <div className={styles.topContainerLeft}>
-          <button onClick={() => setMode("all")}>All</button>
-          <button onClick={() => setMode("pending")}>Pending</button>
+          <button
+            className={
+              mode === "all" ? `${styles.btnFocus}` : `${styles.btnNormal}`
+            }
+            onClick={() => setMode("all")}
+          >
+            All
+          </button>
+          <button
+            className={
+              mode === "pending" ? `${styles.btnFocus}` : `${styles.btnNormal}`
+            }
+            onClick={() => setMode("pending")}
+          >
+            Pending {pending.length > 0 && <span>+{pending.length}</span>}
+          </button>
         </div>
         <div className={styles.topContainerRight}>
           <form onSubmit={handleSubmit}>
@@ -93,9 +107,9 @@ function ProfileFriends() {
       <div className={styles.bottomContainer}>
         {mode === "all" && (
           <>
-            {isLoading && <p>Loading...</p>}
+            {isLoading && <h3>Loading...</h3>}
             {!isLoading && !loadingError && (
-              <ProfileFriendsAllList friends={friends} />
+              <AllFriendsList friends={friends} />
             )}
             {loadingError && loadingError}
           </>
@@ -103,9 +117,9 @@ function ProfileFriends() {
 
         {mode === "pending" && (
           <>
-            {isLoading && <p>Loading...</p>}
+            {isLoading && <h3>Loading...</h3>}
             {!isLoading && !loadingError && (
-              <ProfileFriendsPendingList pending={pending} />
+              <PendingFriendsList pending={pending} />
             )}
             {loadingError && loadingError}
           </>
@@ -113,9 +127,9 @@ function ProfileFriends() {
 
         {mode === "search" && (
           <>
-            {isSearching && <p>Searching...</p>}
+            {isSearching && <h3>Searching...</h3>}
             {!isSearching && !searchingError && (
-              <ProfileFriendsSearchList
+              <SearchFriendsList
                 searchResults={searchResults}
                 relationship={relationship}
               />

@@ -1,33 +1,36 @@
 import { useState } from "react";
 
-import { cancelFriend } from "../../../services/apiFriend";
-import { useFriends } from "../../../contexts/FriendsContext";
+import { useFriends } from "../../../../contexts/FriendsContext";
+import { cancelFriend } from "../../../../services/apiFriend";
 
 function CancelFriendButton({ user }) {
   const { setUpdate } = useFriends();
-  const [isPressed, setIsPressed] = useState(false);
+
   const [isHandling, setIsHandling] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [error, setError] = useState("");
 
   const handleClick = async () => {
     try {
-      setIsPressed(true);
       setIsHandling(true);
+      setError("");
       await cancelFriend(user.recipient._id);
       setUpdate(`cancel ${Date.now()}`);
+      setIsValid(true);
     } catch (err) {
-      console.log(err);
+      setError("Failed operation");
     } finally {
       setIsHandling(false);
     }
   };
 
+  if (error) return <p>{error}</p>;
+
   if (isHandling) return <p>handling...</p>;
 
-  return (
-    <button onClick={handleClick} disabled={isPressed && true}>
-      Cancel
-    </button>
-  );
+  if (isValid) return;
+
+  return <button onClick={handleClick}>Cancel</button>;
 }
 
 export default CancelFriendButton;

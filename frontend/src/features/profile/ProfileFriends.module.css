@@ -18,11 +18,26 @@
   width: 70%;
 }
 
-/* .topContainerRight {
-  display: flex;
-  width: 32.5%;
-  align-items: center;
-} */
+.topContainerLeft button {
+  font-size: 1.25rem;
+  border-radius: 5px;
+  height: 4.5vh;
+  width: 15%;
+  cursor: pointer;
+}
+
+.btnFocus {
+  border-radius: 5px;
+  background-color: lemonchiffon;
+}
+
+.topContainerLeft span {
+  padding: 0.2rem;
+  font-size: 1rem;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}
 
 .topContainerRight {
   background-color: white;
