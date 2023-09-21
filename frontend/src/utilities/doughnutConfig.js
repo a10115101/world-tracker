@@ -1,10 +1,10 @@
-export const doughnutDatasetSetting = (pieData) => {
+export const doughnutDatasetSetting = (doughnutData) => {
   return {
-    labels: pieData.map((data) => data._id),
+    labels: doughnutData.map((data) => data._id),
     datasets: [
       {
         label: "Users Visited",
-        data: pieData.map((data) => data.num),
+        data: doughnutData.map((data) => data.num),
         backgroundColor: [
           "#fab1a0",
           "#ecf0f1",

@@ -8,14 +8,14 @@ import {
   getRecentlyVisited,
   getStatisContinents,
   getStatisCountries,
-} from "../../services/apiRecord";
+} from "src/services/apiRecord";
 import {
   doughnutDatasetSetting,
   doughnutLegendSetting,
-} from "../../utilities/doughnutConfig";
-import { getUser } from "../../services/apiUser";
-import { formatDate, formatLanguage } from "../../utilities/format";
-import ProfileStatisList from "./ProfileStatisList";
+} from "src/utilities/doughnutConfig";
+import { getUser } from "src/services/apiUser";
+import { formatDate, formatLanguage } from "src/utilities/format";
+import MilestoneList from "./statis/chart/MilestoneList";
 import styles from "./ProfileFriendsData.module.css";
 
 function ProfileFriendsData() {
@@ -199,7 +199,7 @@ function ProfileFriendsData() {
                   <h2>Latest Visited</h2>
                   {isLoadingListData && "Loading..."}
                   {!isLoadingListData && !listError && (
-                    <ProfileStatisList listData={listData} />
+                    <MilestoneList listData={listData} />
                   )}
                   {listError && listError}
                 </div>

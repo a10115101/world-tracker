@@ -15,7 +15,7 @@ function ProfileSidebar() {
         </li>
         <li>
           <Link to="/profile/statis">
-            <i className="fa-solid fa-suitcase" />
+            <i className="fa-solid fa-chart-line" />
             Statis
           </Link>
         </li>
@@ -23,12 +23,6 @@ function ProfileSidebar() {
           <Link to="/profile/friends">
             <i className="fa-solid fa-user-group" />
             Friends
-          </Link>
-        </li>
-        <li>
-          <Link to="/profile/setting">
-            <i className="fa-solid fa-gear" />
-            Settings
           </Link>
         </li>
       </ul>
