@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 
 import { getUser } from "src/services/apiAuth";
 import { getStatisCountries } from "src/services/apiRecord";
+import styles from "./BasicStatis.module.css";
 
 function BasicStatis() {
+  const [isOpened, setIsOpened] = useState(false);
   const [isLoadingStatisData, setIsLoadingStatisData] = useState(false);
   const [statisError, setStatisError] = useState("");
   const [numVisitedCountries, setNumVisitedCountries] = useState(0);
@@ -19,8 +21,8 @@ function BasicStatis() {
 
         const data = await getStatisCountries(userInfo._id);
 
-        setNumVisitedCountries(data.visitedCountries.results);
-        setNumPlanningCountries(data.planningCountries.results);
+        setNumVisitedCountries(data.visitedCountries);
+        setNumPlanningCountries(data.planningCountries);
       } catch (err) {
         setStatisError("Loading Statis Data Error!");
       } finally {
@@ -35,9 +37,49 @@ function BasicStatis() {
   if (statisError) return <p>{statisError}</p>;
 
   return (
-    <div>
-      <h4>Total of Countries Visited: {numVisitedCountries}</h4>
-      <h4>Total of Planning to Visit Countries: {numPlanningCountries}</h4>
+    <div className={styles.container}>
+      <div className={styles.leftContainer}>
+        <h4>Total of Countries Visited: {numVisitedCountries.results}</h4>
+        <h4>
+          Total of Planning to Visit Countries: {numPlanningCountries.results}
+        </h4>
+      </div>
+
+      <div className={styles.rightContainer}>
+        <button onClick={() => setIsOpened(!isOpened)}>
+          {isOpened ? (
+            <>
+              Close <i className="fa-solid fa-angle-up" />
+            </>
+          ) : (
+            <>
+              Open <i className="fa-solid fa-angle-down" />
+            </>
+          )}
+        </button>
+
+        {isOpened && (
+          <div>
+            <h4 className={styles.visited}>Visited: </h4>
+            {numVisitedCountries?.countryName?.length > 0 ? (
+              numVisitedCountries?.countryName.map((country) => (
+                <p key={country._id}>{country._id}</p>
+              ))
+            ) : (
+              <p>None</p>
+            )}
+
+            <h4 className={styles.planning}>Planning: </h4>
+            {numPlanningCountries?.countryName?.length > 0 ? (
+              numPlanningCountries?.countryName.map((country) => (
+                <p key={country._id}>{country._id}</p>
+              ))
+            ) : (
+              <p>None</p>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

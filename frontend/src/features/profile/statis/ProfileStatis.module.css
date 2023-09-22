@@ -1,21 +1,23 @@
 .container {
   display: flex;
+  background-color: white;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
   height: 100%;
 }
 
 .leftContainer {
-  width: 40vw;
+  width: 35vw;
 }
 
 .topleftContainer {
   padding: 1.5rem;
-  border: 2px solid red;
   height: 20%;
 }
 
 .bottomLeftContainer {
+  border-top: 3px solid black;
   padding: 1rem 1.5rem;
-  border: 2px solid red;
   height: 80%;
 }
 
@@ -25,7 +27,7 @@
 }
 
 .rightContainer {
-  border: 2px solid green;
-  width: 40vw;
+  border-left: 3px solid black;
+  width: 35vw;
   padding: 1.5rem;
 }

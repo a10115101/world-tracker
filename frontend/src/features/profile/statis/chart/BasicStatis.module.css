@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+}
+
+.leftContainer {
+  width: 80%;
+}
+
+.rightContainer {
+  width: 20%;
+  align-self: center;
+}
+
+.rightContainer button {
+  padding: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.rightContainer div {
+  position: absolute;
+  z-index: 5;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  min-width: 15vw;
+}
+
+.rightContainer p {
+  padding-left: 0.25rem;
+}
+
+.rightContainer p:hover {
+  cursor: pointer;
+  font-weight: 700;
+  background-color: hsla(0, 0%, 50%, 0.3);
+}
+
+.visited {
+  padding-left: 0.25rem;
+  background-color: lightgreen;
+  border-bottom: 2px solid black;
+}
+
+.planning {
+  padding-left: 0.25rem;
+  background-color: rgb(251, 251, 108);
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}

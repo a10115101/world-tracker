@@ -12,14 +12,12 @@ function ProfileDetails() {
           <BasicStatis />
         </div>
         <div className={styles.bottomLeftContainer}>
-          <h2>Number of visits by continents</h2>
+          <h2>Number Of Visits By Continents</h2>
           <DoughnutChart />
         </div>
       </div>
       <div className={styles.rightContainer}>
-        <div className={styles.topRightContainer}>
-          <h2>Latest Visited</h2>
-        </div>
+        <h2>Latest Visited</h2>
         <MilestoneList />
       </div>
     </div>

@@ -1,14 +1,12 @@
-.container ul {
-  height: 72vh;
-  border: 1px solid green;
+.container {
+  border: 2px solid gray;
   border-radius: 5px;
-  padding: 1rem;
-  overflow-y: scroll;
 }
 
-.container ul::-webkit-scrollbar {
-  display: none;
-  scroll-behavior: smooth;
+.container ul {
+  height: 72vh;
+  padding: 1rem;
+  overflow-y: scroll;
 }
 
 .container li {
@@ -28,12 +26,15 @@
   height: 10px;
   border-radius: 50%;
   background-color: #f45b69;
-  transform: translateX(-50%) translateY(-350%);
+  transform: translateX(-50%) translateY(-500%);
 }
 
 .container div {
-  min-width: 480px;
+  min-width: 420px;
   padding: 1rem;
-  /* border: 1px solid #f45b69; */
-  background-color: #f45b6810;
+  background-color: #ff061b10;
+}
+
+.container i {
+  color: rgb(255, 153, 0);
 }

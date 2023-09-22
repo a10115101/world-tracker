@@ -125,6 +125,9 @@ exports.getStatisCountries = async (req, res, next) => {
           num: { $sum: 1 },
         },
       },
+      {
+        $sort: { _id: 1 },
+      },
     ]);
 
     const planningCountries = await Record.aggregate([
@@ -143,6 +146,9 @@ exports.getStatisCountries = async (req, res, next) => {
           _id: "$country",
           num: { $sum: 1 },
         },
+      },
+      {
+        $sort: { _id: 1 },
       },
     ]);
 
