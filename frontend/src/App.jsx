@@ -17,7 +17,7 @@ import Profile from "./pages/Profile";
 import ProfileAbout from "./features/profile/about/ProfileAbout";
 import ProfileStatis from "./features/profile/statis/ProfileStatis";
 import ProfileFriends from "./features/profile/friends/ProfileFriends";
-import ProfileFriendsData from "./features/profile/ProfileFriendsData";
+import ProfileFriendInfo from "./features/profile/friendInfo/ProfileFriendInfo";
 
 import { RecordsProvider } from "./contexts/RecordsContext";
 import { SearchProvider } from "./contexts/SearchContext";
@@ -69,7 +69,7 @@ function App() {
                       </FriendsProvider>
                     }
                   />
-                  <Route path="user/:id" element={<ProfileFriendsData />} />
+                  <Route path="user/:id" element={<ProfileFriendInfo />} />
                 </Route>
 
                 <Route path="*" element={<PageNotFound />} />

@@ -4,41 +4,59 @@
   width: 85%;
   height: 100%;
   padding: 1.5rem;
-  border: 2px solid green;
 }
 
 .topContainer {
   display: flex;
-  height: 15%;
+  max-height: 20%;
+  border: 2px solid grey;
+  background-color: white;
+  border-radius: 5px;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .topContainer div {
-  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 .bottomContainer {
   background-color: white;
   border-radius: 5px;
-  height: 85%;
+  height: 80%;
 }
 
 .bottomPart1Container {
+  display: flex;
+  align-items: center;
   background-color: grey;
-  height: 8%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  height: 10%;
   padding: 0.5rem;
 }
 
 .bottomPart1Container button {
-  height: 100%;
   width: 7.5%;
-  font-size: 1rem;
+  height: 100%;
+  border-radius: 5px;
+  margin-right: 0.25rem;
+  font-size: 1.25rem;
   cursor: pointer;
+}
+
+.btnFocus {
+  border-radius: 5px;
+  background-color: lemonchiffon;
 }
 
 .bottomPart2Container {
   border: 1px solid grey;
-  height: 92%;
-  padding: 1rem;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-radius: 5px;
+  height: 90%;
+  padding: 1rem 1.5rem;
   overflow-y: scroll;
 }
 
@@ -53,32 +71,33 @@
 
 .profileContainer h2 {
   border-bottom: 1.5px solid gray;
+  margin-bottom: 0.25rem;
 }
 
 .profileField1Container {
-  height: 30%;
+  height: 32.5%;
 }
 
 .profileField2Container {
-  height: 70%;
+  height: 67.5%;
 }
 
 .statisBasicContainer {
   border-bottom: 2px solid gray;
-  height: 22.5%;
   margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
 .statisFigureContainer {
   display: flex;
-  height: 77.5%;
+  height: 70%;
 }
 
 .statisDoughnutContainer {
-  width: 30%;
+  width: 40%;
 }
 
 .statisListContainer {
-  padding-left: 1.25rem;
-  width: 70%;
+  padding-left: 1.5rem;
+  width: 60%;
 }

@@ -7,15 +7,12 @@ import {
   doughnutDatasetSetting,
   doughnutLegendSetting,
 } from "src/utilities/doughnutConfig";
-import { getUser } from "src/services/apiAuth";
 import { getStatisContinents } from "src/services/apiRecord";
 
-function DoughnutChart() {
+function DoughnutChart({ userId }) {
   const [isLoadingDoughnutData, setIsLoadingDoughnutData] = useState(false);
   const [doughnutError, setDoughnutError] = useState("");
   const [doughnutData, setDoughnutData] = useState({ datasets: [] });
-
-  const userInfo = getUser().user;
 
   useEffect(function () {
     async function getPieData() {
@@ -23,7 +20,7 @@ function DoughnutChart() {
         setIsLoadingDoughnutData(true);
         setDoughnutError("");
 
-        const data = await getStatisContinents(userInfo._id);
+        const data = await getStatisContinents(userId);
 
         setDoughnutData(doughnutDatasetSetting(data));
       } catch (err) {

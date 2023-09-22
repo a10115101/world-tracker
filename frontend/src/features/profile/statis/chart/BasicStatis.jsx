@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { getUser } from "src/services/apiAuth";
 import { getStatisCountries } from "src/services/apiRecord";
 import styles from "./BasicStatis.module.css";
 
-function BasicStatis() {
+function BasicStatis({ userId }) {
   const [isOpened, setIsOpened] = useState(false);
   const [isLoadingStatisData, setIsLoadingStatisData] = useState(false);
   const [statisError, setStatisError] = useState("");
   const [numVisitedCountries, setNumVisitedCountries] = useState(0);
   const [numPlanningCountries, setNumPlanningCountries] = useState(0);
-
-  const userInfo = getUser().user;
 
   useEffect(function () {
     async function getStatis() {
@@ -19,7 +16,7 @@ function BasicStatis() {
         setIsLoadingStatisData(true);
         setStatisError("");
 
-        const data = await getStatisCountries(userInfo._id);
+        const data = await getStatisCountries(userId);
 
         setNumVisitedCountries(data.visitedCountries);
         setNumPlanningCountries(data.planningCountries);

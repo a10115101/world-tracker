@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { formatDate } from "src/utilities/format";
-import { getUser } from "src/services/apiAuth";
 import { getRecentlyVisited } from "src/services/apiRecord";
 import styles from "./MilestoneList.module.css";
 
-function MilestoneList() {
+function MilestoneList({ userId }) {
   const [isLoadingListData, setIsLoadingListData] = useState(false);
   const [listError, setListError] = useState("");
   const [listData, setListData] = useState([]);
-
-  const userInfo = getUser().user;
 
   useEffect(function () {
     async function getListData() {
@@ -18,7 +15,7 @@ function MilestoneList() {
         setIsLoadingListData(true);
         setListError("");
 
-        const data = await getRecentlyVisited(userInfo._id);
+        const data = await getRecentlyVisited(userId);
 
         setListData(data.informaiton);
       } catch (err) {
