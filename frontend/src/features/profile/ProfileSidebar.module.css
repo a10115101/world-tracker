@@ -45,6 +45,6 @@
 
 .bottomContainer a:hover {
   color: black;
-  font-weight: 400;
+  font-weight: 700;
   background-color: var(--color-light0);
 }

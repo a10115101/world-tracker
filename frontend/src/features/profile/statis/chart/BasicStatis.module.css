@@ -8,7 +8,7 @@
 
 .rightContainer {
   width: 20%;
-  align-self: center;
+  height: 100%;
 }
 
 .rightContainer button {
@@ -21,12 +21,12 @@
 }
 
 .rightContainer div {
-  position: absolute;
+  position: relative;
   z-index: 5;
   background-color: white;
   border: 2px solid black;
   border-radius: 5px;
-  min-width: 15vw;
+  min-width: 12.5vw;
 }
 
 .rightContainer p {

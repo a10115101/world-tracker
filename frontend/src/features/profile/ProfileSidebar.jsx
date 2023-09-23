@@ -1,16 +1,23 @@
 import { Link } from "react-router-dom";
 
+import { useAuth } from "src/contexts/AuthContext";
 import { getUser } from "src/services/apiAuth";
 import styles from "./ProfileSidebar.module.css";
 
 function ProfileSidebar() {
+  const { currentUser } = useAuth();
+
   const userInfo = getUser().user;
 
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <img
-          src={`http://localhost:3000/public/users/${userInfo.photo}`}
+          src={`http://localhost:3000/public/users/${
+            currentUser.user === undefined
+              ? userInfo.photo
+              : currentUser.user.photo
+          }`}
           alt="pic"
         />
         <p>{userInfo.username && userInfo.username}</p>
