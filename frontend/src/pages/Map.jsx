@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import MapComponent from "../features/map/MapComponent";
 import MapSidebar from "../features/map/MapSidebar";
-import MapSearch from "../features/map/MapSearch";
+import MapComponent from "../features/map/view/MapComponent";
+import MapSearch from "../features/map/search/MapSearch";
 import styles from "./Map.module.css";
 
 function Map() {

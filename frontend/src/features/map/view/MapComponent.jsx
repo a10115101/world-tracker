@@ -1,15 +1,16 @@
 import React from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 
-import MapSearchMarker from "./MapSearchMarker";
-import MapFormMarker from "./MapFormMarker";
-import MapRecordMarker from "./MapRecordMarker";
+import MapSearchMarker from "./marker/MapSearchMarker";
+import MapFormMarker from "./marker/MapFormMarker";
+import MapRecordMarker from "./marker/MapRecordMarker";
+
 import SetRecordsPositionView from "./plugins/SetRecordsPositionView";
 import SetSearchPositionView from "./plugins/SetSearchPositionView";
 import SetClickPositionView from "./plugins/SetClickPositionView";
 
-import { useSearch } from "../../contexts/SearchContext";
-import { useRecords } from "../../contexts/RecordsContext";
+import { useSearch } from "src/contexts/SearchContext";
+import { useRecords } from "src/contexts/RecordsContext";
 
 function MapComponent() {
   const { isFormOpened, mapPosition, isClicked, records } = useRecords();

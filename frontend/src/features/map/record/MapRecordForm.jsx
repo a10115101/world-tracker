@@ -4,15 +4,15 @@ import { enqueueSnackbar } from "notistack";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { useRecords } from "../../contexts/RecordsContext";
-import { getGeocoding } from "../../services/apiGeocoding";
-import { creataRecord } from "../../services/apiRecord";
-import { options } from "../../utilities/snackbar";
+import { useRecords } from "src/contexts/RecordsContext";
+import { getGeocoding } from "src/services/apiGeocoding";
+import { creataRecord } from "src/services/apiRecord";
+import { options } from "src/utilities/snackbar";
 import styles from "./MapRecordForm.module.css";
 
 function MapRecordForm() {
-  const { setIsFormOpened, mapPosition, isClicked } = useRecords();
   const navigate = useNavigate();
+  const { setIsFormOpened, mapPosition, isClicked } = useRecords();
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [continent, setContinent] = useState("");

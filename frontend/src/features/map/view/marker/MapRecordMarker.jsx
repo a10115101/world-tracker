@@ -1,6 +1,6 @@
 import { Marker, Popup } from "react-leaflet";
 
-import { LeafIcon } from "../../utilities/icon";
+import { LeafIcon } from "src/utilities/icon";
 
 function MapRecordMarker({ record }) {
   const greenIcon = new LeafIcon({ iconUrl: "/green-pin.png" });

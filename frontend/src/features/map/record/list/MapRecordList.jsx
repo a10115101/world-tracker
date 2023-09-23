@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-import styles from "./MapRecordList.module.css";
 import MapRecordListItem from "./MapRecordListItem";
 
-import { useRecords } from "../../contexts/RecordsContext";
-import { useSearch } from "../../contexts/SearchContext";
-import { getAllRecords } from "../../services/apiRecord";
+import { useRecords } from "src/contexts/RecordsContext";
+import { useSearch } from "src/contexts/SearchContext";
+import { getAllRecords } from "src/services/apiRecord";
+import styles from "./MapRecordList.module.css";
 
 function MapRecordList() {
   const { setIsFormOpened, records, setRecords } = useRecords();

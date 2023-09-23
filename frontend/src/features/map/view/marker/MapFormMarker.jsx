@@ -1,7 +1,7 @@
 import { Marker, Popup } from "react-leaflet";
 
-import { useRecords } from "../../contexts/RecordsContext";
-import { LeafIcon } from "../../utilities/icon";
+import { useRecords } from "src/contexts/RecordsContext";
+import { LeafIcon } from "src/utilities/icon";
 
 function MapFormMarker() {
   const { mapPosition } = useRecords();

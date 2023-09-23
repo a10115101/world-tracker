@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 
-import { useRecords } from "../../../contexts/RecordsContext";
-import { useSearch } from "../../../contexts/SearchContext";
+import { useRecords } from "src/contexts/RecordsContext";
+import { useSearch } from "src/contexts/SearchContext";
 
 function SetSearchPositionView() {
   const { setMapPosition } = useRecords();
   const { selectedPosition } = useSearch();
+
   const map = useMap();
 
   useEffect(() => {
@@ -15,7 +16,6 @@ function SetSearchPositionView() {
       const lng = selectedPosition?.geometry?.lng;
 
       map.setView([lat, lng]);
-
       setMapPosition([lat, lng]);
     }
   }, [selectedPosition]);

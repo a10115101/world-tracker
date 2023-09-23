@@ -1,13 +1,13 @@
-import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { closeSnackbar, enqueueSnackbar } from "notistack";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { useRecords } from "../../contexts/RecordsContext";
-import { formatDate } from "../../utilities/format";
-import { deleteRecord, updateRecord } from "../../services/apiRecord";
-import { closeSnackbar, enqueueSnackbar } from "notistack";
-import { options } from "../../utilities/snackbar";
+import { useRecords } from "src/contexts/RecordsContext";
+import { formatDate } from "src/utilities/format";
+import { deleteRecord, updateRecord } from "src/services/apiRecord";
+import { options } from "src/utilities/snackbar";
 import styles from "./MapRecord.module.css";
 
 function MapRecord() {

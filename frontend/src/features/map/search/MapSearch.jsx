@@ -1,8 +1,8 @@
 import { useState } from "react";
 
+import { useSearch } from "src/contexts/SearchContext";
+import { getGeocoding } from "src/services/apiGeocoding";
 import styles from "./MapSearch.module.css";
-import { useSearch } from "../../contexts/SearchContext";
-import { getGeocoding } from "../../services/apiGeocoding";
 
 function MapSearch() {
   const { setSelectedPosition, setIsMapSearchMarkerVisible } = useSearch();

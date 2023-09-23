@@ -1,6 +1,6 @@
 import { useMap, useMapEvent } from "react-leaflet";
 
-import { useRecords } from "../../../contexts/RecordsContext";
+import { useRecords } from "src/contexts/RecordsContext";
 
 function SetClickPositionView() {
   const { isClicked, setIsClicked, mapPosition, setMapPosition } = useRecords();

@@ -1,14 +1,13 @@
-import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
-
+import { useSearchParams } from "react-router-dom";
 import { useMap } from "react-leaflet";
 
-import { useRecords } from "../../../contexts/RecordsContext";
+import { useRecords } from "src/contexts/RecordsContext";
 
 function SetRecordsPositionView() {
   const { mapPosition, setMapPosition } = useRecords();
-
   const [searchParams] = useSearchParams();
+
   const getLat = searchParams.get("lat");
   const getLng = searchParams.get("lng");
 
@@ -18,6 +17,7 @@ function SetRecordsPositionView() {
         setMapPosition([getLat, getLng]);
       }
     },
+
     [getLat, getLng]
   );
 

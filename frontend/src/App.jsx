@@ -9,9 +9,9 @@ import PageNotFound from "./pages/PageNotFound";
 import ProtectedRoute from "./pages/ProtectedRoute";
 
 import Map from "./pages/Map";
-import MapRecordList from "./features/map/MapRecordList";
-import MapRecord from "./features/map/MapRecord";
-import MapRecordForm from "./features/map/MapRecordForm";
+import MapRecordList from "./features/map/record/list/MapRecordList";
+import MapRecord from "./features/map/record/MapRecord";
+import MapRecordForm from "./features/map/record/MapRecordForm";
 
 import Profile from "./pages/Profile";
 import ProfileAbout from "./features/profile/about/ProfileAbout";

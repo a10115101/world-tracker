@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-import { useSearch } from "../../contexts/SearchContext";
-import { formatDate } from "../../utilities/format";
+import { useSearch } from "src/contexts/SearchContext";
+import { formatDate } from "src/utilities/format";
 import styles from "./MapRecordListItem.module.css";
 
 function MapRecordListItem({ record }) {
