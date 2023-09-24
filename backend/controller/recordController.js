@@ -27,7 +27,7 @@ exports.getRecord = async (req, res, next) => {
     res.status(200).json({
       status: "success",
       data: {
-        data: record,
+        record,
       },
     });
   } catch (err) {
@@ -61,8 +61,6 @@ exports.createRecord = async (req, res, next) => {
 
 exports.updateRecord = async (req, res, next) => {
   try {
-    req.body = { ...req.body.updateRecordObject };
-
     if (req.body.status === "planning") delete req.body.rating;
 
     if (!req.body.user) req.body.user = req.user.id;

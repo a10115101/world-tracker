@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import MapRecordListItem from "./MapRecordListItem";
@@ -12,7 +12,8 @@ function MapRecordList() {
   const { setIsFormOpened, records, setRecords } = useRecords();
   const { setIsMapSearchMarkerVisible } = useSearch();
 
-  // const [records, setRecords] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState("");
 
   // initialize status for first time render
   useEffect(function () {
@@ -22,12 +23,26 @@ function MapRecordList() {
 
   useEffect(function () {
     async function getData() {
-      const response = await getAllRecords();
-      setRecords(response.data.data.records);
+      try {
+        setIsLoading(true);
+        setLoadingError("");
+
+        const data = await getAllRecords();
+
+        setRecords(data);
+      } catch (err) {
+        setLoadingError("Loading Error");
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     getData();
   }, []);
+
+  if (isLoading) return <p>Loading...</p>;
+
+  if (loadingError) return <p>{loadingError}</p>;
 
   return (
     <div className={styles.container}>

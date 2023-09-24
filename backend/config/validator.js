@@ -58,8 +58,12 @@ exports.recordDataValidate = (data) => {
 exports.updateRecordDataValidate = (data) => {
   const schema = Joi.object({
     user: Joi.string().required(),
-    date: Joi.date().required(),
     status: Joi.string().required().valid("planning", "visited"),
+    date: Joi.when("status", {
+      is: "visited",
+      then: Joi.date().less("now").required(),
+      otherwise: Joi.date().greater("now").required(),
+    }),
     rating: Joi.when("status", {
       is: "visited",
       then: Joi.number().min(1).max(5).required(),

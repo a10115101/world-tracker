@@ -26,6 +26,14 @@ const recordSchema = new mongoose.Schema(
     date: {
       type: Date,
       required: [true, "Record must hava date"],
+      validate: {
+        validator: function (val) {
+          if (this.get("status") === "visited") return val < Date.now();
+
+          if (this.get("status") === "planning") return val > Date.now();
+        },
+        message: "Record must be valid date",
+      },
     },
     status: {
       type: String,
