@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  flex: 1;
+  height: 100%;
 }
 
 .mapContainer {
@@ -10,7 +10,7 @@
 
 .mapContainerLeft {
   position: absolute;
-  z-index: 10;
+  z-index: 2;
   align-self: center;
 }
 
@@ -30,7 +30,7 @@
 
 .mapContainerRight {
   position: absolute;
-  z-index: 10;
+  z-index: 2;
   top: 10%;
   right: 2.5%;
 }

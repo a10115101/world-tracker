@@ -10,14 +10,11 @@ function Map() {
 
   return (
     <div className={styles.container}>
-      {isSidebarOpened ? <MapSidebar /> : null}
+      {isSidebarOpened && <MapSidebar />}
+
       <div className={styles.mapContainer}>
         <div className={styles.mapContainerLeft}>
-          <button
-            onClick={() => {
-              setIsSidebarOpened(!isSidebarOpened);
-            }}
-          >
+          <button onClick={() => setIsSidebarOpened(!isSidebarOpened)}>
             {!isSidebarOpened ? "Open" : "Close"}
           </button>
         </div>

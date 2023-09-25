@@ -6,20 +6,58 @@
 }
 
 .topContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 15%;
-  width: 100%;
   font-size: 1.5rem;
   border: 1px solid gray;
   background-color: #cedebd;
 }
 
+.topLeftContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.topLeftContainer button {
+  padding: 0.25rem;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.topRightContainer {
+  position: relative;
+  z-index: 5;
+  top: -30%;
+  left: 65%;
+  width: 80%;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.topRightContainer div {
+  margin: 1rem 0.75rem;
+  border-radius: 5px;
+}
+
+.topRightContainer button {
+  width: 30%;
+  padding: 0.25rem;
+  border-radius: 5px;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btnFocus {
+  border-radius: 5px;
+  background-color: lemonchiffon;
+}
+
 .bottomContainer {
   padding-top: 0.75rem;
   height: 85%;
-  width: 100%;
   background-color: rgb(244, 238, 238, 0.5);
   border: 1px solid gray;
   overflow-y: scroll;

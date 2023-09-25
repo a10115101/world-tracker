@@ -9,36 +9,80 @@ import { getAllRecords } from "src/services/apiRecord";
 import styles from "./MapRecordList.module.css";
 
 function MapRecordList() {
-  const { setIsFormOpened, records, setRecords } = useRecords();
+  const { setIsFormOpened, records, setRecords, statusMode, dateMode } =
+    useRecords();
+
   const { setIsMapSearchMarkerVisible } = useSearch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState("");
 
-  // initialize status for first time render
   useEffect(function () {
     setIsMapSearchMarkerVisible(false);
     setIsFormOpened(false);
   }, []);
 
-  useEffect(function () {
-    async function getData() {
-      try {
-        setIsLoading(true);
-        setLoadingError("");
+  useEffect(
+    function () {
+      async function getData() {
+        try {
+          setIsLoading(true);
+          setLoadingError("");
 
-        const data = await getAllRecords();
+          const data = await getAllRecords();
 
-        setRecords(data);
-      } catch (err) {
-        setLoadingError("Loading Error");
-      } finally {
-        setIsLoading(false);
+          if (statusMode === "all" && dateMode === "des")
+            setRecords(
+              data.slice().sort((a, b) => new Date(b.date) - new Date(a.date))
+            );
+
+          if (statusMode === "all" && dateMode === "asc")
+            setRecords(
+              data.slice().sort((a, b) => new Date(a.date) - new Date(b.date))
+            );
+
+          if (statusMode === "visited" && dateMode === "des")
+            setRecords(
+              data
+                .slice()
+                .filter((d) => d.status === "visited")
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+            );
+
+          if (statusMode === "visited" && dateMode === "asc")
+            setRecords(
+              data
+                .slice()
+                .filter((d) => d.status === "visited")
+                .sort((a, b) => new Date(a.date) - new Date(b.date))
+            );
+
+          if (statusMode === "planning" && dateMode === "des")
+            setRecords(
+              data
+                .slice()
+                .filter((d) => d.status === "planning")
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+            );
+
+          if (statusMode === "planning" && dateMode === "asc")
+            setRecords(
+              data
+                .slice()
+                .filter((d) => d.status === "planning")
+                .sort((a, b) => new Date(a.date) - new Date(b.date))
+            );
+        } catch (err) {
+          setLoadingError("Loading Error");
+        } finally {
+          setIsLoading(false);
+        }
       }
-    }
 
-    getData();
-  }, []);
+      getData();
+    },
+    [statusMode, dateMode]
+  );
 
   if (isLoading) return <p>Loading...</p>;
 

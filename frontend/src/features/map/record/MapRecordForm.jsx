@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import Flag from "./form/Flag";
 import Status from "./form/Status";
 import Rating from "./form/Rating";
 import Desciption from "./form/Desciption";
@@ -11,7 +12,6 @@ import AddRecordButton from "./button/AddRecordButton";
 import { useRecords } from "src/contexts/RecordsContext";
 import { getGeocoding } from "src/services/apiGeocoding";
 import styles from "./MapRecordForm.module.css";
-import Flag from "./form/Flag";
 
 function MapRecordForm() {
   const navigate = useNavigate();

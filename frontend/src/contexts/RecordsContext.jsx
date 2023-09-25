@@ -8,6 +8,9 @@ function RecordsProvider({ children }) {
   const [mapPosition, setMapPosition] = useState([24, 121.5]);
   const [records, setRecords] = useState([]);
 
+  const [statusMode, setStatusMode] = useState("all");
+  const [dateMode, setDateMode] = useState("des");
+
   return (
     <RecordsContext.Provider
       value={{
@@ -19,6 +22,10 @@ function RecordsProvider({ children }) {
         setMapPosition,
         records,
         setRecords,
+        statusMode,
+        setStatusMode,
+        dateMode,
+        setDateMode,
       }}
     >
       {children}
