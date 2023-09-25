@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { enqueueSnackbar } from "notistack";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import Status from "./form/Status";
+import Rating from "./form/Rating";
+import Desciption from "./form/Desciption";
+import AddRecordButton from "./button/AddRecordButton";
+
 import { useRecords } from "src/contexts/RecordsContext";
 import { getGeocoding } from "src/services/apiGeocoding";
-import { creataRecord } from "src/services/apiRecord";
-import { options } from "src/utilities/snackbar";
 import styles from "./MapRecordForm.module.css";
+import Flag from "./form/Flag";
 
 function MapRecordForm() {
   const navigate = useNavigate();
@@ -21,39 +24,26 @@ function MapRecordForm() {
   const [cityName, setCityName] = useState("");
   const [geocodingError, setGeocodingError] = useState("");
 
-  const [isRatingVisible, setIsRatingVisible] = useState(false);
-  const [newdate, setNewDate] = useState(new Date());
-  const [status, setStatus] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [status, setStatus] = useState("planning");
   const [rating, setRating] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleClick = async (e) => {
-    try {
-      e.preventDefault();
+  const lat = mapPosition[0];
+  const lng = mapPosition[1];
 
-      const lat = mapPosition[0];
-      const lng = mapPosition[1];
-      const recordObject = {
-        continent,
-        country,
-        countryCode,
-        cityName,
-        date: newdate,
-        status,
-        rating,
-        position: {
-          coordinates: [lng, lat],
-        },
-        description,
-      };
-
-      await creataRecord(recordObject);
-      enqueueSnackbar("Success Creation!", options("success"));
-      navigate("/map");
-    } catch (err) {
-      const errorMessage = err.response.data.message;
-      enqueueSnackbar(errorMessage, options("error"));
-    }
+  const recordObject = {
+    continent,
+    country,
+    countryCode,
+    cityName,
+    date,
+    status,
+    rating,
+    position: {
+      coordinates: [lng, lat],
+    },
+    description,
   };
 
   useEffect(
@@ -68,7 +58,6 @@ function MapRecordForm() {
           );
 
           const data = searchedData[0]?.components;
-          console.log(data);
 
           if (!data.country_code || data === undefined)
             throw new Error(
@@ -99,88 +88,48 @@ function MapRecordForm() {
     [mapPosition]
   );
 
-  if (!isClicked) return <div>Start by clicking somewhere on the map</div>;
+  if (!isClicked) return <h2>Start by clicking somewhere on the map</h2>;
 
-  if (isLoadingGeocoding) return <div>Loading...</div>;
+  if (isLoadingGeocoding) return <h2>Loading...</h2>;
 
-  if (!mapPosition) return <div>Can not find this position on the map</div>;
+  if (!mapPosition) return <h2>Can not find this position on the map</h2>;
 
-  if (geocodingError) return <div>{geocodingError}</div>;
+  if (geocodingError) return <h2>{geocodingError}</h2>;
 
   return (
     <div className={styles.container}>
       <form className={styles.formContainer}>
         <div className={styles.topFormContainer}>
-          <img
-            src={`https://flagcdn.com/w80/${countryCode}.png`}
-            width="80"
-            alt="flag"
-          />
-          <div>
-            <h2>Country: {country}</h2>
-            <h3>City: {cityName}</h3>
-          </div>
+          <Flag record={{ countryCode, country, cityName }} />
         </div>
 
         <div className={styles.centerFormContainer}>
+          <Status mode={"update"} status={status} setStatus={setStatus} />
+
           <div className={styles.date}>
             <label htmlFor="date">Date: </label>
             <DatePicker
               id="date"
-              onChange={(date) => setNewDate(date)}
-              selected={newdate}
+              onChange={(date) => setDate(date)}
+              selected={date}
+              maxDate={status === "visited" && new Date()}
+              minDate={status === "planning" && new Date()}
               dateFormat="MMM dd, yyyy"
             />
           </div>
 
-          <div className={styles.status}>
-            <label htmlFor="status">Status: </label>
-            <select
-              id="status"
-              value={status}
-              onChange={(e) => {
-                if (e.target.value === "visited") {
-                  setIsRatingVisible(true);
-                  setStatus(e.target.value);
-                } else {
-                  setIsRatingVisible(false);
-                  setStatus(e.target.value);
-                }
-              }}
-            >
-              <option></option>
-              <option value="planning">Planning</option>
-              <option value="visited">Visited</option>
-            </select>
-          </div>
+          <Rating
+            mode={"update"}
+            rating={rating}
+            setRating={setRating}
+            currentStatus={status}
+          />
 
-          {isRatingVisible && (
-            <div className={styles.rating}>
-              <label htmlFor="rating">Rating: </label>
-              <select
-                id="rating"
-                value={rating}
-                onChange={(e) => setRating(e.target.value)}
-              >
-                <option></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div>
-          )}
-
-          <div className={styles.description}>
-            <label htmlFor="description">Description: </label>
-            <textarea
-              id="description"
-              rows={3}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
+          <Desciption
+            mode={"update"}
+            description={description}
+            setDescription={setDescription}
+          />
         </div>
 
         <div className={styles.bottomFormContainer}>
@@ -188,13 +137,12 @@ function MapRecordForm() {
             onClick={(e) => {
               e.preventDefault();
               navigate(-1);
-              setIsRatingVisible(false);
               setIsFormOpened(false);
             }}
           >
             Cancel
           </button>
-          <button onClick={handleClick}>Add</button>
+          <AddRecordButton recordObject={recordObject} />
         </div>
       </form>
     </div>

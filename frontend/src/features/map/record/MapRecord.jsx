@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import Flag from "./form/Flag";
+import Status from "./form/Status";
+import Rating from "./form/Rating";
+import Desciption from "./form/Desciption";
+import SwitchModeButton from "./button/SwitchModeButton";
 import UpdateRecordButton from "./button/UpdateRecordButton";
 import DeleteRecordButton from "./button/DeleteRecordButton";
+import CancelButton from "./button/CancelButton";
 
 import { getRecord } from "src/services/apiRecord";
 import { formatDate } from "src/utilities/format";
 import styles from "./MapRecord.module.css";
 
 function MapRecord() {
-  const navigate = useNavigate();
   const { id } = useParams();
 
   const [mode, setMode] = useState("normal");
@@ -68,32 +73,16 @@ function MapRecord() {
     <div className={styles.container}>
       <form className={styles.formContainer}>
         <div className={styles.topFormContainer}>
-          <img
-            src={`https://flagcdn.com/w80/${record.countryCode}.png`}
-            width="80"
-            alt="flag"
-          />
-          <div>
-            <h2>Country: {record.country}</h2>
-            <h3>City: {record.cityName}</h3>
-          </div>
+          <Flag record={record} />
         </div>
 
         <div className={styles.centerFormContainer}>
-          <div className={styles.status}>
-            <label htmlFor="status">Status: </label>
-            {mode === "normal" && <p>{record.status}</p>}
-            {mode === "update" && (
-              <select
-                id="status"
-                value={currentStatus}
-                onChange={(e) => setCurrentStatus(e.target.value)}
-              >
-                <option value="planning">Planning</option>
-                <option value="visited">Visited</option>
-              </select>
-            )}
-          </div>
+          <Status
+            mode={mode}
+            record={record}
+            status={currentStatus}
+            setStatus={setCurrentStatus}
+          />
 
           <div className={styles.date}>
             <label htmlFor="date">Date: </label>
@@ -110,80 +99,44 @@ function MapRecord() {
             )}
           </div>
 
-          {mode === "normal" && record.status === "visited" && (
-            <div className={styles.rating}>
-              <label htmlFor="rating">Rating: </label>
-              <p>{record.rating}</p>
-            </div>
-          )}
+          <Rating
+            mode={mode}
+            record={record}
+            rating={currentRating}
+            setRating={setCurrentRating}
+            currentStatus={currentStatus}
+          />
 
-          {mode === "update" && currentStatus === "visited" && (
-            <div className={styles.rating}>
-              <label htmlFor="rating">Rating: </label>
-              <select
-                id="rating"
-                value={currentRating}
-                onChange={(e) => setCurrentRating(e.target.value)}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div>
-          )}
-
-          <div className={styles.description}>
-            <label htmlFor="description">Description: </label>
-            {mode === "normal" && <p>{record.description}</p>}
-            {mode === "update" && (
-              <textarea
-                id="description"
-                rows={3}
-                value={currentDescription}
-                onChange={(e) => setCurrentDescription(e.target.value)}
-              />
-            )}
-          </div>
+          <Desciption
+            mode={mode}
+            record={record}
+            description={currentDescription}
+            setDescription={setCurrentDescription}
+          />
         </div>
 
         <div className={styles.bottomFormContainer}>
           {mode === "normal" && (
             <>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigate(-1);
-                }}
-              >
-                Back
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMode("update");
-                }}
-              >
+              <CancelButton>Back</CancelButton>
+              <SwitchModeButton setMode={setMode} mode={"update"}>
                 Update
-              </button>
-              <DeleteRecordButton id={id} />
+              </SwitchModeButton>
+              <DeleteRecordButton id={id}>Delete</DeleteRecordButton>
             </>
           )}
+
           {mode === "update" && (
             <>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMode("normal");
-                }}
-              >
+              <SwitchModeButton setMode={setMode} mode={"normal"}>
                 Cancel
-              </button>
+              </SwitchModeButton>
               <UpdateRecordButton
                 id={id}
                 updateRecordObject={updateRecordObject}
-              />
+              >
+                Confirm
+              </UpdateRecordButton>
             </>
           )}
         </div>

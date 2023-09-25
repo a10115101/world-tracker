@@ -4,7 +4,7 @@ import { closeSnackbar, enqueueSnackbar } from "notistack";
 import { options } from "src/utilities/snackbar";
 import { deleteRecord } from "src/services/apiRecord";
 
-function DeleteRecordButton({ id }) {
+function DeleteRecordButton({ id, children }) {
   const navigate = useNavigate();
 
   const handleDeleteConfirm = async (e) => {
@@ -14,13 +14,7 @@ function DeleteRecordButton({ id }) {
       action: (key) => (
         <div>
           <button onClick={handleDelete}>Yes</button>
-          <button
-            onClick={() => {
-              closeSnackbar(key);
-            }}
-          >
-            No
-          </button>
+          <button onClick={() => closeSnackbar(key)}>No</button>
         </div>
       ),
     });
@@ -38,7 +32,7 @@ function DeleteRecordButton({ id }) {
     }
   };
 
-  return <button onClick={handleDeleteConfirm}>Delete</button>;
+  return <button onClick={handleDeleteConfirm}>{children}</button>;
 }
 
 export default DeleteRecordButton;

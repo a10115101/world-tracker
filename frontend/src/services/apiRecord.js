@@ -36,11 +36,10 @@ export async function creataRecord(recordObject) {
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  return axios.post(
-    API_URL,
-    { recordObject },
-    { headers: { Authorization: token }, withCredentials: true }
-  );
+  return axios.post(API_URL, recordObject, {
+    headers: { Authorization: token },
+    withCredentials: true,
+  });
 }
 
 export async function updateRecord(id, updateRecordObject) {

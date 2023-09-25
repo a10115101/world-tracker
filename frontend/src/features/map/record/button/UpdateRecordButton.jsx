@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { updateRecord } from "src/services/apiRecord";
 import { options } from "src/utilities/snackbar";
 
-function UpdateRecordButton({ id, updateRecordObject }) {
+function UpdateRecordButton({ id, updateRecordObject, children }) {
   const navigate = useNavigate();
 
   const handleModified = async (e) => {
@@ -19,7 +19,7 @@ function UpdateRecordButton({ id, updateRecordObject }) {
     }
   };
 
-  return <button onClick={handleModified}>Confirm</button>;
+  return <button onClick={handleModified}>{children}</button>;
 }
 
 export default UpdateRecordButton;
