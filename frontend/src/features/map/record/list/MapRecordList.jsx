@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 
 import MapRecordListItem from "./MapRecordListItem";
 
+import { useMapSearch } from "src/contexts/MapSearchContext";
+import { useRecordForm } from "src/contexts/RecordFormContext";
 import { useRecords } from "src/contexts/RecordsContext";
-import { useSearch } from "src/contexts/SearchContext";
 import { getAllRecords } from "src/services/apiRecord";
 import styles from "./MapRecordList.module.css";
 
 function MapRecordList() {
-  const { setIsFormOpened, records, setRecords, statusFilter, dateFilter } =
-    useRecords();
-
-  const { setIsMapSearchMarkerVisible } = useSearch();
+  const { setIsMapSearchMarkerVisible } = useMapSearch();
+  const { setIsFormOpened } = useRecordForm();
+  const { records, setRecords, statusFilter, dateFilter } = useRecords();
 
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState("");

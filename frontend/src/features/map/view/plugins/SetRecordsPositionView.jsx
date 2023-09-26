@@ -2,26 +2,24 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useMap } from "react-leaflet";
 
-import { useRecords } from "src/contexts/RecordsContext";
+import { useMapPosition } from "src/contexts/MapPositionContext";
 
 function SetRecordsPositionView() {
-  const { mapPosition, setMapPosition } = useRecords();
+  const map = useMap();
   const [searchParams] = useSearchParams();
+  const { mapPosition, setMapPosition } = useMapPosition();
 
   const getLat = searchParams.get("lat");
   const getLng = searchParams.get("lng");
 
   useEffect(
     function () {
-      if (getLat && getLng) {
-        setMapPosition([getLat, getLng]);
-      }
+      if (getLat && getLng) setMapPosition([getLat, getLng]);
     },
 
     [getLat, getLng]
   );
 
-  const map = useMap();
   map.setView(mapPosition);
 
   return null;

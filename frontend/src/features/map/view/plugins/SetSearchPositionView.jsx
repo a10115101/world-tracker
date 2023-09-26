@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 
-import { useRecords } from "src/contexts/RecordsContext";
-import { useSearch } from "src/contexts/SearchContext";
+import { useMapPosition } from "src/contexts/MapPositionContext";
+import { useMapSearch } from "src/contexts/MapSearchContext";
 
 function SetSearchPositionView() {
-  const { setMapPosition } = useRecords();
-  const { selectedPosition } = useSearch();
-
   const map = useMap();
+  const { setMapPosition } = useMapPosition();
+  const { selectedPosition } = useMapSearch();
 
   useEffect(() => {
     if (selectedPosition) {

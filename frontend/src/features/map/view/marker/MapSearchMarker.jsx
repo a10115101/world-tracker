@@ -1,10 +1,10 @@
 import { Marker, Popup } from "react-leaflet";
 
-import { useSearch } from "src/contexts/SearchContext";
+import { useMapSearch } from "src/contexts/MapSearchContext";
 import { LeafIcon } from "src/utilities/icon";
 
 function MapSearchMarker() {
-  const { selectedPosition } = useSearch();
+  const { selectedPosition } = useMapSearch();
 
   const locationSelection = [
     Number(selectedPosition?.geometry?.lat),

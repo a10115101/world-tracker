@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
 
-import { useSearch } from "src/contexts/SearchContext";
 import { formatDate } from "src/utilities/format";
 import styles from "./MapRecordListItem.module.css";
 
 function MapRecordListItem({ record }) {
-  const { setIsMapSearchMarkerVisible } = useSearch();
-
   const { _id, countryCode, country, cityName, date, position } = record;
 
   const lng = position.coordinates[0];
@@ -14,10 +11,7 @@ function MapRecordListItem({ record }) {
 
   return (
     <li className={styles.container}>
-      <Link
-        to={`${_id}?lat=${lat}&lng=${lng}`}
-        onClick={() => setIsMapSearchMarkerVisible(false)}
-      >
+      <Link to={`${_id}?lat=${lat}&lng=${lng}`}>
         <span>
           <img
             src={`https://flagcdn.com/w20/${countryCode}.png`}
@@ -27,7 +21,7 @@ function MapRecordListItem({ record }) {
         </span>
         <h3>{country}</h3>
         <h3>{cityName}</h3>
-        <time>{formatDate(date)}</time>
+        <p>{formatDate(date)}</p>
         <i className="fa-solid fa-location-dot" />
       </Link>
     </li>

@@ -1,8 +1,8 @@
-import { useSearch } from "src/contexts/SearchContext";
+import { useMapSearch } from "src/contexts/MapSearchContext";
 import styles from "./MapSearchList.module.css";
 
 function MapSearchList({ searchedResults }) {
-  const { setSelectedPosition, setIsMapSearchMarkerVisible } = useSearch();
+  const { setSelectedPosition, setIsMapSearchMarkerVisible } = useMapSearch();
 
   return (
     <div className={styles.container}>

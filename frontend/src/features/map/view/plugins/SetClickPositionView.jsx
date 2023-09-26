@@ -1,11 +1,12 @@
 import { useMap, useMapEvent } from "react-leaflet";
 
-import { useRecords } from "src/contexts/RecordsContext";
+import { useMapPosition } from "src/contexts/MapPositionContext";
+import { useRecordForm } from "src/contexts/RecordFormContext";
 
 function SetClickPositionView() {
-  const { isClicked, setIsClicked, mapPosition, setMapPosition } = useRecords();
-
   const map = useMap();
+  const { mapPosition, setMapPosition } = useMapPosition();
+  const { isClicked, setIsClicked } = useRecordForm();
 
   useMapEvent({
     click: (e) => {

@@ -6,12 +6,7 @@ function FriendsProvider({ children }) {
   const [update, setUpdate] = useState("");
 
   return (
-    <FriendsContext.Provider
-      value={{
-        setUpdate,
-        update,
-      }}
-    >
+    <FriendsContext.Provider value={{ setUpdate, update }}>
       {children}
     </FriendsContext.Provider>
   );
@@ -19,8 +14,10 @@ function FriendsProvider({ children }) {
 
 function useFriends() {
   const context = useContext(FriendsContext);
+
   if (context === undefined)
-    throw new Error("FriendsContext was used outside the FriendsProvider");
+    throw new Error("FriendsContext is used outside the FriendsProvider");
+
   return context;
 }
 

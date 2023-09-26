@@ -9,13 +9,15 @@ import Rating from "./form/Rating";
 import Desciption from "./form/Desciption";
 import AddRecordButton from "./button/AddRecordButton";
 
-import { useRecords } from "src/contexts/RecordsContext";
+import { useMapPosition } from "src/contexts/MapPositionContext";
+import { useRecordForm } from "src/contexts/RecordFormContext";
 import { getGeocoding } from "src/services/apiGeocoding";
 import styles from "./MapRecordForm.module.css";
 
 function MapRecordForm() {
   const navigate = useNavigate();
-  const { setIsFormOpened, mapPosition, isClicked } = useRecords();
+  const { mapPosition } = useMapPosition();
+  const { setIsFormOpened, isClicked } = useRecordForm();
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [continent, setContinent] = useState("");

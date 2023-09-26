@@ -1,14 +1,14 @@
 import { createContext, useContext, useState } from "react";
 
-const SearchContext = createContext();
+const MapSearchContext = createContext();
 
-function SearchProvider({ children }) {
+function MapSearchProvider({ children }) {
   const [selectedPosition, setSelectedPosition] = useState(null);
   const [isMapSearchMarkerVisible, setIsMapSearchMarkerVisible] =
     useState(false);
 
   return (
-    <SearchContext.Provider
+    <MapSearchContext.Provider
       value={{
         selectedPosition,
         setSelectedPosition,
@@ -17,17 +17,17 @@ function SearchProvider({ children }) {
       }}
     >
       {children}
-    </SearchContext.Provider>
+    </MapSearchContext.Provider>
   );
 }
 
-function useSearch() {
-  const context = useContext(SearchContext);
+function useMapSearch() {
+  const context = useContext(MapSearchContext);
 
   if (context === undefined)
-    throw new Error("SearchContext was used outside the SearchProvider");
+    throw new Error("MapSearchContext is used outside the MapSearchProvider");
 
   return context;
 }
 
-export { SearchProvider, useSearch };
+export { MapSearchProvider, useMapSearch };

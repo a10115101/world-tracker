@@ -8,12 +8,7 @@ function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(getUser());
 
   return (
-    <AuthContext.Provider
-      value={{
-        currentUser,
-        setCurrentUser,
-      }}
-    >
+    <AuthContext.Provider value={{ currentUser, setCurrentUser }}>
       {children}
     </AuthContext.Provider>
   );
@@ -23,7 +18,7 @@ function useAuth() {
   const context = useContext(AuthContext);
 
   if (context === undefined)
-    throw new Error("AuthContext was used outside AuthProvider");
+    throw new Error("AuthContext is used outside AuthProvider");
 
   return context;
 }

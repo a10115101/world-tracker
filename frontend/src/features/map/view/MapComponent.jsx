@@ -9,12 +9,16 @@ import SetRecordsPositionView from "./plugins/SetRecordsPositionView";
 import SetSearchPositionView from "./plugins/SetSearchPositionView";
 import SetClickPositionView from "./plugins/SetClickPositionView";
 
-import { useSearch } from "src/contexts/SearchContext";
+import { useMapPosition } from "src/contexts/MapPositionContext";
+import { useMapSearch } from "src/contexts/MapSearchContext";
+import { useRecordForm } from "src/contexts/RecordFormContext";
 import { useRecords } from "src/contexts/RecordsContext";
 
 function MapComponent() {
-  const { isFormOpened, mapPosition, isClicked, records } = useRecords();
-  const { isMapSearchMarkerVisible } = useSearch();
+  const { mapPosition } = useMapPosition();
+  const { isFormOpened, isClicked } = useRecordForm();
+  const { records } = useRecords();
+  const { isMapSearchMarkerVisible } = useMapSearch();
 
   return (
     <MapContainer
@@ -28,13 +32,10 @@ function MapComponent() {
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
       />
 
-      {/* For search data */}
       {isMapSearchMarkerVisible && <MapSearchMarker />}
 
-      {/* For create data */}
       {isFormOpened && isClicked && <MapFormMarker />}
 
-      {/* For db data */}
       {records &&
         records.map((record) => (
           <MapRecordMarker record={record} key={record._id} />
