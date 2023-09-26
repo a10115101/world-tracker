@@ -9,7 +9,7 @@ import { getAllRecords } from "src/services/apiRecord";
 import styles from "./MapRecordList.module.css";
 
 function MapRecordList() {
-  const { setIsFormOpened, records, setRecords, statusMode, dateMode } =
+  const { setIsFormOpened, records, setRecords, statusFilter, dateFilter } =
     useRecords();
 
   const { setIsMapSearchMarkerVisible } = useSearch();
@@ -29,49 +29,9 @@ function MapRecordList() {
           setIsLoading(true);
           setLoadingError("");
 
-          const data = await getAllRecords();
+          const data = await getAllRecords(statusFilter, dateFilter);
 
-          if (statusMode === "all" && dateMode === "des")
-            setRecords(
-              data.slice().sort((a, b) => new Date(b.date) - new Date(a.date))
-            );
-
-          if (statusMode === "all" && dateMode === "asc")
-            setRecords(
-              data.slice().sort((a, b) => new Date(a.date) - new Date(b.date))
-            );
-
-          if (statusMode === "visited" && dateMode === "des")
-            setRecords(
-              data
-                .slice()
-                .filter((d) => d.status === "visited")
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-            );
-
-          if (statusMode === "visited" && dateMode === "asc")
-            setRecords(
-              data
-                .slice()
-                .filter((d) => d.status === "visited")
-                .sort((a, b) => new Date(a.date) - new Date(b.date))
-            );
-
-          if (statusMode === "planning" && dateMode === "des")
-            setRecords(
-              data
-                .slice()
-                .filter((d) => d.status === "planning")
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-            );
-
-          if (statusMode === "planning" && dateMode === "asc")
-            setRecords(
-              data
-                .slice()
-                .filter((d) => d.status === "planning")
-                .sort((a, b) => new Date(a.date) - new Date(b.date))
-            );
+          setRecords(data);
         } catch (err) {
           setLoadingError("Loading Error");
         } finally {
@@ -81,7 +41,8 @@ function MapRecordList() {
 
       getData();
     },
-    [statusMode, dateMode]
+
+    [statusFilter, dateFilter]
   );
 
   if (isLoading) return <p>Loading...</p>;

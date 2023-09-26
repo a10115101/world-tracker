@@ -50,9 +50,18 @@
   cursor: pointer;
 }
 
+.topRightContainer button:hover {
+  font-weight: 700;
+}
+
 .btnFocus {
   border-radius: 5px;
   background-color: lemonchiffon;
+}
+
+.btnClose {
+  background-color: #ff0000d0;
+  color: white;
 }
 
 .bottomContainer {

@@ -2,16 +2,19 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3000/api/v1/records";
 
-export async function getAllRecords() {
+export async function getAllRecords(statusMode, dateMode) {
   let token = "";
 
   if (localStorage.getItem("user"))
     token = JSON.parse(localStorage.getItem("user")).token;
 
-  const response = await axios.get(API_URL, {
-    headers: { Authorization: token },
-    withCredentials: true,
-  });
+  const response = await axios.get(
+    `${API_URL}/?status=${statusMode}&date=${dateMode}`,
+    {
+      headers: { Authorization: token },
+      withCredentials: true,
+    }
+  );
 
   return response.data.data.records;
 }

@@ -1,10 +1,19 @@
 const Record = require("../models/recordModel");
-const AppError = require("../utilities/appError");
 const validator = require("../config/validator");
+const AppError = require("../utilities/appError");
+const apiFilter = require("../utilities/apiFilter");
 
 exports.getAllRecords = async (req, res, next) => {
   try {
-    const records = await Record.find({ user: req.user.id }).exec();
+    const queryStatus = apiFilter.queryStr(req.query.status);
+    const queryDate = apiFilter.sorted(req.query.date);
+
+    const records = await Record.find({
+      user: req.user.id,
+      status: { $in: queryStatus },
+    })
+      .sort(queryDate)
+      .exec();
 
     res.status(200).json({
       status: "success",

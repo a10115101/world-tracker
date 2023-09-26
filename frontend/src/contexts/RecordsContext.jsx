@@ -8,8 +8,8 @@ function RecordsProvider({ children }) {
   const [mapPosition, setMapPosition] = useState([24, 121.5]);
   const [records, setRecords] = useState([]);
 
-  const [statusMode, setStatusMode] = useState("all");
-  const [dateMode, setDateMode] = useState("des");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [dateFilter, setDateFilter] = useState("des");
 
   return (
     <RecordsContext.Provider
@@ -22,10 +22,10 @@ function RecordsProvider({ children }) {
         setMapPosition,
         records,
         setRecords,
-        statusMode,
-        setStatusMode,
-        dateMode,
-        setDateMode,
+        statusFilter,
+        setStatusFilter,
+        dateFilter,
+        setDateFilter,
       }}
     >
       {children}

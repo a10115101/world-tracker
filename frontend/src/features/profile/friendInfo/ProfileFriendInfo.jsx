@@ -63,13 +63,13 @@ function ProfileFriendInfo() {
       <div className={styles.bottomContainer}>
         <div className={styles.bottomPart1Container}>
           <button
-            className={mode === "profile" && `${styles.btnFocus}`}
+            className={mode === "profile" ? `${styles.btnFocus}` : ""}
             onClick={() => setMode("profile")}
           >
             Profile
           </button>
           <button
-            className={mode === "statis" && `${styles.btnFocus}`}
+            className={mode === "statis" ? `${styles.btnFocus}` : ""}
             onClick={() => setMode("statis")}
           >
             Statis

@@ -1,45 +1,48 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
+import { useRecords } from "src/contexts/RecordsContext";
 import styles from "./MapSidebar.module.css";
-import { useRecords } from "../../contexts/RecordsContext";
 
 function MapSidebar() {
-  const { statusMode, setStatusMode, dateMode, setDateMode } = useRecords();
+  const { statusFilter, setStatusFilter, dateFilter, setDateFilter } =
+    useRecords();
 
-  const [isOpenFilter, setIsOpenFilter] = useState(false);
+  const [isFilterOpened, setIsFilterOpened] = useState(false);
 
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <div className={styles.topLeftContainer}>
           <h3>Record List</h3>
-          <button onClick={() => setIsOpenFilter(!isOpenFilter)}>
+          <button onClick={() => setIsFilterOpened(!isFilterOpened)}>
             <i className="fa-solid fa-filter" />
           </button>
         </div>
 
-        {isOpenFilter && (
+        {isFilterOpened && (
           <div className={styles.topRightContainer}>
             <div>
               <p>Status</p>
               <button
-                className={statusMode === "all" ? `${styles.btnFocus}` : ""}
-                onClick={() => setStatusMode("all")}
+                className={statusFilter === "all" ? `${styles.btnFocus}` : ""}
+                onClick={() => setStatusFilter("all")}
               >
                 All
               </button>
               <button
-                className={statusMode === "visited" ? `${styles.btnFocus}` : ""}
-                onClick={() => setStatusMode("visited")}
+                className={
+                  statusFilter === "visited" ? `${styles.btnFocus}` : ""
+                }
+                onClick={() => setStatusFilter("visited")}
               >
                 Vistited
               </button>
               <button
                 className={
-                  statusMode === "planning" ? `${styles.btnFocus}` : ""
+                  statusFilter === "planning" ? `${styles.btnFocus}` : ""
                 }
-                onClick={() => setStatusMode("planning")}
+                onClick={() => setStatusFilter("planning")}
               >
                 Planning
               </button>
@@ -47,16 +50,24 @@ function MapSidebar() {
             <div>
               <p>Date</p>
               <button
-                className={dateMode === "asc" ? `${styles.btnFocus}` : ""}
-                onClick={() => setDateMode("asc")}
+                className={dateFilter === "asc" ? `${styles.btnFocus}` : ""}
+                onClick={() => setDateFilter("asc")}
               >
-                Ascending
+                Asc
               </button>
               <button
-                className={dateMode === "des" ? `${styles.btnFocus}` : ""}
-                onClick={() => setDateMode("des")}
+                className={dateFilter === "des" ? `${styles.btnFocus}` : ""}
+                onClick={() => setDateFilter("des")}
               >
-                Descending
+                Desc
+              </button>
+            </div>
+            <div>
+              <button
+                className={styles.btnClose}
+                onClick={() => setIsFilterOpened(!isFilterOpened)}
+              >
+                Close <i className="fa-solid fa-xmark" />
               </button>
             </div>
           </div>
