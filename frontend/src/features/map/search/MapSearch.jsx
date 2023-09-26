@@ -1,35 +1,31 @@
 import { useState } from "react";
 
-import { useSearch } from "src/contexts/SearchContext";
+import MapSearchList from "./MapSearchList";
 import { getGeocoding } from "src/services/apiGeocoding";
 import styles from "./MapSearch.module.css";
 
 function MapSearch() {
-  const { setSelectedPosition, setIsMapSearchMarkerVisible } = useSearch();
-
-  const [searchedText, setSearchedText] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchedResults, setSearchedResults] = useState([]);
-  const [searchingError, setSearchingError] = useState("");
-
   const [isListOpened, setIsListOpened] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchedText, setSearchedText] = useState("");
+  const [searchingError, setSearchingError] = useState("");
+  const [searchedResults, setSearchedResults] = useState([]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (searchedText.length <= 1) return;
-
     try {
+      e.preventDefault();
+
+      if (searchedText.length <= 1) return;
+
       setIsSearching(true);
       setSearchingError("");
 
-      const searchedData = await getGeocoding(searchedText);
+      const data = await getGeocoding(searchedText);
 
-      if (!searchedData)
+      if (data.length === 0)
         throw new Error("Not found it, please search for another place again.");
 
-      setSearchedResults(searchedData);
-      // isListOpened.current = true;
+      setSearchedResults(data);
       setIsListOpened(true);
     } catch (err) {
       setSearchingError(err.message);
@@ -41,56 +37,34 @@ function MapSearch() {
   return (
     <div
       className={styles.container}
-      onClick={() => {
-        setIsListOpened(!isListOpened);
-      }}
+      onClick={() => setIsListOpened(!isListOpened)}
     >
       <div className={styles.topContainer}>
         <form onSubmit={handleSubmit}>
           <button>
             <i className="fa-solid fa-magnifying-glass" />
           </button>
-          {isSearching ? (
+
+          {isSearching && (
+            <input type="search" disabled={isSearching} value="Searching..." />
+          )}
+
+          {!isSearching && (
             <input
               type="search"
               placeholder="Search for country or city"
-              disabled={isSearching}
-              value="Searching..."
-            />
-          ) : (
-            <input
-              type="search"
-              placeholder="Search for country or city"
-              disabled={isSearching}
-              value={searchedText}
+              value={searchingError ? searchingError : searchedText}
               onChange={(e) => {
                 setSearchedText(e.target.value);
                 setSearchedResults([]);
+                setSearchingError("");
               }}
             />
           )}
         </form>
       </div>
 
-      {searchedResults && isListOpened && (
-        <div className={styles.bottomContainer}>
-          <ul>
-            {searchedResults.map((searchedResult, id) => {
-              return (
-                <li
-                  key={id}
-                  onClick={() => {
-                    setSelectedPosition(searchedResult);
-                    setIsMapSearchMarkerVisible(true);
-                  }}
-                >
-                  {searchedResult.formatted}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
+      {isListOpened && <MapSearchList searchedResults={searchedResults} />}
     </div>
   );
 }

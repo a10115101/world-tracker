@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const SearchContext = createContext();
 
@@ -23,8 +23,10 @@ function SearchProvider({ children }) {
 
 function useSearch() {
   const context = useContext(SearchContext);
+
   if (context === undefined)
     throw new Error("SearchContext was used outside the SearchProvider");
+
   return context;
 }
 

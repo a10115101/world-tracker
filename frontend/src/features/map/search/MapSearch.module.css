@@ -1,7 +1,7 @@
 .container {
   background-color: white;
-  border-radius: 5px;
   border: 2px solid black;
+  border-radius: 5px;
 }
 
 .topContainer {
@@ -25,18 +25,4 @@
 
 .topContainer input {
   border: none;
-}
-
-.bottomContainer {
-  padding-left: 0.5rem;
-  border: 2px solid green;
-}
-
-.bottomContainer ul {
-  list-style: none;
-  cursor: pointer;
-}
-
-.bottomContainer li:hover {
-  background-color: grey;
 }

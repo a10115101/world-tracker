@@ -1,0 +1,12 @@
+.container ul {
+  list-style: none;
+  cursor: pointer;
+}
+
+.container li {
+  padding: 0.1rem 0.5rem;
+}
+
+.container li:hover {
+  background-color: rgba(128, 128, 128, 0.725);
+}
