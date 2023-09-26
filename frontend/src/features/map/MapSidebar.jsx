@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import { useRecords } from "src/contexts/RecordsContext";
+import { useRecordsFilter } from "src/contexts/RecordsFilterContext";
 import styles from "./MapSidebar.module.css";
 
 function MapSidebar() {
   const { statusFilter, setStatusFilter, dateFilter, setDateFilter } =
-    useRecords();
+    useRecordsFilter();
 
   const [isFilterOpened, setIsFilterOpened] = useState(false);
 

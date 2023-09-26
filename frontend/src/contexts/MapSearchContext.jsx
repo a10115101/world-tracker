@@ -4,17 +4,10 @@ const MapSearchContext = createContext();
 
 function MapSearchProvider({ children }) {
   const [selectedPosition, setSelectedPosition] = useState(null);
-  const [isMapSearchMarkerVisible, setIsMapSearchMarkerVisible] =
-    useState(false);
 
   return (
     <MapSearchContext.Provider
-      value={{
-        selectedPosition,
-        setSelectedPosition,
-        isMapSearchMarkerVisible,
-        setIsMapSearchMarkerVisible,
-      }}
+      value={{ selectedPosition, setSelectedPosition }}
     >
       {children}
     </MapSearchContext.Provider>

@@ -6,16 +6,16 @@ import { useRecordForm } from "src/contexts/RecordFormContext";
 function SetClickPositionView() {
   const map = useMap();
   const { mapPosition, setMapPosition } = useMapPosition();
-  const { isClicked, setIsClicked } = useRecordForm();
+  const { isFormOpened } = useRecordForm();
 
   useMapEvent({
     click: (e) => {
-      setMapPosition([e.latlng.wrap().lat, e.latlng.wrap().lng]);
-      setIsClicked(true);
+      if (isFormOpened) {
+        setMapPosition([e.latlng.wrap().lat, e.latlng.wrap().lng]);
+        map.setView(mapPosition);
+      }
     },
   });
-
-  if (isClicked) map.setView(mapPosition);
 
   return null;
 }

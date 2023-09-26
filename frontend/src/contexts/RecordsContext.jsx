@@ -4,20 +4,9 @@ const RecordsContext = createContext();
 
 function RecordsProvider({ children }) {
   const [records, setRecords] = useState([]);
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [dateFilter, setDateFilter] = useState("des");
 
   return (
-    <RecordsContext.Provider
-      value={{
-        records,
-        setRecords,
-        statusFilter,
-        setStatusFilter,
-        dateFilter,
-        setDateFilter,
-      }}
-    >
+    <RecordsContext.Provider value={{ records, setRecords }}>
       {children}
     </RecordsContext.Provider>
   );

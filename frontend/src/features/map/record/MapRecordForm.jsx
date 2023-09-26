@@ -17,7 +17,7 @@ import styles from "./MapRecordForm.module.css";
 function MapRecordForm() {
   const navigate = useNavigate();
   const { mapPosition } = useMapPosition();
-  const { setIsFormOpened, isClicked } = useRecordForm();
+  const { setIsFormOpened } = useRecordForm();
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [continent, setContinent] = useState("");
@@ -89,8 +89,6 @@ function MapRecordForm() {
 
     [mapPosition]
   );
-
-  if (!isClicked) return <h2>Start by clicking somewhere on the map</h2>;
 
   if (isLoadingGeocoding) return <h2>Loading...</h2>;
 

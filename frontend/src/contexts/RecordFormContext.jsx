@@ -4,17 +4,9 @@ const RecordFormContext = createContext();
 
 function RecordFormProvider({ children }) {
   const [isFormOpened, setIsFormOpened] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
 
   return (
-    <RecordFormContext.Provider
-      value={{
-        isFormOpened,
-        setIsFormOpened,
-        isClicked,
-        setIsClicked,
-      }}
-    >
+    <RecordFormContext.Provider value={{ isFormOpened, setIsFormOpened }}>
       {children}
     </RecordFormContext.Provider>
   );

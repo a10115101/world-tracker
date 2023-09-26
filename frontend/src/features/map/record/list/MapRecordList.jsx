@@ -6,19 +6,21 @@ import MapRecordListItem from "./MapRecordListItem";
 import { useMapSearch } from "src/contexts/MapSearchContext";
 import { useRecordForm } from "src/contexts/RecordFormContext";
 import { useRecords } from "src/contexts/RecordsContext";
+import { useRecordsFilter } from "src/contexts/RecordsFilterContext";
 import { getAllRecords } from "src/services/apiRecord";
 import styles from "./MapRecordList.module.css";
 
 function MapRecordList() {
-  const { setIsMapSearchMarkerVisible } = useMapSearch();
+  const { setSelectedPosition } = useMapSearch();
   const { setIsFormOpened } = useRecordForm();
-  const { records, setRecords, statusFilter, dateFilter } = useRecords();
+  const { records, setRecords } = useRecords();
+  const { statusFilter, dateFilter } = useRecordsFilter();
 
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState("");
 
   useEffect(function () {
-    setIsMapSearchMarkerVisible(false);
+    setSelectedPosition(null);
     setIsFormOpened(false);
   }, []);
 
@@ -56,7 +58,7 @@ function MapRecordList() {
         <Link
           to="/map/form"
           onClick={() => {
-            setIsMapSearchMarkerVisible(false);
+            setSelectedPosition(null);
             setIsFormOpened(true);
           }}
         >

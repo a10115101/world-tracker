@@ -24,6 +24,7 @@ import { MapPositionProvider } from "./contexts/MapPositionContext";
 import { MapSearchProvider } from "./contexts/MapSearchContext";
 import { RecordFormProvider } from "./contexts/RecordFormContext";
 import { RecordsProvider } from "./contexts/RecordsContext";
+import { RecordsFilterProvider } from "./contexts/RecordsFilterContext";
 import { FriendsProvider } from "./contexts/FriendsContext";
 
 function App() {
@@ -36,19 +37,20 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Singup />} />
             <Route path="redirect" element={<Redirect />} />
-
             <Route
               path="map"
               element={
                 <ProtectedRoute>
                   <RecordsProvider>
-                    <RecordFormProvider>
-                      <MapPositionProvider>
-                        <MapSearchProvider>
-                          <Map />
-                        </MapSearchProvider>
-                      </MapPositionProvider>
-                    </RecordFormProvider>
+                    <RecordsFilterProvider>
+                      <RecordFormProvider>
+                        <MapPositionProvider>
+                          <MapSearchProvider>
+                            <Map />
+                          </MapSearchProvider>
+                        </MapPositionProvider>
+                      </RecordFormProvider>
+                    </RecordsFilterProvider>
                   </RecordsProvider>
                 </ProtectedRoute>
               }
@@ -57,7 +59,6 @@ function App() {
               <Route path="/map/:id" element={<MapRecord />} />
               <Route path="form" element={<MapRecordForm />} />
             </Route>
-
             <Route
               path="profile"
               element={
@@ -79,7 +80,6 @@ function App() {
               />
               <Route path="user/:id" element={<ProfileFriendInfo />} />
             </Route>
-
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

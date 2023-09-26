@@ -7,7 +7,7 @@ export async function getGeocoding(queryParams) {
     q: queryParams,
     key: import.meta.env.VITE_OPENCAGE_API_KEY,
     language: "en",
-    no_annotations: 1,
+    // no_annotations: 1,
     pretty: 1,
   };
 
