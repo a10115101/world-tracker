@@ -15,6 +15,7 @@ function AppNav() {
       await logout();
       localStorage.removeItem("user");
       setCurrentUser(null);
+      navigate("/");
       enqueueSnackbar("Success Logout", options("success"));
     } catch (err) {
       const errorMessage = err.response.data.message;

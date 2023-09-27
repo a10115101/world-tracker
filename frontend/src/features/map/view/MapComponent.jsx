@@ -14,7 +14,7 @@ function MapComponent() {
   return (
     <MapContainer
       center={mapPosition}
-      zoom={3}
+      zoom={2}
       scrollWheelZoom={true}
       style={{ height: "100%" }}
     >

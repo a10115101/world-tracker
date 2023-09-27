@@ -67,7 +67,6 @@
 .bottomContainer {
   padding-top: 0.75rem;
   height: 85%;
-  background-color: rgb(244, 238, 238, 0.5);
   border: 1px solid gray;
   overflow-y: scroll;
 }

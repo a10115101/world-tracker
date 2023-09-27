@@ -16,7 +16,7 @@ function Homepage() {
       try {
         if (currentUser === null) return;
 
-        if (currentUser?.user.googleID) {
+        if (currentUser?.user?.googleID) {
           await logout();
           localStorage.removeItem("user");
           setCurrentUser(null);

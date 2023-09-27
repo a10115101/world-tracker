@@ -40,10 +40,8 @@ function MapRecordList() {
           setIsLoading(false);
         }
       }
-
       getData();
     },
-
     [statusFilter, dateFilter]
   );
 
