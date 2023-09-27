@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import Flag from "./form/Flag";
+import BasicInfo from "./form/BasicInfo";
 import Status from "./form/Status";
 import Rating from "./form/Rating";
 import Desciption from "./form/Desciption";
@@ -58,21 +58,21 @@ function MapRecordForm() {
 
           const data = searchedData[0]?.components;
 
-          if (!data.country_code || data === undefined)
+          if (!data?.country_code || data === undefined)
             throw new Error(
-              "Oops! It doesn't seem like a country or a city. Please click somewhere else on the map"
+              "Oops! It doesn't seem like a country or a city. Please click somewhere else on the map."
             );
 
-          setContinent(data.continent);
-          setCountryCode(data.country_code);
-          setCountry(data.country);
+          setContinent(data?.continent);
+          setCountryCode(data?.country_code);
+          setCountry(data?.country);
           setCityName(
-            data.city ||
-              data.county ||
-              data.village ||
-              data.town ||
-              data.neighbourhood ||
-              data.state
+            data?.city ||
+              data?.county ||
+              data?.village ||
+              data?.town ||
+              data?.neighbourhood ||
+              data?.state
           );
         } catch (err) {
           setGeocodingError(err.message);
@@ -89,15 +89,15 @@ function MapRecordForm() {
 
   if (isLoadingGeocoding) return <h2>Loading...</h2>;
 
-  if (!mapPosition) return <h2>Can not find this position on the map</h2>;
+  if (!mapPosition) return <h4>Can not find this position on the map.</h4>;
 
-  if (geocodingError) return <h2>{geocodingError}</h2>;
+  if (geocodingError) return <h4>{geocodingError}</h4>;
 
   return (
     <div className={styles.container}>
       <form className={styles.formContainer}>
         <div className={styles.topFormContainer}>
-          <Flag record={{ countryCode, country, cityName }} />
+          <BasicInfo record={{ countryCode, country, cityName }} />
         </div>
 
         <div className={styles.centerFormContainer}>

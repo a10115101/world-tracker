@@ -45,9 +45,9 @@ function MapRecordList() {
     [statusFilter, dateFilter]
   );
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <h2>Loading...</h2>;
 
-  if (loadingError) return <p>{loadingError}</p>;
+  if (loadingError) return <h2>{loadingError}</h2>;
 
   return (
     <div className={styles.container}>

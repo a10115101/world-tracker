@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import Flag from "./form/Flag";
+import BasicInfo from "./form/BasicInfo";
 import Status from "./form/Status";
 import Rating from "./form/Rating";
 import Desciption from "./form/Desciption";
@@ -62,15 +62,15 @@ function MapRecord() {
     [id]
   );
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <h2>Loading...</h2>;
 
-  if (loadingError) return <p>{loadingError}</p>;
+  if (loadingError) return <h2>{loadingError}</h2>;
 
   return (
     <div className={styles.container}>
       <form className={styles.formContainer}>
         <div className={styles.topFormContainer}>
-          <Flag record={record} />
+          <BasicInfo record={record} />
         </div>
 
         <div className={styles.centerFormContainer}>

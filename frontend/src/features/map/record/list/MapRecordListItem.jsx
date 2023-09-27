@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Flag from "react-country-flag";
 
 import { formatDate } from "src/utilities/format";
 import styles from "./MapRecordListItem.module.css";
@@ -14,11 +15,11 @@ function MapRecordListItem({ record }) {
     <li className={styles.container}>
       <Link to={`${_id}?lat=${lat}&lng=${lng}`}>
         <div className={styles.frontContainer}>
-          <img
+          <Flag
             className={styles.flag}
-            src={`https://flagcdn.com/w40/${countryCode}.png`}
-            width="40"
-            alt="flag"
+            countryCode={countryCode}
+            fallback={<span>{countryCode}</span>}
+            svg
           />
         </div>
         <div className={styles.centerContainer}>

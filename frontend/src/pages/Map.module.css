@@ -10,12 +10,20 @@
 
 .mapContainerLeft {
   position: absolute;
-  z-index: 2;
   align-self: center;
+  z-index: 2;
 }
 
 .mapContainerLeft button {
-  height: 10vh;
+  padding: 0.2rem;
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 7.5vh;
+}
+
+.mapContainerLeft button:hover {
+  border: 2px solid black;
 }
 
 .mapContainerCenter {

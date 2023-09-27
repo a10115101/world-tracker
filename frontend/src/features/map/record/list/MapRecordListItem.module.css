@@ -27,15 +27,17 @@
   width: 12.5%;
 }
 
-.frontContainer img {
-  border: 1.5px black solid;
+.flag {
+  border: 1.25px black solid;
   border-radius: 2.5px;
+  min-width: 48px;
+  min-height: 36px;
 }
 
 .centerContainer {
-  padding-left: 0.5rem;
+  padding-left: 0.65rem;
   width: 52.5%;
-  border-right: 1px solid gray;
+  border-right: 2px solid gray;
 }
 
 .backContainer {

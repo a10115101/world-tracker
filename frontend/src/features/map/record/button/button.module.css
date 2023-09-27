@@ -15,7 +15,7 @@
 }
 
 .btn:hover {
-  border: 2.4px solid black;
+  border: 2.2px solid black;
   border-radius: 5px;
 }
 
@@ -50,6 +50,6 @@
 }
 
 .smallBtn:hover {
-  border: 2px solid black;
+  border: 1.7px solid black;
   border-radius: 5px;
 }
