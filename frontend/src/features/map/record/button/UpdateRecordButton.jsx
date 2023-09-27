@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { updateRecord } from "src/services/apiRecord";
 import { options } from "src/utilities/snackbar";
+import styles from "./button.module.css";
 
 function UpdateRecordButton({ id, updateRecordObject, children }) {
   const navigate = useNavigate();
@@ -19,7 +20,15 @@ function UpdateRecordButton({ id, updateRecordObject, children }) {
     }
   };
 
-  return <button onClick={handleModified}>{children}</button>;
+  return (
+    <button
+      className={`${styles.btn} ${styles.success}`}
+      onClick={handleModified}
+    >
+      {children}
+      <i className="fa-solid fa-check" />
+    </button>
+  );
 }
 
 export default UpdateRecordButton;

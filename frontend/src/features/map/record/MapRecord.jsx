@@ -20,7 +20,6 @@ function MapRecord() {
   const { id } = useParams();
 
   const [mode, setMode] = useState("normal");
-
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState("");
   const [record, setRecord] = useState({});
@@ -57,11 +56,9 @@ function MapRecord() {
           setIsLoading(false);
         }
       }
-
       getRecordData();
       setMode("normal");
     },
-
     [id]
   );
 
@@ -84,10 +81,16 @@ function MapRecord() {
             setStatus={setCurrentStatus}
           />
 
-          <div className={styles.date}>
-            <label htmlFor="date">Date: </label>
-            {mode === "normal" && <p>{formatDate(record.date || null)}</p>}
-            {mode === "update" && (
+          {mode === "normal" && (
+            <div className={styles.date}>
+              <h3 htmlFor="date">Date: </h3>
+              <p>{formatDate(record.date || null)}</p>
+            </div>
+          )}
+
+          {mode === "update" && (
+            <div className={styles.date}>
+              <label htmlFor="date">Date: </label>
               <DatePicker
                 id="date"
                 onChange={(date) => setCurrentDate(date)}
@@ -96,8 +99,8 @@ function MapRecord() {
                 minDate={currentStatus === "planning" && new Date()}
                 dateFormat="MMM dd, yyyy"
               />
-            )}
-          </div>
+            </div>
+          )}
 
           <Rating
             mode={mode}

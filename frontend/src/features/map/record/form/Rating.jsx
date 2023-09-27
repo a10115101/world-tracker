@@ -5,7 +5,7 @@ function Rating({ mode, record, rating, setRating, currentStatus }) {
     <>
       {mode === "normal" && record.status === "visited" && (
         <div className={styles.rating}>
-          <label htmlFor="rating">Rating: </label>
+          <h3 htmlFor="rating">Rating: </h3>
           <p>{record.rating}</p>
         </div>
       )}

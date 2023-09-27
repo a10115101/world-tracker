@@ -1,16 +1,21 @@
+import styles from "./form.module.css";
+
 function Flag({ record }) {
   return (
-    <>
+    <div className={styles.flag}>
       <img
-        src={`https://flagcdn.com/w80/${record.countryCode}.png`}
+        src={
+          record.countryCode &&
+          `https://flagcdn.com/w80/${record.countryCode}.png`
+        }
         width="80"
         alt="flag"
       />
       <div>
-        <h2>Country: {record.country}</h2>
-        <h3>City: {record.cityName}</h3>
+        <h2>{record.country}</h2>
+        <p>({record.cityName})</p>
       </div>
-    </>
+    </div>
   );
 }
 

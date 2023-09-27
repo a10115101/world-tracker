@@ -14,3 +14,7 @@ export const formatLanguage = (language) => {
       return "English";
   }
 };
+
+export const formatFirstCharUpperCase = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};

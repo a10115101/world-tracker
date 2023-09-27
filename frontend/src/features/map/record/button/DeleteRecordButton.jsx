@@ -3,6 +3,7 @@ import { closeSnackbar, enqueueSnackbar } from "notistack";
 
 import { options } from "src/utilities/snackbar";
 import { deleteRecord } from "src/services/apiRecord";
+import styles from "./button.module.css";
 
 function DeleteRecordButton({ id, children }) {
   const navigate = useNavigate();
@@ -13,14 +14,27 @@ function DeleteRecordButton({ id, children }) {
       ...options("warning"),
       action: (key) => (
         <div>
-          <button onClick={handleDelete}>Yes</button>
-          <button onClick={() => closeSnackbar(key)}>No</button>
+          <button
+            className={`${styles.smallBtn} ${styles.success}`}
+            onClick={() => {
+              handleDelete(e, id);
+              closeSnackbar(key);
+            }}
+          >
+            Yes
+          </button>
+          <button
+            className={`${styles.smallBtn} ${styles.danger}`}
+            onClick={() => closeSnackbar(key)}
+          >
+            No
+          </button>
         </div>
       ),
     });
   };
 
-  const handleDelete = async (e) => {
+  const handleDelete = async (e, id) => {
     try {
       e.preventDefault();
       await deleteRecord(id);
@@ -32,7 +46,15 @@ function DeleteRecordButton({ id, children }) {
     }
   };
 
-  return <button onClick={handleDeleteConfirm}>{children}</button>;
+  return (
+    <button
+      className={`${styles.btn} ${styles.danger}`}
+      onClick={handleDeleteConfirm}
+    >
+      {children}
+      <i className="fa-regular fa-trash-can" />
+    </button>
+  );
 }
 
 export default DeleteRecordButton;

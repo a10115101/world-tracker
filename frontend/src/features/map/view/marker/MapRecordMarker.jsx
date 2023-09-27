@@ -1,6 +1,7 @@
 import { Marker, Popup } from "react-leaflet";
 
 import { useRecords } from "src/contexts/RecordsContext";
+import { formatFirstCharUpperCase } from "src/utilities/format";
 import { LeafIcon } from "src/utilities/icon";
 import style from "./marker.module.css";
 
@@ -25,7 +26,9 @@ function MapRecordMarker() {
             <div className={style.container}>
               <div>
                 <h3>Status:</h3>
-                <p>{record.status}</p>
+                <p>
+                  {record.status && formatFirstCharUpperCase(record.status)}
+                </p>
               </div>
               <div>
                 <h3>Place:</h3>

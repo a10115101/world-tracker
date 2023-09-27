@@ -1,0 +1,55 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  border: 2px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 5vh;
+  width: 7.5vw;
+}
+
+.btn i {
+  padding-left: 0.5rem;
+}
+
+.btn:hover {
+  border: 2.4px solid black;
+  border-radius: 5px;
+}
+
+.success {
+  background-color: rgba(10, 150, 99, 0.805);
+  color: white;
+}
+
+.warning {
+  background-color: rgb(255, 149, 0);
+  color: white;
+}
+
+.danger {
+  background-color: rgba(239, 7, 7, 0.805);
+  color: white;
+}
+
+.normal {
+  background-color: rgba(128, 128, 128, 0.805);
+  color: white;
+}
+
+.smallBtn {
+  font-size: 1rem;
+  border: 1.5px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 3.25vh;
+  width: 3.25vw;
+  margin-left: 0.5rem;
+}
+
+.smallBtn:hover {
+  border: 2px solid black;
+  border-radius: 5px;
+}

@@ -1,51 +1,55 @@
 .container {
+  height: 100%;
   padding: 1rem;
 }
 
 .formContainer {
-  border: 2px solid pink;
+  border: 2px solid gray;
+  background-color: white;
   border-radius: 5px;
-  padding: 1rem;
+  height: 67.5vh;
+}
+
+.formContainer h3 {
+  font-weight: 700;
+  font-size: 1.25rem;
 }
 
 .formContainer label {
   font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.formContainer p {
+  font-weight: 400;
   font-size: 1.15rem;
 }
 
 .topFormContainer {
   display: flex;
   align-items: center;
-  border: 2px solid green;
-}
-
-.topFormContainer div {
-  margin-left: 1rem;
+  border-bottom: 2px solid gray;
+  padding: 0rem 1rem;
+  height: 15%;
 }
 
 .centerFormContainer {
-  border: 2px solid red;
-  height: 42.5vh;
-  margin: 0.5rem 0rem;
+  border-bottom: 2px solid gray;
+  padding: 0.5rem 1rem;
+  height: 72.5%;
+}
+
+.bottomFormContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0rem 1rem;
+  height: 12.5%;
 }
 
 .date {
   height: 22%;
   width: 50%;
-}
-
-.bottomFormContainer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border: 2px solid blue;
-  height: 8vh;
-  padding: 0rem 0.75rem;
-}
-
-.bottomFormContainer button {
-  height: 5vh;
-  width: 5vw;
 }
 
 .datePicker div {

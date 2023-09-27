@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -8,16 +7,14 @@ import Status from "./form/Status";
 import Rating from "./form/Rating";
 import Desciption from "./form/Desciption";
 import AddRecordButton from "./button/AddRecordButton";
+import CancelButton from "./button/CancelButton";
 
 import { useMapPosition } from "src/contexts/MapPositionContext";
-import { useRecordForm } from "src/contexts/RecordFormContext";
 import { getGeocoding } from "src/services/apiGeocoding";
-import styles from "./MapRecordForm.module.css";
+import styles from "./MapRecord.module.css";
 
 function MapRecordForm() {
-  const navigate = useNavigate();
   const { mapPosition } = useMapPosition();
-  const { setIsFormOpened } = useRecordForm();
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [continent, setContinent] = useState("");
@@ -133,16 +130,8 @@ function MapRecordForm() {
         </div>
 
         <div className={styles.bottomFormContainer}>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(-1);
-              setIsFormOpened(false);
-            }}
-          >
-            Cancel
-          </button>
-          <AddRecordButton recordObject={recordObject} />
+          <CancelButton>Back</CancelButton>
+          <AddRecordButton recordObject={recordObject}>Add</AddRecordButton>
         </div>
       </form>
     </div>
