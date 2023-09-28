@@ -1,0 +1,19 @@
+.container {
+  height: 100%;
+  padding: 2rem;
+}
+
+.container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 2px solid gray;
+  border-radius: 5px;
+  height: 15%;
+  width: 50%;
+}
+
+.container h1 {
+  margin-right: 2rem;
+}

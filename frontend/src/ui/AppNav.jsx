@@ -7,14 +7,14 @@ import { options } from "../utilities/snackbar";
 import styles from "./AppNav.module.css";
 
 function AppNav() {
-  const { currentUser, setCurrentUser } = useAuth();
   const navigate = useNavigate();
+  const { currentUser, setCurrentUser } = useAuth();
 
   const handleClick = async () => {
     try {
-      await logout();
       localStorage.removeItem("user");
       setCurrentUser(null);
+      await logout();
       navigate("/");
       enqueueSnackbar("Success Logout", options("success"));
     } catch (err) {

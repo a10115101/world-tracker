@@ -1,7 +1,13 @@
+import CancelButton from "../features/map/record/button/CancelButton";
+import styles from "./PageNotFound.module.css";
+
 function PageNotFound() {
   return (
-    <div>
-      <h1>404 page not found</h1>
+    <div className={styles.container}>
+      <div>
+        <h1>Sorry, 404 page not found!</h1>
+        <CancelButton>Back</CancelButton>
+      </div>
     </div>
   );
 }

@@ -5,10 +5,11 @@ import { enqueueSnackbar } from "notistack";
 import { google } from "../services/apiAuth";
 import { useAuth } from "../contexts/AuthContext";
 import { options } from "../utilities/snackbar";
+import styles from "./Redirect.module.css";
 
 function Redirect() {
-  const { setCurrentUser } = useAuth();
   const navigate = useNavigate();
+  const { setCurrentUser } = useAuth();
 
   useEffect(function () {
     async function getData() {
@@ -19,17 +20,19 @@ function Redirect() {
         enqueueSnackbar("Success Login", options("success"));
         navigate("/map");
       } catch (err) {
-        console.log(err);
         const errorMessage = err.response.data.message;
         enqueueSnackbar(errorMessage, options("error"));
         navigate("/");
       }
     }
-
     getData();
   }, []);
 
-  return <div>Redircting...</div>;
+  return (
+    <div className={styles.container}>
+      <h1>Redircting...</h1>
+    </div>
+  );
 }
 
 export default Redirect;

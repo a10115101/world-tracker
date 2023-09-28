@@ -1,18 +1,15 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../contexts/AuthContext";
 
 function ProtectedRoute({ children }) {
-  const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
-  useEffect(
-    function () {
-      if (!currentUser) navigate("/");
-    },
-    [currentUser, navigate]
-  );
+  useEffect(() => {
+    if (!currentUser) navigate("/");
+  }, [currentUser]);
 
   return currentUser ? children : null;
 }
