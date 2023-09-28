@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import AllFriendsList from "./list/AllFriendsList";
 import PendingFriendsList from "./list/PendingFriendsList";
 import SearchFriendsList from "./list/SearchFriendsList";
-
 import { useFriends } from "src/contexts/FriendsContext";
 import { getAllUsers } from "src/services/apiUser";
 import { getFriends } from "src/services/apiFriend";
@@ -22,7 +21,6 @@ function ProfileFriends() {
   const [relationship, setRelationship] = useState([]);
   const [friends, setFriends] = useState([]);
   const [pending, setPending] = useState([]);
-
   const [mode, setMode] = useState("all");
 
   const handleSubmit = async (e) => {
@@ -73,22 +71,19 @@ function ProfileFriends() {
       <div className={styles.topContainer}>
         <div className={styles.topContainerLeft}>
           <button
-            className={
-              mode === "all" ? `${styles.btnFocus}` : `${styles.btnNormal}`
-            }
+            className={mode === "all" ? `${styles.btnFocus}` : ""}
             onClick={() => setMode("all")}
           >
             All
           </button>
           <button
-            className={
-              mode === "pending" ? `${styles.btnFocus}` : `${styles.btnNormal}`
-            }
+            className={mode === "pending" ? `${styles.btnFocus}` : ""}
             onClick={() => setMode("pending")}
           >
             Pending {pending.length > 0 && <span>+{pending.length}</span>}
           </button>
         </div>
+
         <div className={styles.topContainerRight}>
           <form onSubmit={handleSubmit}>
             <button>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 import { useAuth } from "src/contexts/AuthContext";
 import { getUser } from "src/services/apiAuth";
+import { backendPort } from "src/utilities/port";
 import styles from "./ProfileSidebar.module.css";
 
 function ProfileSidebar() {
@@ -13,11 +14,13 @@ function ProfileSidebar() {
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <img
-          src={`http://localhost:3000/public/users/${
-            currentUser.user === undefined
-              ? userInfo.photo
-              : currentUser.user.photo
-          }`}
+          src={backendPort(
+            `public/users/${
+              currentUser.user === undefined
+                ? userInfo.photo
+                : currentUser.user.photo
+            }`
+          )}
           alt="pic"
         />
         <p>{userInfo.username && userInfo.username}</p>

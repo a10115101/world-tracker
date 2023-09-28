@@ -6,7 +6,10 @@ const frinedSchema = new mongoose.Schema(
     recipient: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     status: {
       type: Number,
-      enums: [0, 1, 2, 3],
+      enums: {
+        values: [0, 1, 2, 3],
+        message: "Friendship only can be 4 status",
+      },
     },
   },
   { timestamps: true }

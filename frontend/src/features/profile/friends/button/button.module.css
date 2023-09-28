@@ -1,0 +1,46 @@
+.btn {
+  margin-left: 1rem;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid gray;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border: 2.5px solid black;
+}
+
+.btn i {
+  margin-left: 0.5rem;
+}
+
+.success {
+  background-color: rgba(10, 150, 99, 0.805);
+  color: white;
+}
+
+.warning {
+  background-color: rgb(255, 149, 0);
+  color: white;
+}
+
+.danger {
+  background-color: rgba(239, 7, 7, 0.805);
+  color: white;
+}
+
+.smallBtn {
+  font-size: 1rem;
+  border: 1.5px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 3.25vh;
+  width: 3.25vw;
+  margin-left: 0.5rem;
+}
+
+.smallBtn:hover {
+  border: 1.7px solid black;
+  border-radius: 5px;
+}

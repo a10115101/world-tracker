@@ -10,6 +10,11 @@
   margin: 0.75rem 0rem;
 }
 
+.container:hover {
+  background-color: rgba(250, 250, 210, 0.715);
+  /* border: 2.5px solid black; */
+}
+
 .leftContainer {
   width: 75%;
 }
@@ -37,13 +42,4 @@
   display: flex;
   width: 25%;
   justify-content: center;
-}
-
-.rightContainer button {
-  margin-left: 1rem;
-  padding: 0.4rem 0.8rem;
-  font-size: 1.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100px;
 }

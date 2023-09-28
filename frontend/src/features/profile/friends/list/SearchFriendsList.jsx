@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import AddFriendButton from "../button/AddFriendButton";
 import { getUser } from "src/services/apiAuth";
+import { backendPort, frontendPort } from "src/utilities/port";
+import { formatFriendship } from "src/utilities/format";
 import styles from "./list.module.css";
 
 function SearchFriendsList({ searchResults, relationship }) {
@@ -27,20 +29,23 @@ function SearchFriendsList({ searchResults, relationship }) {
         matchResults.map((el) => (
           <div className={styles.container} key={el._id}>
             <div className={styles.leftContainer}>
-              <Link to={`http://localhost:5173/profile/user/${el._id}`}>
+              <Link to={frontendPort(`profile/user/${el._id}`)}>
                 <img
-                  src={`http://localhost:3000/public/users/${el.photo}`}
+                  src={backendPort(`public/users/${el.photo}`)}
                   alt="photo"
-                  width="75"
                 />
                 <h2>Name: {el.username}</h2>
-                <h2>Status: {el.status}</h2>
+                <h2>
+                  Status:{" "}
+                  {userInfo._id !== el._id
+                    ? formatFriendship(el.status)
+                    : "None"}
+                </h2>
               </Link>
             </div>
-
             <div className={styles.rightContainer}>
               {userInfo._id !== el._id && el.status === 0 && (
-                <AddFriendButton user={el} />
+                <AddFriendButton user={el}>Add</AddFriendButton>
               )}
             </div>
           </div>
