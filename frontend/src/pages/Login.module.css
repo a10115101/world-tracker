@@ -3,31 +3,33 @@
   flex-direction: column;
   justify-content: space-between;
   align-self: center;
-  border: #444444 solid 3px;
+  border: gray solid 3px;
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: white;
   height: 80%;
   width: 35%;
-  padding: 1.25rem;
+  padding: 1.25rem 2rem;
 }
 
 .topContainer {
   display: flex;
   flex-direction: column;
+  height: 20%;
 }
 
 .topContainer div {
   display: flex;
+  align-items: center;
 }
 
 .centerContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  border-top: 0.75px solid #000;
-  border-bottom: 0.75px solid #000;
+  justify-content: space-between;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
   font-size: 1.25rem;
-  height: 62.5%;
+  height: 65%;
 }
 
 .centerContainer div {
@@ -35,26 +37,41 @@
 }
 
 .centerContainer button {
-  padding: 0.8rem 1.6rem;
-  font-size: 1rem;
-  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.15rem;
   border-radius: 5px;
+  border: 1.75px solid gray;
   cursor: pointer;
+}
+
+.centerContainer button:hover {
+  border: 2px solid black;
+  color: white;
+  background-color: gray;
 }
 
 .bottomContainer {
   display: flex;
+  align-items: center;
+  height: 15%;
 }
 
 .container a:link,
 .container a:visited {
   color: #05aae1;
   text-decoration: none;
+  border-radius: 5px;
   font-size: 1.25rem;
+  padding: 0.25rem;
   font-weight: 600;
-  margin-left: 1rem;
+  margin-left: 0.25rem;
   display: flex;
   align-items: center;
+}
+
+.container a:hover {
+  color: white;
+  background-color: #05aae1bc;
 }
 
 .container i {
@@ -64,8 +81,5 @@
 .container img {
   height: 30px;
   width: 30px;
-}
-
-.container span {
-  padding-left: 1rem;
+  margin-left: 1rem;
 }

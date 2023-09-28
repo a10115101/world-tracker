@@ -85,13 +85,11 @@ function Singup() {
 
       <div className={styles.bottomContainer}>
         <h2>Or with google?</h2>
-        <Link onClick={hanldeClick}>
-          <img
-            src="https://img.icons8.com/color/30/google-logo.png"
-            alt="google-logo"
-          />
-          <span>Google Account</span>
-        </Link>
+        <img
+          src="https://img.icons8.com/color/30/google-logo.png"
+          alt="google-logo"
+        />
+        <Link onClick={hanldeClick}>Google Account</Link>
       </div>
     </div>
   );

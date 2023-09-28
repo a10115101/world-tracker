@@ -32,29 +32,27 @@ function Homepage() {
         navigate("/");
       }
     }
-
     checkLoginState();
   }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
-        <img src="/logo.png" alt="logo" style={{ maxWidth: "375px" }} />
-        <h1>Every wonderful journey is memorable!</h1>
-        <p>
-          We can record the visited places on the map <br /> Create a unique
-          mark for you on the map
-          <br /> Share it with your friends
-        </p>
-        <Link to="/login">Start</Link>
+        <div className={styles.leftTopContainer}>
+          <img src="/logo.png" alt="logo" />
+        </div>
+        <div className={styles.leftBottomContainer}>
+          <h1>Every wonderful journey is memorable!</h1>
+          <p>
+            You can record the visited travel or you are planning on the map.
+            <br /> Start to create a variety of markers for you.
+            <br /> And share it with your friends!
+          </p>
+          <Link to="/login">Start</Link>
+        </div>
       </div>
-
       <div className={styles.rightContainer}>
-        <img
-          src="/background.jpg"
-          alt="background"
-          style={{ maxWidth: "800px", borderRadius: "5px" }}
-        />
+        <img src="/background.jpg" alt="background" />
       </div>
     </div>
   );
