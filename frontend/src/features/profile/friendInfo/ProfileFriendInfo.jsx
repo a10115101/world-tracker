@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import BasicStatis from "../statis/chart/BasicStatis";
 import DoughnutChart from "../statis/chart/DoughnutChart";
 import MilestoneList from "../statis/chart/MilestoneList";
-
 import { getCurrentUser } from "src/services/apiAuth";
 import { getUser } from "src/services/apiUser";
 import { backendPort } from "src/utilities/port";
@@ -30,7 +29,6 @@ function ProfileFriendInfo() {
 
         setIsLoadingData(true);
         setLoadingError("");
-
         const data = await getUser(lookupUserID);
         setUserInfo(data);
       } catch (err) {

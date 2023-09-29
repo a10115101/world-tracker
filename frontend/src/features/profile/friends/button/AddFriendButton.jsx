@@ -33,7 +33,8 @@ function AddFriendButton({ user, children }) {
 
   return (
     <button className={`${styles.btn} ${styles.warning}`} onClick={handleClick}>
-      {children} <i className="fa-solid fa-plus" />
+      {children}
+      <i className="fa-solid fa-plus" />
     </button>
   );
 }

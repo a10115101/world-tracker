@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import AllFriendsList from "./list/AllFriendsList";
 import PendingFriendsList from "./list/PendingFriendsList";
 import SearchFriendsList from "./list/SearchFriendsList";
+import SwitchModeButtonSet from "./button/SwitchModeButtonSet";
+import ProfileFriendsSearch from "./search/ProfileFriendsSearch";
 import { useFriends } from "src/contexts/FriendsContext";
-import { getAllUsers } from "src/services/apiUser";
 import { getFriends } from "src/services/apiFriend";
 import styles from "./ProfileFriends.module.css";
 
@@ -13,7 +14,6 @@ function ProfileFriends() {
 
   const [isSearching, setIsSearching] = useState(false);
   const [searchingError, setSearchingError] = useState("");
-  const [searchedText, setSearchedText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -22,24 +22,6 @@ function ProfileFriends() {
   const [friends, setFriends] = useState([]);
   const [pending, setPending] = useState([]);
   const [mode, setMode] = useState("all");
-
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-
-      if (!searchedText) return;
-
-      setMode("search");
-      setIsSearching(true);
-      setSearchingError("");
-      const results = await getAllUsers(searchedText);
-      setSearchResults(results);
-    } catch (err) {
-      setSearchingError("Searching Error");
-    } finally {
-      setIsSearching(false);
-    }
-  };
 
   useEffect(
     function () {
@@ -66,67 +48,48 @@ function ProfileFriends() {
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <div className={styles.topContainerLeft}>
-          <button
-            className={mode === "all" ? `${styles.btnFocus}` : ""}
-            onClick={() => setMode("all")}
-          >
-            All ({friends.length})
-          </button>
-          <button
-            className={mode === "pending" ? `${styles.btnFocus}` : ""}
-            onClick={() => setMode("pending")}
-          >
-            Pending {pending.length > 0 && <span>+{pending.length}</span>}
-          </button>
+          <SwitchModeButtonSet
+            mode={mode}
+            setMode={setMode}
+            friends={friends}
+            pending={pending}
+          />
         </div>
 
         <div className={styles.topContainerRight}>
-          <form onSubmit={handleSubmit}>
-            <button>
-              <i className="fa-solid fa-magnifying-glass" />
-            </button>
-            <input
-              type="text"
-              placeholder="Search for friend"
-              value={searchedText}
-              onChange={(e) => setSearchedText(e.target.value)}
-            />
-          </form>
+          <ProfileFriendsSearch
+            setMode={setMode}
+            setIsSearching={setIsSearching}
+            setSearchingError={setSearchingError}
+            setSearchResults={setSearchResults}
+          />
         </div>
       </div>
 
       <div className={styles.bottomContainer}>
         {mode === "all" && (
-          <>
-            {isLoading && <h3>Loading...</h3>}
-            {!isLoading && !loadingError && (
-              <AllFriendsList friends={friends} />
-            )}
-            {loadingError && loadingError}
-          </>
+          <AllFriendsList
+            friends={friends}
+            isLoading={isLoading}
+            loadingError={loadingError}
+          />
         )}
 
         {mode === "pending" && (
-          <>
-            {isLoading && <h3>Loading...</h3>}
-            {!isLoading && !loadingError && (
-              <PendingFriendsList pending={pending} />
-            )}
-            {loadingError && loadingError}
-          </>
+          <PendingFriendsList
+            pending={pending}
+            isLoading={isLoading}
+            loadingError={loadingError}
+          />
         )}
 
         {mode === "search" && (
-          <>
-            {isSearching && <h3>Searching...</h3>}
-            {!isSearching && !searchingError && (
-              <SearchFriendsList
-                searchResults={searchResults}
-                relationship={relationship}
-              />
-            )}
-            {searchingError && searchingError}
-          </>
+          <SearchFriendsList
+            searchResults={searchResults}
+            relationship={relationship}
+            isSearching={isSearching}
+            searchingError={searchingError}
+          />
         )}
       </div>
     </div>

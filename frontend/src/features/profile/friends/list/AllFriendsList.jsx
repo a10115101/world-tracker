@@ -5,7 +5,11 @@ import { backendPort, frontendPort } from "src/utilities/port";
 import { formatFriendship } from "src/utilities/format";
 import styles from "./list.module.css";
 
-function AllFriendsList({ friends }) {
+function AllFriendsList({ friends, isLoading, loadingError }) {
+  if (isLoading) return <h3>Loading...</h3>;
+
+  if (loadingError) return <h3>{loadingError}</h3>;
+
   return (
     <>
       {friends.length > 0 ? (
@@ -17,8 +21,14 @@ function AllFriendsList({ friends }) {
                   src={backendPort(`public/users/${el.recipient.photo}`)}
                   alt="photo"
                 />
-                <h2>Name: {el.recipient.username}</h2>
-                <h2>Status: {formatFriendship(el.status)}</h2>
+                <div>
+                  <h4>Name: </h4>
+                  <h2>{el.recipient.username}</h2>
+                </div>
+                <div>
+                  <h4>Status: </h4>
+                  <h2>{formatFriendship(el.status)}</h2>
+                </div>
               </Link>
             </div>
             <div className={styles.rightContainer}>

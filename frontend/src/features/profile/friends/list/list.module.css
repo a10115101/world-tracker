@@ -25,10 +25,19 @@
   border: 2px black solid;
 }
 
+.leftContainer div {
+  display: flex;
+  align-items: center;
+}
+
+.leftContainer h2 {
+  margin-left: 0.5rem;
+}
+
 .leftContainer a:link,
 .leftContainer a:visited {
   display: grid;
-  grid-template-columns: 20% 40% 40%;
+  grid-template-columns: 15% 35% 50%;
   align-items: center;
   text-decoration: none;
   color: black;

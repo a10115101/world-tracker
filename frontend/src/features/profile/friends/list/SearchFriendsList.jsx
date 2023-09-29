@@ -6,7 +6,12 @@ import { backendPort, frontendPort } from "src/utilities/port";
 import { formatFriendship } from "src/utilities/format";
 import styles from "./list.module.css";
 
-function SearchFriendsList({ searchResults, relationship }) {
+function SearchFriendsList({
+  searchResults,
+  isSearching,
+  searchingError,
+  relationship,
+}) {
   const userInfo = getCurrentUser().user;
 
   const matchResults = searchResults.map((searchResult) => {
@@ -23,6 +28,10 @@ function SearchFriendsList({ searchResults, relationship }) {
     return searchResult;
   });
 
+  if (isSearching) return <h3>Searching...</h3>;
+
+  if (searchingError) return <h3>{searchingError}</h3>;
+
   return (
     <>
       {matchResults.length > 0 ? (
@@ -34,13 +43,18 @@ function SearchFriendsList({ searchResults, relationship }) {
                   src={backendPort(`public/users/${el.photo}`)}
                   alt="photo"
                 />
-                <h2>Name: {el.username}</h2>
-                <h2>
-                  Status:{" "}
-                  {userInfo._id !== el._id
-                    ? formatFriendship(el.status)
-                    : "None"}
-                </h2>
+                <div>
+                  <h4>Name: </h4>
+                  <h2>{el.username}</h2>
+                </div>
+                <div>
+                  <h4>Status: </h4>
+                  <h2>
+                    {userInfo._id !== el._id
+                      ? formatFriendship(el.status)
+                      : "None"}
+                  </h2>
+                </div>
               </Link>
             </div>
             <div className={styles.rightContainer}>

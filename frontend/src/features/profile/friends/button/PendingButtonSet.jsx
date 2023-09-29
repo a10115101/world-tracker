@@ -3,7 +3,7 @@ import { useState } from "react";
 import AcceptFriendButton from "./AcceptFriendButton";
 import CancelFriendButton from "./CancelFriendButton";
 
-function ButtonSet({ el }) {
+function PendingButtonSet({ el }) {
   const [handleMode, setHandleMode] = useState("init");
 
   return (
@@ -50,4 +50,4 @@ function ButtonSet({ el }) {
   );
 }
 
-export default ButtonSet;
+export default PendingButtonSet;

@@ -11,10 +11,6 @@
   border: 2.5px solid black;
 }
 
-.btn i {
-  margin-left: 0.5rem;
-}
-
 .success {
   background-color: rgba(10, 150, 99, 0.805);
   color: white;
@@ -43,4 +39,35 @@
 .smallBtn:hover {
   border: 1.7px solid black;
   border-radius: 5px;
+}
+
+.container button {
+  text-align: center;
+  font-size: 1.25rem;
+  border-radius: 5px;
+  height: 4.5vh;
+  width: 15%;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.container span {
+  padding: 0.2rem;
+  font-size: 1rem;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}
+
+.container button:hover {
+  border: 2.5px solid black;
+}
+
+.btnFocus {
+  border-radius: 5px;
+  background-color: #fbe68c;
+}
+
+.container i {
+  margin-left: 0.5rem;
 }
