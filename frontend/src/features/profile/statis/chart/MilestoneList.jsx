@@ -14,9 +14,7 @@ function MilestoneList({ userId }) {
       try {
         setIsLoadingListData(true);
         setListError("");
-
         const data = await getRecentlyVisited(userId);
-
         setListData(data.informaiton);
       } catch (err) {
         setListError("Loading List Data Error!");

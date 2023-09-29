@@ -1,6 +1,7 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css";
 @import "https://fonts.googleapis.com/css2?family=Arimo:wght@400;600;700&display=swap";
 @import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+@import "react-datepicker/dist/react-datepicker.css";
 
 :root {
   --color-dark0: #1a120b;

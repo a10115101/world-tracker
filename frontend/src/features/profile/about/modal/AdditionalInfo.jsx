@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 import { useAuth } from "src/contexts/AuthContext";
 import { updateUser } from "src/services/apiUser";
@@ -14,18 +13,18 @@ function AdditionInfo({ closeModal, userInfo }) {
   const navigate = useNavigate();
   const { setCurrentUser } = useAuth();
 
-  const [gender, setGender] = useState(userInfo.gender);
+  const [gender, setGender] = useState(userInfo?.gender);
   const [birthday, setBirthday] = useState(
-    userInfo.birthday ? new Date(userInfo.birthday) : ""
+    userInfo?.birthday ? new Date(userInfo?.birthday) : ""
   );
-  const [language, setLanguage] = useState(userInfo.language);
+  const [language, setLanguage] = useState(userInfo?.language);
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
 
       const updateMeObject = { gender, birthday, language };
-      const newUpadte = await updateUser(userInfo._id, updateMeObject);
+      const newUpadte = await updateUser(userInfo?._id, updateMeObject);
 
       updateLocalStorage(newUpadte);
       setCurrentUser(newUpadte);

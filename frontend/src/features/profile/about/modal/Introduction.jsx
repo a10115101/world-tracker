@@ -12,14 +12,14 @@ function Introduction({ closeModal, userInfo }) {
   const navigate = useNavigate();
   const { setCurrentUser } = useAuth();
 
-  const [introduction, setIntroduction] = useState(userInfo.introduction);
+  const [introduction, setIntroduction] = useState(userInfo?.introduction);
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
 
       const updateMeObject = { introduction };
-      const newUpadte = await updateUser(userInfo._id, updateMeObject);
+      const newUpadte = await updateUser(userInfo?._id, updateMeObject);
 
       updateLocalStorage(newUpadte);
       setCurrentUser(newUpadte);

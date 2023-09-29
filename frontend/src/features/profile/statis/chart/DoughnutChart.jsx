@@ -19,9 +19,7 @@ function DoughnutChart({ userId }) {
       try {
         setIsLoadingDoughnutData(true);
         setDoughnutError("");
-
         const data = await getStatisContinents(userId);
-
         setDoughnutData(doughnutDatasetSetting(data));
       } catch (err) {
         setDoughnutError("Loading Doughnut Data Error!");

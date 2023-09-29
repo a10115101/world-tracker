@@ -4,9 +4,9 @@ import Photo from "./modal/Photo";
 import AdditionalInfo from "./modal/AdditionalInfo";
 import Introduction from "./modal/Introduction";
 import Setting from "./modal/Setting";
-
-import { formatDate, formatLanguage } from "src/utilities/format";
 import { getCurrentUser } from "src/services/apiAuth";
+import { formatDate, formatLanguage } from "src/utilities/format";
+import { backendPort } from "src/utilities/port";
 import styles from "./ProfileAbout.module.css";
 
 function ProfileAbout() {
@@ -29,15 +29,13 @@ function ProfileAbout() {
         </div>
         <div className={styles.topBodyContainer}>
           <img
-            src={`http://localhost:3000/public/users/${userInfo.photo}`}
+            src={backendPort(`public/users/${userInfo?.photo}`)}
             alt="photo"
           />
           <div>
-            <p>User Name: {userInfo.username && userInfo.username}</p>
-            <p>Email Address: {userInfo.email && userInfo.email}</p>
-            <p>
-              Created At: {userInfo.createdAt && formatDate(userInfo.createdAt)}
-            </p>
+            <p>User Name: {userInfo?.username}</p>
+            <p>Email Address: {userInfo?.email}</p>
+            <p>Created At: {formatDate(userInfo?.createdAt)}</p>
           </div>
         </div>
       </div>
@@ -51,11 +49,9 @@ function ProfileAbout() {
           />
         </div>
         <div className={styles.bodyContainer}>
-          <p>Gender: {userInfo.gender && userInfo.gender}</p>
-          <p>Birthday: {userInfo.birthday && formatDate(userInfo.birthday)}</p>
-          <p>
-            Language: {userInfo.language && formatLanguage(userInfo.language)}
-          </p>
+          <p>Gender: {userInfo?.gender}</p>
+          <p>Birthday: {formatDate(userInfo?.birthday)}</p>
+          <p>Language: {formatLanguage(userInfo?.language)}</p>
         </div>
       </div>
 
@@ -68,7 +64,7 @@ function ProfileAbout() {
           />
         </div>
         <div className={styles.bodyContainer}>
-          <p>{userInfo.introduction && userInfo.introduction}</p>
+          <p>{userInfo?.introduction}</p>
         </div>
       </div>
 
@@ -81,11 +77,7 @@ function ProfileAbout() {
           />
         </div>
         <div className={styles.bodyContainer}>
-          <p>
-            {userInfo.isPublic && userInfo.isPublic
-              ? "Now is public!"
-              : "Only you can see!"}
-          </p>
+          <p>{userInfo?.isPublic ? "Now is public!" : "Only you can see!"}</p>
         </div>
       </div>
 

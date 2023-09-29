@@ -15,9 +15,7 @@ function BasicStatis({ userId }) {
       try {
         setIsLoadingStatisData(true);
         setStatisError("");
-
         const data = await getStatisCountries(userId);
-
         setNumVisitedCountries(data.visitedCountries);
         setNumPlanningCountries(data.planningCountries);
       } catch (err) {
