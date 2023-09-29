@@ -6,7 +6,7 @@ import Introduction from "./modal/Introduction";
 import Setting from "./modal/Setting";
 
 import { formatDate, formatLanguage } from "src/utilities/format";
-import { getUser } from "src/services/apiAuth";
+import { getCurrentUser } from "src/services/apiAuth";
 import styles from "./ProfileAbout.module.css";
 
 function ProfileAbout() {
@@ -15,7 +15,7 @@ function ProfileAbout() {
   const [isIntroduction, setIsIntroduction] = useState(false);
   const [isSetting, setIsSetting] = useState(false);
 
-  const userInfo = getUser().user;
+  const userInfo = getCurrentUser().user;
 
   return (
     <div className={styles.container}>

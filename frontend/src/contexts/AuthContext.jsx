@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from "react";
 
-import { getUser } from "../services/apiAuth";
+import { getCurrentUser } from "../services/apiAuth";
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(getUser());
+  const [currentUser, setCurrentUser] = useState(getCurrentUser());
 
   return (
     <AuthContext.Provider value={{ currentUser, setCurrentUser }}>

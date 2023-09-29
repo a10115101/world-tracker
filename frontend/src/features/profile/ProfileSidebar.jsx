@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
 import { useAuth } from "src/contexts/AuthContext";
-import { getUser } from "src/services/apiAuth";
+import { getCurrentUser } from "src/services/apiAuth";
 import { backendPort } from "src/utilities/port";
 import styles from "./ProfileSidebar.module.css";
 
 function ProfileSidebar() {
   const { currentUser } = useAuth();
 
-  const userInfo = getUser().user;
+  const userInfo = getCurrentUser().user;
 
   return (
     <div className={styles.container}>

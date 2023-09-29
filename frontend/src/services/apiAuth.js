@@ -18,6 +18,6 @@ export async function google() {
   return await axios.get(`${API_URL}/getGoogleUser`, { withCredentials: true });
 }
 
-export function getUser() {
+export function getCurrentUser() {
   return JSON.parse(localStorage.getItem("user"));
 }

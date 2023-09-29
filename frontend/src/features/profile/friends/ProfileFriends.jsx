@@ -32,7 +32,6 @@ function ProfileFriends() {
       setMode("search");
       setIsSearching(true);
       setSearchingError("");
-
       const results = await getAllUsers(searchedText);
       setSearchResults(results);
     } catch (err) {
@@ -48,10 +47,8 @@ function ProfileFriends() {
         try {
           setIsLoading(true);
           setLoadingError("");
-
           const data = await getFriends();
           setRelationship(data);
-
           setFriends(data.filter((el) => el.status === 1 || el.status === 3));
           setPending(data.filter((el) => el.status === 2));
         } catch (err) {
@@ -60,7 +57,6 @@ function ProfileFriends() {
           setIsLoading(false);
         }
       }
-
       getRelationship();
     },
     [update]
@@ -74,7 +70,7 @@ function ProfileFriends() {
             className={mode === "all" ? `${styles.btnFocus}` : ""}
             onClick={() => setMode("all")}
           >
-            All
+            All ({friends.length})
           </button>
           <button
             className={mode === "pending" ? `${styles.btnFocus}` : ""}

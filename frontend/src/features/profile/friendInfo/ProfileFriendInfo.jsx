@@ -1,31 +1,37 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import BasicStatis from "../statis/chart/BasicStatis";
 import DoughnutChart from "../statis/chart/DoughnutChart";
 import MilestoneList from "../statis/chart/MilestoneList";
 
+import { getCurrentUser } from "src/services/apiAuth";
 import { getUser } from "src/services/apiUser";
+import { backendPort } from "src/utilities/port";
 import { formatDate, formatLanguage } from "src/utilities/format";
 import styles from "./ProfileFriendInfo.module.css";
 
 function ProfileFriendInfo() {
+  const navigate = useNavigate();
   const { id } = useParams();
 
+  const [mode, setMode] = useState("profile");
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [loadingError, setLoadingError] = useState("");
   const [userInfo, setUserInfo] = useState({});
 
-  const [mode, setMode] = useState("profile");
+  const currentUserID = getCurrentUser().user._id;
+  const lookupUserID = id;
 
   useEffect(function () {
     async function getUserData() {
       try {
+        if (currentUserID === lookupUserID) return navigate("/profile");
+
         setIsLoadingData(true);
         setLoadingError("");
 
-        const data = await getUser(id);
-
+        const data = await getUser(lookupUserID);
         setUserInfo(data);
       } catch (err) {
         setLoadingError("Loading Data Error!");
@@ -47,15 +53,15 @@ function ProfileFriendInfo() {
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <img
-          src={`http://localhost:3000/public/users/${userInfo.photo}`}
+          src={backendPort(`public/users/${userInfo?.photo}`)}
           alt="pic"
           width="80"
         />
         <div>
-          <h4>User Name: {userInfo.username && userInfo.username}</h4>
-          <h4>Email Address: {userInfo.email && userInfo.email}</h4>
+          <h4>User Name: {userInfo?.username}</h4>
+          <h4>Email Address: {userInfo?.email}</h4>
           <h4>
-            Created At: {userInfo.createdAt && formatDate(userInfo.createdAt)}
+            Created At: {userInfo?.createdAt && formatDate(userInfo?.createdAt)}
           </h4>
         </div>
       </div>
@@ -83,21 +89,15 @@ function ProfileFriendInfo() {
                 <div className={styles.profileField1Container}>
                   <h2>Additional Information</h2>
                   <div>
-                    <h4>Gender: {userInfo.gender && userInfo.gender}</h4>
-                    <h4>
-                      Birthday:{" "}
-                      {userInfo.birthday && formatDate(userInfo.birthday)}
-                    </h4>
-                    <h4>
-                      Language:{" "}
-                      {userInfo.language && formatLanguage(userInfo.language)}
-                    </h4>
+                    <h4>Gender: {userInfo?.gender}</h4>
+                    <h4>Birthday: {formatDate(userInfo?.birthday)}</h4>
+                    <h4>Language: {formatLanguage(userInfo?.language)}</h4>
                   </div>
                 </div>
                 <div className={styles.profileField2Container}>
                   <h2>Introduction</h2>
                   <div>
-                    <p>{userInfo.introduction && userInfo.introduction}</p>
+                    <p>{userInfo?.introduction}</p>
                   </div>
                 </div>
               </div>
@@ -108,16 +108,16 @@ function ProfileFriendInfo() {
             <>
               <div className={styles.statisBasicContainer}>
                 <h2>Basic Statis</h2>
-                <BasicStatis userId={id} />
+                <BasicStatis userId={lookupUserID} />
               </div>
               <div className={styles.statisFigureContainer}>
                 <div className={styles.statisDoughnutContainer}>
                   <h2>Number Of Visits By Continents</h2>
-                  <DoughnutChart userId={id} />
+                  <DoughnutChart userId={lookupUserID} />
                 </div>
                 <div className={styles.statisListContainer}>
                   <h2>Latest Visited</h2>
-                  <MilestoneList userId={id} />
+                  <MilestoneList userId={lookupUserID} />
                 </div>
               </div>
             </>

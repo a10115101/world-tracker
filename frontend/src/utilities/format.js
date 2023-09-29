@@ -1,4 +1,6 @@
 export const formatDate = (date) => {
+  if (!date) return;
+
   return new Intl.DateTimeFormat("en", {
     day: "numeric",
     month: "short",
@@ -7,6 +9,8 @@ export const formatDate = (date) => {
 };
 
 export const formatLanguage = (language) => {
+  if (!language) return;
+
   switch (language) {
     case "zh":
       return "Chinese";
@@ -16,6 +20,8 @@ export const formatLanguage = (language) => {
 };
 
 export const formatFriendship = (status) => {
+  if (status === undefined || status === null) return;
+
   switch (status) {
     case 0:
       return "Not Friend";
@@ -29,5 +35,7 @@ export const formatFriendship = (status) => {
 };
 
 export const formatFirstCharUpperCase = (str) => {
+  if (!str) return;
+
   return str.charAt(0).toUpperCase() + str.slice(1);
 };

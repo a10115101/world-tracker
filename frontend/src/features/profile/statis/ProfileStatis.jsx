@@ -2,11 +2,11 @@ import BasicStatis from "./chart/BasicStatis";
 import DoughnutChart from "./chart/DoughnutChart";
 import MilestoneList from "./chart/MilestoneList";
 
-import { getUser } from "src/services/apiAuth";
+import { getCurrentUser } from "src/services/apiAuth";
 import styles from "./ProfileStatis.module.css";
 
 function ProfileDetails() {
-  const userInfo = getUser().user;
+  const userInfo = getCurrentUser().user;
 
   return (
     <div className={styles.container}>

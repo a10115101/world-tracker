@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 
 import AddFriendButton from "../button/AddFriendButton";
-import { getUser } from "src/services/apiAuth";
+import { getCurrentUser } from "src/services/apiAuth";
 import { backendPort, frontendPort } from "src/utilities/port";
 import { formatFriendship } from "src/utilities/format";
 import styles from "./list.module.css";
 
 function SearchFriendsList({ searchResults, relationship }) {
-  const userInfo = getUser().user;
+  const userInfo = getCurrentUser().user;
 
   const matchResults = searchResults.map((searchResult) => {
     const index = relationship.findIndex(

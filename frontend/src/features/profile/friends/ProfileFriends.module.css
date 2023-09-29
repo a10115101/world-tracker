@@ -19,6 +19,7 @@
 }
 
 .topContainerLeft button {
+  text-align: center;
   font-size: 1.25rem;
   border-radius: 5px;
   height: 4.5vh;
