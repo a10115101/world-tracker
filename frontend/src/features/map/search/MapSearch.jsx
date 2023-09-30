@@ -19,7 +19,6 @@ function MapSearch() {
 
       setIsSearching(true);
       setSearchingError("");
-
       const data = await getGeocoding(searchedText);
 
       if (data.length === 0)

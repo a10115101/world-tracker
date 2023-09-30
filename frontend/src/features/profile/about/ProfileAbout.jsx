@@ -4,7 +4,7 @@ import Photo from "./modal/Photo";
 import AdditionalInfo from "./modal/AdditionalInfo";
 import Introduction from "./modal/Introduction";
 import Setting from "./modal/Setting";
-import { getCurrentUser } from "src/services/apiAuth";
+import { getCurrentUser } from "src/utilities/localStorage";
 import { formatDate, formatLanguage } from "src/utilities/format";
 import { backendPort } from "src/utilities/port";
 import styles from "./ProfileAbout.module.css";

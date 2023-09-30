@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import BasicStatis from "../statis/chart/BasicStatis";
-import DoughnutChart from "../statis/chart/DoughnutChart";
-import MilestoneList from "../statis/chart/MilestoneList";
-import { getCurrentUser } from "src/services/apiAuth";
+import SwitchModeButtonSet from "./button/SwitchModeButtonSet";
+import Information from "./information/Information";
 import { getUser } from "src/services/apiUser";
+import { getCurrentUser } from "src/utilities/localStorage";
 import { backendPort } from "src/utilities/port";
-import { formatDate, formatLanguage } from "src/utilities/format";
+import { formatDate } from "src/utilities/format";
 import styles from "./ProfileFriendInfo.module.css";
 
 function ProfileFriendInfo() {
@@ -17,33 +16,33 @@ function ProfileFriendInfo() {
   const [mode, setMode] = useState("profile");
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [loadingError, setLoadingError] = useState("");
-  const [userInfo, setUserInfo] = useState({});
+  const [lookupUserInfo, setLookupUserInfo] = useState({});
 
   const currentUserID = getCurrentUser().user._id;
   const lookupUserID = id;
 
   useEffect(function () {
-    async function getUserData() {
+    async function getLookupUserData() {
       try {
         if (currentUserID === lookupUserID) return navigate("/profile");
 
         setIsLoadingData(true);
         setLoadingError("");
         const data = await getUser(lookupUserID);
-        setUserInfo(data);
+        setLookupUserInfo(data);
       } catch (err) {
         setLoadingError("Loading Data Error!");
       } finally {
         setIsLoadingData(false);
       }
     }
-    getUserData();
+    getLookupUserData();
   }, []);
 
   if (isLoadingData) return <h2>Loading...</h2>;
 
-  if (!userInfo.isPublic)
-    return <h2>Oops! {userInfo.username} profile is not public</h2>;
+  if (!lookupUserInfo.isPublic)
+    return <h2>Oops! {lookupUserInfo.username} profile is not public</h2>;
 
   if (loadingError) return <h2>{loadingError}</h2>;
 
@@ -51,76 +50,19 @@ function ProfileFriendInfo() {
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <img
-          src={backendPort(`public/users/${userInfo?.photo}`)}
+          src={backendPort(`public/users/${lookupUserInfo?.photo}`)}
           alt="pic"
-          width="80"
         />
         <div>
-          <h4>User Name: {userInfo?.username}</h4>
-          <h4>Email Address: {userInfo?.email}</h4>
-          <h4>
-            Created At: {userInfo?.createdAt && formatDate(userInfo?.createdAt)}
-          </h4>
+          <h4>User Name: {lookupUserInfo?.username}</h4>
+          <h4>Email Address: {lookupUserInfo?.email}</h4>
+          <h4>Created At: {formatDate(lookupUserInfo?.createdAt)}</h4>
         </div>
       </div>
 
       <div className={styles.bottomContainer}>
-        <div className={styles.bottomPart1Container}>
-          <button
-            className={mode === "profile" ? `${styles.btnFocus}` : ""}
-            onClick={() => setMode("profile")}
-          >
-            Profile
-          </button>
-          <button
-            className={mode === "statis" ? `${styles.btnFocus}` : ""}
-            onClick={() => setMode("statis")}
-          >
-            Statis
-          </button>
-        </div>
-
-        <div className={styles.bottomPart2Container}>
-          {mode === "profile" && (
-            <>
-              <div className={styles.profileContainer}>
-                <div className={styles.profileField1Container}>
-                  <h2>Additional Information</h2>
-                  <div>
-                    <h4>Gender: {userInfo?.gender}</h4>
-                    <h4>Birthday: {formatDate(userInfo?.birthday)}</h4>
-                    <h4>Language: {formatLanguage(userInfo?.language)}</h4>
-                  </div>
-                </div>
-                <div className={styles.profileField2Container}>
-                  <h2>Introduction</h2>
-                  <div>
-                    <p>{userInfo?.introduction}</p>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-
-          {mode === "statis" && (
-            <>
-              <div className={styles.statisBasicContainer}>
-                <h2>Basic Statis</h2>
-                <BasicStatis userId={lookupUserID} />
-              </div>
-              <div className={styles.statisFigureContainer}>
-                <div className={styles.statisDoughnutContainer}>
-                  <h2>Number Of Visits By Continents</h2>
-                  <DoughnutChart userId={lookupUserID} />
-                </div>
-                <div className={styles.statisListContainer}>
-                  <h2>Latest Visited</h2>
-                  <MilestoneList userId={lookupUserID} />
-                </div>
-              </div>
-            </>
-          )}
-        </div>
+        <SwitchModeButtonSet mode={mode} setMode={setMode} />
+        <Information mode={mode} lookupUserInfo={lookupUserInfo} />
       </div>
     </div>
   );

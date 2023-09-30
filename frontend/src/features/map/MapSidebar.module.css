@@ -13,65 +13,6 @@
   background-color: #cedebd;
 }
 
-.topLeftContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.topLeftContainer button {
-  font-size: 1rem;
-  padding: 0.25rem;
-  margin-left: 1rem;
-  border: 1px solid gray;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.topLeftContainer button:hover {
-  border: 1px solid black;
-}
-
-.topRightContainer {
-  position: relative;
-  z-index: 5;
-  top: -30%;
-  left: 65%;
-  width: 80%;
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 5px;
-}
-
-.topRightContainer div {
-  margin: 1rem 0.75rem;
-  border-radius: 5px;
-}
-
-.topRightContainer button {
-  width: 30%;
-  padding: 0.25rem;
-  border-radius: 5px;
-  margin-right: 0.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.topRightContainer button:hover {
-  font-weight: 700;
-}
-
-.btnFocus {
-  border-radius: 5px;
-  background-color: lemonchiffon;
-}
-
-.btnClose {
-  background-color: #ff0000d0;
-  color: white;
-}
-
 .bottomContainer {
   height: 85%;
   border: 1px solid gray;

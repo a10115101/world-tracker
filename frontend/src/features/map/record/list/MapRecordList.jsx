@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import MapRecordListItem from "./MapRecordListItem";
-
 import { useMapSearch } from "src/contexts/MapSearchContext";
 import { useRecordForm } from "src/contexts/RecordFormContext";
 import { useRecords } from "src/contexts/RecordsContext";
@@ -30,9 +29,7 @@ function MapRecordList() {
         try {
           setIsLoading(true);
           setLoadingError("");
-
           const data = await getAllRecords(statusFilter, dateFilter);
-
           setRecords(data);
         } catch (err) {
           setLoadingError("Loading Error");

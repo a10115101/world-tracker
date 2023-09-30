@@ -1,4 +1,4 @@
-import CancelButton from "../features/map/record/button/CancelButton";
+import CancelButton from "src/features/map/record/button/CancelButton";
 import styles from "./PageNotFound.module.css";
 
 function PageNotFound() {

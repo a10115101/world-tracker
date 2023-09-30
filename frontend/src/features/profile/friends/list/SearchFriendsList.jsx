@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import AddFriendButton from "../button/AddFriendButton";
-import { getCurrentUser } from "src/services/apiAuth";
+import { getCurrentUser } from "src/utilities/localStorage";
 import { backendPort, frontendPort } from "src/utilities/port";
 import { formatFriendship } from "src/utilities/format";
 import styles from "./list.module.css";

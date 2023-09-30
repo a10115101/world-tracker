@@ -25,11 +25,16 @@
 }
 
 .innerContainer button {
+  border: 2px solid grey;
   padding: 0.4rem 0.8rem;
   font-size: 1rem;
   border-radius: 5px;
   cursor: pointer;
   width: 75px;
+}
+
+.innerContainer button:hover {
+  border: 2px solid black;
 }
 
 .upload {

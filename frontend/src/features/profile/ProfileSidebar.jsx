@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { useAuth } from "src/contexts/AuthContext";
-import { getCurrentUser } from "src/services/apiAuth";
+import { getCurrentUser } from "src/utilities/localStorage";
 import { backendPort } from "src/utilities/port";
 import styles from "./ProfileSidebar.module.css";
 
@@ -23,7 +23,7 @@ function ProfileSidebar() {
           )}
           alt="pic"
         />
-        <p>{userInfo.username && userInfo.username}</p>
+        <p>{userInfo?.username}</p>
       </div>
       <div className={styles.bottomContainer}>
         <ul>

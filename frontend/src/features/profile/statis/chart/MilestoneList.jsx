@@ -37,14 +37,11 @@ function MilestoneList({ userId }) {
             <li key={data._id}>
               <div>
                 <h4>
-                  Country: {data.country} <span>({data.cityName})</span>
+                  Country: {data.country} ({data.cityName})
                 </h4>
                 <h4>Date: {formatDate(data.date)} </h4>
                 <h4>
-                  Rating: {data.rating}{" "}
-                  <span>
-                    <i className="fa-solid fa-star" />
-                  </span>
+                  Rating: {data.rating} <i className="fa-solid fa-star" />
                 </h4>
               </div>
             </li>

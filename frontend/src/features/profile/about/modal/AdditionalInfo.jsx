@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import { useAuth } from "src/contexts/AuthContext";
 import { updateUser } from "src/services/apiUser";
 import { options } from "src/utilities/snackbar";
-import { updateLocalStorage } from "src/utilities/updateLoaclStorage";
+import { updateLocalStorage } from "src/utilities/localStorage";
 import styles from "./modal.module.css";
 
 function AdditionInfo({ closeModal, userInfo }) {

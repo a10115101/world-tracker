@@ -1,0 +1,57 @@
+.topContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.topContainer button {
+  font-size: 1rem;
+  padding: 0.25rem;
+  margin-left: 1rem;
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.topContainer button:hover {
+  border: 1.5px solid black;
+}
+
+.bottomContainer {
+  position: relative;
+  z-index: 5;
+  top: -30%;
+  left: 65%;
+  width: 80%;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.bottomContainer div {
+  margin: 1rem 0.75rem;
+}
+
+.bottomContainer button {
+  border: 2px solid gray;
+  width: 30%;
+  padding: 0.25rem;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.bottomContainer button:hover {
+  border: 2.35px solid black;
+}
+
+.btnFocus {
+  background-color: #fbe68c;
+}
+
+.btnClose {
+  background-color: #ff0000d0;
+  color: white;
+}

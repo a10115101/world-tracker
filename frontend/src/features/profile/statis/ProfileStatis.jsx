@@ -1,8 +1,7 @@
 import BasicStatis from "./chart/BasicStatis";
 import DoughnutChart from "./chart/DoughnutChart";
 import MilestoneList from "./chart/MilestoneList";
-
-import { getCurrentUser } from "src/services/apiAuth";
+import { getCurrentUser } from "src/utilities/localStorage";
 import styles from "./ProfileStatis.module.css";
 
 function ProfileDetails() {

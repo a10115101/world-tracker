@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/v1/auth";
+import { backendPort } from "src/utilities/port";
+
+const API_URL = backendPort("api/v1/auth");
 
 export async function signup(username, email, password) {
   return await axios.post(`${API_URL}/signup`, { username, email, password });
@@ -16,8 +18,4 @@ export async function logout() {
 
 export async function google() {
   return await axios.get(`${API_URL}/getGoogleUser`, { withCredentials: true });
-}
-
-export function getCurrentUser() {
-  return JSON.parse(localStorage.getItem("user"));
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 import BasicInfo from "./form/BasicInfo";
 import Status from "./form/Status";
@@ -11,7 +10,6 @@ import SwitchModeButton from "./button/SwitchModeButton";
 import UpdateRecordButton from "./button/UpdateRecordButton";
 import DeleteRecordButton from "./button/DeleteRecordButton";
 import CancelButton from "./button/CancelButton";
-
 import { getRecord } from "src/services/apiRecord";
 import { formatDate } from "src/utilities/format";
 import styles from "./MapRecord.module.css";
@@ -42,10 +40,8 @@ function MapRecord() {
         try {
           setIsLoading(true);
           setLoadingError("");
-
           const data = await getRecord(id);
           setRecord(data);
-
           setCurrentDate(new Date(data.date));
           setCurrentStatus(data.status);
           setCurrentRating(data.rating);

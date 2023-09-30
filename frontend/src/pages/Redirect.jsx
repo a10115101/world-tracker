@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
-import { google } from "../services/apiAuth";
-import { useAuth } from "../contexts/AuthContext";
-import { options } from "../utilities/snackbar";
+import { useAuth } from "src/contexts/AuthContext";
+import { google } from "src/services/apiAuth";
+import { setLoacalStorage } from "src/utilities/localStorage";
+import { options } from "src/utilities/snackbar";
 import styles from "./Redirect.module.css";
 
 function Redirect() {
@@ -15,7 +16,7 @@ function Redirect() {
     async function getData() {
       try {
         const response = await google();
-        localStorage.setItem("user", JSON.stringify(response.data));
+        setLoacalStorage(response.data);
         setCurrentUser(response);
         enqueueSnackbar("Success Login", options("success"));
         navigate("/map");

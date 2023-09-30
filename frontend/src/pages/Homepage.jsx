@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
-import { logout } from "../services/apiAuth";
-import { useAuth } from "../contexts/AuthContext";
-import { options } from "../utilities/snackbar";
+import { useAuth } from "src/contexts/AuthContext";
+import { logout } from "src/services/apiAuth";
+import { options } from "src/utilities/snackbar";
 import styles from "./Homepage.module.css";
+import { clearLocalStorage } from "src/utilities/localStorage";
 
 function Homepage() {
   const navigate = useNavigate();
@@ -17,17 +18,17 @@ function Homepage() {
         if (currentUser === null) return;
 
         if (currentUser?.user?.googleID) {
-          await logout();
-          localStorage.removeItem("user");
+          clearLocalStorage();
           setCurrentUser(null);
+          await logout();
           navigate("/");
         } else {
           navigate("/map");
         }
       } catch (err) {
-        await logout();
-        localStorage.removeItem("user");
+        clearLocalStorage();
         setCurrentUser(null);
+        await logout();
         enqueueSnackbar("Unknown Error, Please Re-Login!", options("error"));
         navigate("/");
       }

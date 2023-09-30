@@ -34,9 +34,9 @@ function BasicStatis({ userId }) {
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
-        <h4>Total of Countries Visited: {numVisitedCountries.results}</h4>
+        <h4>Total of Countries Visited: {numVisitedCountries?.results}</h4>
         <h4>
-          Total of Planning to Visit Countries: {numPlanningCountries.results}
+          Total of Planning to Visit Countries: {numPlanningCountries?.results}
         </h4>
       </div>
 

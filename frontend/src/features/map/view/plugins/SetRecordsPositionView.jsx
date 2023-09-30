@@ -16,7 +16,6 @@ function SetRecordsPositionView() {
     function () {
       if (getLat && getLng) setMapPosition([getLat, getLng]);
     },
-
     [getLat, getLng]
   );
 

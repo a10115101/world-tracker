@@ -13,6 +13,5 @@ export async function getGeocoding(queryParams) {
 
   const queryString = new URLSearchParams(params).toString();
   const response = await axios.get(`${OPENCAGE_BASE_URL}${queryString}`);
-
   return response.data.results;
 }

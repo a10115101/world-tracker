@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 const MapPositionContext = createContext();
 
 function MapPositionProvider({ children }) {
-  const [mapPosition, setMapPosition] = useState([24, 121.5]);
+  const [mapPosition, setMapPosition] = useState([23.9739374, 120.9820179]);
 
   return (
     <MapPositionContext.Provider value={{ mapPosition, setMapPosition }}>

@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  background-color: grey;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  height: 10%;
+  padding: 0.5rem;
+}
+
+.container button {
+  width: 7.5%;
+  height: 100%;
+  border-radius: 5px;
+  margin-right: 0.25rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.btnFocus {
+  border-radius: 5px;
+  background-color: #fbe68c;
+}

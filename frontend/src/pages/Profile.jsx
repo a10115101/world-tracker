@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import ProfileSiderbar from "../features/profile/ProfileSidebar";
+import ProfileSiderbar from "src/features/profile/ProfileSidebar";
 import styles from "./Profile.module.css";
 
 function Profile() {

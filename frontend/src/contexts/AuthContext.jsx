@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-import { getCurrentUser } from "../services/apiAuth";
+import { getCurrentUser } from "src/utilities/localStorage";
 
 const AuthContext = createContext();
 

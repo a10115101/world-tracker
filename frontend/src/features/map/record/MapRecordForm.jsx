@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 import BasicInfo from "./form/BasicInfo";
 import Status from "./form/Status";
@@ -8,7 +7,6 @@ import Rating from "./form/Rating";
 import Desciption from "./form/Desciption";
 import AddRecordButton from "./button/AddRecordButton";
 import CancelButton from "./button/CancelButton";
-
 import { useMapPosition } from "src/contexts/MapPositionContext";
 import { getGeocoding } from "src/services/apiGeocoding";
 import styles from "./MapRecord.module.css";
@@ -80,10 +78,8 @@ function MapRecordForm() {
           setIsLoadingGeocoding(false);
         }
       }
-
       getLocationInfo();
     },
-
     [mapPosition]
   );
 

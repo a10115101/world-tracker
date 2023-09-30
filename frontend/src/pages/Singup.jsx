@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
-import { signup } from "../services/apiAuth";
-import { options } from "../utilities/snackbar";
+import { signup } from "src/services/apiAuth";
+import { backendPort } from "src/utilities/port";
+import { options } from "src/utilities/snackbar";
 import styles from "./Singup.module.css";
 
 function Singup() {
@@ -25,8 +26,8 @@ function Singup() {
     }
   };
 
-  const hanldeClick = () => {
-    window.location.href = "http://localhost:3000/api/v1/auth/google";
+  const hanldeGoogleLogin = () => {
+    window.location.href = backendPort("api/v1/auth/google");
   };
 
   return (
@@ -89,7 +90,7 @@ function Singup() {
           src="https://img.icons8.com/color/30/google-logo.png"
           alt="google-logo"
         />
-        <Link onClick={hanldeClick}>Google Account</Link>
+        <Link onClick={hanldeGoogleLogin}>Google Account</Link>
       </div>
     </div>
   );

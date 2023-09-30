@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
-import { useAuth } from "../contexts/AuthContext";
-import { logout } from "../services/apiAuth";
-import { options } from "../utilities/snackbar";
+import { useAuth } from "src/contexts/AuthContext";
+import { logout } from "src/services/apiAuth";
+import { options } from "src/utilities/snackbar";
+import { clearLocalStorage } from "src/utilities/localStorage";
 import styles from "./AppNav.module.css";
 
 function AppNav() {
@@ -12,7 +13,7 @@ function AppNav() {
 
   const handleClick = async () => {
     try {
-      localStorage.removeItem("user");
+      clearLocalStorage();
       setCurrentUser(null);
       await logout();
       navigate("/");

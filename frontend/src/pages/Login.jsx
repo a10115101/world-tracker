@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
-import { useAuth } from "../contexts/AuthContext";
-import { login } from "../services/apiAuth";
-import { options } from "../utilities/snackbar";
+import { useAuth } from "src/contexts/AuthContext";
+import { login } from "src/services/apiAuth";
+import { backendPort } from "src/utilities/port";
+import { setLoacalStorage } from "src/utilities/localStorage";
+import { options } from "src/utilities/snackbar";
 import styles from "./Login.module.css";
 
 function Login() {
@@ -14,11 +16,11 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleLocalLogin = async (e) => {
     try {
       e.preventDefault();
       const response = await login(email, password);
-      localStorage.setItem("user", JSON.stringify(response.data));
+      setLoacalStorage(response.data);
       setCurrentUser(response);
       enqueueSnackbar("Success Login", options("success"));
       navigate("/map");
@@ -28,8 +30,8 @@ function Login() {
     }
   };
 
-  const hanldeClick = () => {
-    window.location.href = "http://localhost:3000/api/v1/auth/google";
+  const hanldeGoogleLogin = () => {
+    window.location.href = backendPort("api/v1/auth/google");
   };
 
   return (
@@ -43,7 +45,7 @@ function Login() {
       </div>
 
       <div className={styles.centerContainer}>
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleLocalLogin}>
           <div>
             <label htmlFor="email">
               <i className="fa-solid fa-envelope" />
@@ -80,7 +82,7 @@ function Login() {
           src="https://img.icons8.com/color/30/google-logo.png"
           alt="google-logo"
         />
-        <Link onClick={hanldeClick}>Google Account</Link>
+        <Link onClick={hanldeGoogleLogin}>Google Account</Link>
       </div>
     </div>
   );

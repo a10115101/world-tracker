@@ -7,7 +7,7 @@ function Status({ mode, record, status, setStatus }) {
       {mode === "normal" && (
         <div className={styles.status}>
           <h3 htmlFor="status">Status: </h3>
-          <p>{record.status && formatFirstCharUpperCase(record.status)}</p>
+          <p>{formatFirstCharUpperCase(record?.status)}</p>
         </div>
       )}
 
