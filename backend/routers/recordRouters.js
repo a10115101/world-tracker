@@ -1,5 +1,4 @@
 const router = require("express").Router();
-
 const recordController = require("../controller/recordController");
 
 router.route("/statisCountries/:id").get(recordController.getStatisCountries);

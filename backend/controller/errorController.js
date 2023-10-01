@@ -1,5 +1,4 @@
 const { CastError } = require("mongoose");
-
 const AppError = require("../utilities/appError");
 
 const handleCastErrorDB = (err) => {

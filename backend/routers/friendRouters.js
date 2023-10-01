@@ -1,5 +1,4 @@
 const router = require("express").Router();
-
 const friendController = require("../controller/friendController");
 
 router.route("/").get(friendController.getFriends);

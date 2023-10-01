@@ -1,44 +1,37 @@
 require("dotenv").config();
+require("./config/passport");
+const cors = require("cors");
+const compression = require("compression");
 const express = require("express");
+const helmet = require("helmet");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const cors = require("cors");
-
-require("./config/passport");
 const passport = require("passport");
+const rateLimit = require("express-rate-limit");
 
 const authRouter = require("./routers/authRouters");
 const userRouter = require("./routers/userRouters");
 const recordRouter = require("./routers/recordRouters");
 const friendRouter = require("./routers/friendRouters");
-
 const AppError = require("./utilities/appError");
-const errorController = require("./controller/errorController");
+const setting = require("./config/setting");
 const authController = require("./controller/authController");
+const errorController = require("./controller/errorController");
 
 const app = express();
 
-const cofig = {
-  origin: "http://localhost:5173",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-};
+if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
-app.use(morgan("dev"));
+app.use(helmet());
+app.use(cors(setting.corsSetting()));
 app.use("/public/users/", express.static("public/users"));
 app.use(express.json());
-app.use(
-  session({
-    secret: process.env.SESSION_SECRETE,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false },
-  })
-);
+app.use(session(setting.sessionSetting()));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors(cofig));
+app.use("/api", rateLimit(setting.rateLimitSetting()));
+app.use(compression());
 
 const MongoDB = process.env.MONGO_DATABASE.replace(
   "<PASSWORD>",

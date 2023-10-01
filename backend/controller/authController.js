@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
-
 const User = require("../models/userModel");
 const AppError = require("../utilities/appError");
 const validator = require("../config/validator");
@@ -11,12 +10,55 @@ const signToken = (id) => {
   });
 };
 
-exports.signup = async (req, res, next) => {
-  const { error } = validator.signupDataValidate(req.body);
+exports.isAuth = (req, res, next) => {
+  if (req.isAuthenticated()) return next();
 
-  if (error) return next(new AppError(`${error.details[0].message}`, 400));
+  const passportJWT = passport.authenticate("jwt", { session: false });
+  passportJWT(req, res, next);
+};
 
+exports.protect = (req, res, next) => {
+  if (!req.isAuthenticated())
+    return next(new AppError("You are not authorized!", 401));
+
+  next();
+};
+
+exports.googleLogin = async (req, res, next) => {
+  const googleLogin = passport.authenticate("google", {
+    scope: ["profile", "email"],
+    prompt: "select_account",
+  });
+  googleLogin(req, res, next);
+};
+
+exports.googleRedirect = async (req, res, next) => {
+  const googleRedirect = passport.authenticate("google", {
+    successRedirect: `${process.env.FRONTEND_PORT}/redirect`,
+    failureRedirect: process.env.FRONTEND_PORT,
+  });
+  googleRedirect(req, res, next);
+};
+
+exports.getGoogleUser = async (req, res, next) => {
   try {
+    if (!req.user) next(new AppError("You are not authorized", 401));
+
+    res.status(200).json({
+      status: "success",
+      user: req.user,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.signup = async (req, res, next) => {
+  try {
+    const { error } = validator.signupDataValidate(req.body);
+
+    if (error) return next(new AppError(`${error.details[0].message}`, 400));
+
     const { username, email, password } = req.body;
     const isEmailExisted = await User.findOne({ email }).exec();
 
@@ -43,11 +85,11 @@ exports.signup = async (req, res, next) => {
 };
 
 exports.login = async (req, res, next) => {
-  const { error } = validator.loginDataValidate(req.body);
-
-  if (error) return next(new AppError(`${error.details[0].message}`, 400));
-
   try {
+    const { error } = validator.loginDataValidate(req.body);
+
+    if (error) return next(new AppError(`${error.details[0].message}`, 400));
+
     const { email, password } = req.body;
     const user = await User.findOne({ email }).select("+password").exec();
 
@@ -72,34 +114,4 @@ exports.logout = async (req, res, next) => {
 
     res.status(200).json({ status: "success" });
   });
-};
-
-exports.getGoogleUser = async (req, res, next) => {
-  try {
-    if (!req.user) next(new AppError("You are not authorized", 401));
-
-    res.status(200).json({
-      status: "success",
-      user: req.user,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.isAuth = (req, res, next) => {
-  if (req.isAuthenticated()) return next();
-
-  const passportJWT = passport.authenticate("jwt", {
-    session: false,
-  });
-
-  passportJWT(req, res, next);
-};
-
-exports.protect = (req, res, next) => {
-  if (!req.isAuthenticated())
-    return next(new AppError("You are not authorized!", 401));
-
-  next();
 };
