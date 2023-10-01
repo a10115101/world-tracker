@@ -41,6 +41,7 @@ function SearchFriendsList({
               <Link to={frontendPort(`profile/user/${el._id}`)}>
                 <img
                   src={backendPort(`public/users/${el.photo}`)}
+                  crossOrigin="use-credentials"
                   alt="photo"
                 />
                 <div>

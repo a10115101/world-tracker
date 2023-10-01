@@ -2,6 +2,7 @@ const Record = require("../models/recordModel");
 const validator = require("../config/validator");
 const AppError = require("../utilities/appError");
 const apiFilter = require("../utilities/apiFilter");
+const inputDataProcessor = require("../utilities/inputDataProcessor");
 
 exports.getAllRecords = async (req, res, next) => {
   try {
@@ -47,16 +48,12 @@ exports.getRecord = async (req, res, next) => {
 
 exports.createRecord = async (req, res, next) => {
   try {
-    if (req.body.status === "planning") delete req.body.rating;
-
-    if (!req.body.user) req.body.user = req.user.id;
-
-    const { error } = await validator.recordDataValidate(req.body);
+    const processedData = inputDataProcessor.record(req.body, req.user);
+    const { error } = await validator.recordDataValidate(processedData);
 
     if (error) return next(new AppError(`${error.details[0].message}`, 400));
 
-    const newRecord = await Record.create(req.body);
-
+    const newRecord = await Record.create(processedData);
     res.status(200).json({
       status: "success",
       data: {
@@ -70,18 +67,19 @@ exports.createRecord = async (req, res, next) => {
 
 exports.updateRecord = async (req, res, next) => {
   try {
-    if (req.body.status === "planning") delete req.body.rating;
-
-    if (!req.body.user) req.body.user = req.user.id;
-
-    const { error } = validator.updateRecordDataValidate(req.body);
+    const processedData = inputDataProcessor.record(req.body, req.user);
+    const { error } = await validator.updateRecordDataValidate(processedData);
 
     if (error) return next(new AppError(`${error.details[0].message}`, 400));
 
-    const record = await Record.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    }).exec();
+    const record = await Record.findByIdAndUpdate(
+      req.params.id,
+      processedData,
+      {
+        new: true,
+        runValidators: true,
+      }
+    ).exec();
 
     if (!record)
       return next(new AppError("No document found with that ID", 404));

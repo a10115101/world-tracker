@@ -19,6 +19,7 @@ function AllFriendsList({ friends, isLoading, loadingError }) {
               <Link to={frontendPort(`profile/user/${el.recipient._id}`)}>
                 <img
                   src={backendPort(`public/users/${el.recipient.photo}`)}
+                  crossOrigin="use-credentials"
                   alt="photo"
                 />
                 <div>

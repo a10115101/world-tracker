@@ -51,6 +51,7 @@ function ProfileFriendInfo() {
       <div className={styles.topContainer}>
         <img
           src={backendPort(`public/users/${lookupUserInfo?.photo}`)}
+          crossOrigin="use-credentials"
           alt="pic"
         />
         <div>

@@ -1,8 +1,9 @@
 const multer = require("multer");
 const sharp = require("sharp");
 const User = require("../models/userModel");
-const AppError = require("../utilities/appError");
 const validator = require("../config/validator");
+const AppError = require("../utilities/appError");
+const inputDataProcessor = require("../utilities/inputDataProcessor");
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image")) {
@@ -19,7 +20,7 @@ const upload = multer({
 
 exports.uploadUserPhoto = upload.single("photo");
 
-exports.resizeUserPhoto = async (req, res, next) => {
+exports.compressUserPhoto = async (req, res, next) => {
   try {
     if (!req.file) return next();
 
@@ -76,21 +77,12 @@ exports.getUser = async (req, res, next) => {
 
 exports.updateUser = async (req, res, next) => {
   try {
-    if (req.body.setting === "public") {
-      delete req.body.setting;
-      req.body.isPublic = true;
-    }
-
-    if (req.body.setting === "privacy") {
-      delete req.body.setting;
-      req.body.isPublic = false;
-    }
-
-    const { error } = validator.updateUserDataValidate(req.body);
+    const processedData = inputDataProcessor.user(req.body);
+    const { error } = validator.updateUserDataValidate(processedData);
 
     if (error) return next(new AppError(`${error.details[0].message}`, 400));
 
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const user = await User.findByIdAndUpdate(req.params.id, processedData, {
       new: true,
       runValidators: true,
     }).exec();

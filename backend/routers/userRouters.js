@@ -8,7 +8,7 @@ router
   .get(userController.getUser)
   .patch(
     userController.uploadUserPhoto,
-    userController.resizeUserPhoto,
+    userController.compressUserPhoto,
     userController.updateUser
   )
   .delete(userController.deleteUser);

@@ -30,6 +30,7 @@ function ProfileAbout() {
         <div className={styles.topBodyContainer}>
           <img
             src={backendPort(`public/users/${userInfo?.photo}`)}
+            crossOrigin="use-credentials"
             alt="photo"
           />
           <div>

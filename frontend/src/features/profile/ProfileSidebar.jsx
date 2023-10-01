@@ -21,6 +21,7 @@ function ProfileSidebar() {
                 : currentUser.user.photo
             }`
           )}
+          crossOrigin="use-credentials"
           alt="pic"
         />
         <p>{userInfo?.username}</p>

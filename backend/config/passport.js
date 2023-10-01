@@ -2,7 +2,6 @@ const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const GoogleStrategy = require("passport-google-oauth20");
-
 const User = require("../models/userModel");
 
 const opts = {};
