@@ -38,10 +38,13 @@ exports.googleRedirect = async (req, res, next) => {
     failureRedirect: process.env.FRONTEND,
   });
   await googleRedirect(req, res, next);
+  console.log("Redir");
+  console.log(req.user);
 };
 
 exports.getGoogleUser = async (req, res, next) => {
   try {
+    console.log("getUser");
     console.log(req.user);
     if (!req.user) next(new AppError("You are not authorized", 401));
 
