@@ -23,7 +23,7 @@ function MapRecordForm() {
 
   const [date, setDate] = useState(new Date());
   const [status, setStatus] = useState("planning");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(status === "planning" ? "" : "1");
   const [description, setDescription] = useState("");
 
   const lat = mapPosition[0];
