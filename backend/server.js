@@ -23,7 +23,7 @@ const errorController = require("./controller/errorController");
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.enable("trust proxy");
+app.set("trust proxy", 1);
 
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
