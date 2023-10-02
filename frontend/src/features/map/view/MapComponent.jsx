@@ -19,8 +19,8 @@ function MapComponent() {
       style={{ height: "100%" }}
     >
       <TileLayer
-        attribution={import.meta.env.VITE_LEAFLET_MAP_CONFIG}
-        url={import.meta.env.VITE_LEAFLET_MAP_STYLE}
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
       />
 
       <MapSearchMarker />

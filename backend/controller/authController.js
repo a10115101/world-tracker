@@ -42,7 +42,7 @@ exports.googleRedirect = async (req, res, next) => {
 
 exports.getGoogleUser = async (req, res, next) => {
   try {
-    if (!req.user) next(new AppError("You are not authorized", 401));
+    // if (!req.user) next(new AppError("You are not authorized", 401));
 
     res.status(200).json({
       status: "success",
