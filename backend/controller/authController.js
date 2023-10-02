@@ -25,21 +25,21 @@ exports.protect = (req, res, next) => {
 };
 
 exports.googleLogin = async (req, res, next) => {
-  const googleLogin = await passport.authenticate("google", {
+  const sendRequesting = await passport.authenticate("google", {
     scope: ["profile", "email"],
     prompt: "select_account",
   });
-  googleLogin(req, res, next);
+  sendRequesting(req, res, next);
 };
 
 exports.googleRedirect = async (req, res, next) => {
   console.log("Redir-front");
   console.log(req.user);
-  const googleRedirect = await passport.authenticate("google", {
+  const redirect = await passport.authenticate("google", {
     successRedirect: `${process.env.FRONTEND}/redirect`,
     failureRedirect: process.env.FRONTEND,
   });
-  googleRedirect(req, res, next);
+  redirect(req, res, next);
 
   console.log("Redir-back");
   console.log(req.user);

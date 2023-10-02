@@ -9,6 +9,8 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
 opts.secretOrKey = process.env.PASSPORT_JWT_SECRETE;
 
 passport.serializeUser((user, done) => {
+  console.log("serialize");
+  console.log(user);
   done(null, user.id);
 });
 
@@ -43,7 +45,6 @@ passport.use(
         console.log("strategy");
         const user = await User.findOne({ googleID: profile.id }).exec();
         if (user) {
-          console.log(user);
           done(null, user);
         } else {
           const newUser = await User.create({
