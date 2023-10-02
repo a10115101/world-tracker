@@ -29,7 +29,7 @@ exports.googleLogin = async (req, res, next) => {
     scope: ["profile", "email"],
     prompt: "select_account",
   });
-  googleLogin(req, res, next);
+  await googleLogin(req, res, next);
 };
 
 exports.googleRedirect = async (req, res, next) => {
@@ -37,11 +37,12 @@ exports.googleRedirect = async (req, res, next) => {
     successRedirect: `${process.env.FRONTEND}/redirect`,
     failureRedirect: process.env.FRONTEND,
   });
-  googleRedirect(req, res, next);
+  await googleRedirect(req, res, next);
 };
 
 exports.getGoogleUser = async (req, res, next) => {
   try {
+    console.log(req.user);
     if (!req.user) next(new AppError("You are not authorized", 401));
 
     res.status(200).json({
