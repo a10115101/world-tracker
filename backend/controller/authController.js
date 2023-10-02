@@ -25,21 +25,21 @@ exports.protect = (req, res, next) => {
 };
 
 exports.googleLogin = async (req, res, next) => {
-  const googleLogin = passport.authenticate("google", {
+  const googleLogin = await passport.authenticate("google", {
     scope: ["profile", "email"],
     prompt: "select_account",
   });
-  await googleLogin(req, res, next);
+  googleLogin(req, res, next);
 };
 
 exports.googleRedirect = async (req, res, next) => {
   console.log("Redir-front");
   console.log(req.user);
-  const googleRedirect = passport.authenticate("google", {
+  const googleRedirect = await passport.authenticate("google", {
     successRedirect: `${process.env.FRONTEND}/redirect`,
     failureRedirect: process.env.FRONTEND,
   });
-  await googleRedirect(req, res, next);
+  googleRedirect(req, res, next);
 
   console.log("Redir-back");
   console.log(req.user);
@@ -49,7 +49,8 @@ exports.getGoogleUser = async (req, res, next) => {
   try {
     console.log("getUser");
     console.log(req.user);
-    if (!req.user) next(new AppError("You are not authorized", 401));
+
+    if (!req.user) return next(new AppError("You are not authorized", 401));
 
     res.status(200).json({
       status: "success",

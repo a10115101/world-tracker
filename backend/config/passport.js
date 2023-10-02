@@ -37,12 +37,13 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRETE,
       callbackURL: `${process.env.BACKEND}/api/v1/auth/google/redirect`,
-      passReqToCallback: true,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
+        console.log("strategy");
         const user = await User.findOne({ googleID: profile.id }).exec();
         if (user) {
+          console.log(user);
           done(null, user);
         } else {
           const newUser = await User.create({
