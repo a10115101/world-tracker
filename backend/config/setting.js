@@ -1,6 +1,6 @@
 exports.corsSetting = () => {
   return {
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   };
