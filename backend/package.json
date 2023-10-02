@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "bulid": "npm install --only=dev",
+    "build": "npm install --only=dev",
     "start": "npm run server.js"
   },
   "author": "",

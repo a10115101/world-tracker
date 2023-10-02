@@ -34,8 +34,8 @@ exports.googleLogin = async (req, res, next) => {
 
 exports.googleRedirect = async (req, res, next) => {
   const googleRedirect = passport.authenticate("google", {
-    successRedirect: `${process.env.FRONTEND_PORT}/redirect`,
-    failureRedirect: process.env.FRONTEND_PORT,
+    successRedirect: "http://localhost:5173/redirect",
+    failureRedirect: "http://localhost:5173",
   });
   googleRedirect(req, res, next);
 };
