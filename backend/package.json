@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bulid": "npm install --only=dev",
+    "start": "npm run server.js"
   },
   "author": "",
   "license": "ISC",
