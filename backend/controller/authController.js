@@ -33,12 +33,15 @@ exports.googleLogin = async (req, res, next) => {
 };
 
 exports.googleRedirect = async (req, res, next) => {
+  console.log("Redir-front");
+  console.log(req.user);
   const googleRedirect = passport.authenticate("google", {
     successRedirect: `${process.env.FRONTEND}/redirect`,
     failureRedirect: process.env.FRONTEND,
   });
   await googleRedirect(req, res, next);
-  console.log("Redir");
+
+  console.log("Redir-back");
   console.log(req.user);
 };
 
