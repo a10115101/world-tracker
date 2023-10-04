@@ -50,6 +50,13 @@
   background-color: gray;
 }
 
+.centerContainer span {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-left: 1rem;
+  color: red;
+}
+
 .bottomContainer {
   display: flex;
   align-items: center;

@@ -10,14 +10,12 @@ opts.secretOrKey = process.env.PASSPORT_JWT_SECRETE;
 
 passport.serializeUser((user, done) => {
   console.log("serialize");
-  console.log(user);
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id).exec();
   console.log("deserialize");
-  console.log(user);
+  const user = await User.findById(id).exec();
   done(null, user);
 });
 
@@ -38,7 +36,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRETE,
-      callbackURL: `${process.env.BACKEND}/api/v1/auth/google/redirect`,
+      callbackURL: `${process.env.BACKEND}/api/v1/auth/googleRedirect`,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {

@@ -13,11 +13,13 @@ function Login() {
   const navigate = useNavigate();
   const { setCurrentUser } = useAuth();
 
+  const [isVerifying, setIsVerifying] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLocalLogin = async (e) => {
     try {
+      setIsVerifying(true);
       e.preventDefault();
       const response = await login(email, password);
       setLoacalStorage(response.data);
@@ -27,6 +29,8 @@ function Login() {
     } catch (err) {
       const errorMessage = err.response.data.message;
       enqueueSnackbar(errorMessage, options("error"));
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -45,7 +49,7 @@ function Login() {
       </div>
 
       <div className={styles.centerContainer}>
-        <form className={styles.form} onSubmit={handleLocalLogin}>
+        <form onSubmit={handleLocalLogin}>
           <div>
             <label htmlFor="email">
               <i className="fa-solid fa-envelope" />
@@ -72,6 +76,7 @@ function Login() {
           </div>
           <div>
             <button>Next</button>
+            {isVerifying && <span>Verifying...</span>}
           </div>
         </form>
       </div>

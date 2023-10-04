@@ -24,26 +24,27 @@ exports.protect = (req, res, next) => {
   next();
 };
 
-exports.googleLogin = async (req, res, next) => {
-  const sendRequesting = await passport.authenticate("google", {
-    scope: ["profile", "email"],
-    prompt: "select_account",
-  });
-  sendRequesting(req, res, next);
-};
+// exports.googleLogin = async (req, res, next) => {
+//   console.log("googleLogin");
+//   const sendRequesting = passport.authenticate("google", {
+//     scope: ["profile", "email"],
+//     prompt: "select_account",
+//   });
+//   await sendRequesting(req, res, next);
+// };
 
-exports.googleRedirect = async (req, res, next) => {
-  console.log("Redir-front");
-  console.log(req.user);
-  const redirect = await passport.authenticate("google", {
-    successRedirect: `${process.env.FRONTEND}/redirect`,
-    failureRedirect: process.env.FRONTEND,
-  });
-  redirect(req, res, next);
+// exports.googleRedirect = async (req, res, next) => {
+//   console.log("Redir-front");
+//   console.log(req.user);
+//   const redirect = passport.authenticate("google", {
+//     successRedirect: `${process.env.FRONTEND}/redirect`,
+//     failureRedirect: process.env.FRONTEND,
+//   });
+//   await redirect(req, res, next);
 
-  console.log("Redir-back");
-  console.log(req.user);
-};
+//   console.log("Redir-back");
+//   console.log(req.user);
+// };
 
 exports.getGoogleUser = async (req, res, next) => {
   try {

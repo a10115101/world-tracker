@@ -11,6 +11,7 @@ exports.sessionSetting = () => {
     secret: process.env.SESSION_SECRETE,
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: { secure: true },
   };
 };

@@ -10,12 +10,14 @@ import styles from "./Singup.module.css";
 function Singup() {
   const navigate = useNavigate();
 
+  const [isVerifying, setIsVerifying] = useState(false);
   const [username, setUserame] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     try {
+      setIsVerifying(true);
       e.preventDefault();
       await signup(username, email, password);
       enqueueSnackbar("Success Singup", options("success"));
@@ -23,6 +25,8 @@ function Singup() {
     } catch (err) {
       const errorMessage = err.response.data.message;
       enqueueSnackbar(errorMessage, options("error"));
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -80,6 +84,7 @@ function Singup() {
           </div>
           <div>
             <button>Next</button>
+            {isVerifying && <span>Verifying...</span>}
           </div>
         </form>
       </div>
