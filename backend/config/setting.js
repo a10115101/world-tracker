@@ -12,7 +12,7 @@ exports.sessionSetting = () => {
     resave: false,
     saveUninitialized: false,
     proxy: true,
-    cookie: { secure: true },
+    cookie: { secure: true, sameSite: "none" },
   };
 };
 

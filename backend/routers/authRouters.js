@@ -18,9 +18,9 @@ router.get(
   }),
   (req, res) => {
     console.log("Redirect");
-    req.session.save();
-    req.session.user = req.user;
-    console.log(req.session);
+    // req.session.save();
+    // req.session.user = req.user;
+    // console.log(req.session);
   }
 );
 
