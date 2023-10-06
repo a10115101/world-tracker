@@ -12,11 +12,15 @@ function Photo({ closeModal, userInfo }) {
   const navigate = useNavigate();
   const { setCurrentUser } = useAuth();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [photoFile, setPhotoFile] = useState(null);
 
   const handleSubmit = async (e) => {
     try {
+      setIsLoading(true);
       e.preventDefault();
+
+      if (photoFile === null) throw new Error("Please pick up an image");
 
       let updateMeObject = new FormData();
       updateMeObject.append("photo", photoFile);
@@ -28,8 +32,10 @@ function Photo({ closeModal, userInfo }) {
       navigate("/profile");
       enqueueSnackbar("Success Update!", options("success"));
     } catch (err) {
-      const errorMessage = err.response.data.message;
+      const errorMessage = err?.response?.data?.message || err.message;
       enqueueSnackbar(errorMessage, options("error"));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -52,6 +58,7 @@ function Photo({ closeModal, userInfo }) {
             />
           </div>
           <button>Upload</button>
+          {isLoading && <span>Loading...</span>}
         </form>
       </div>
     </div>

@@ -53,7 +53,8 @@ exports.recordDataValidate = (data) => {
     position: {
       coordinates: Joi.array().items(Joi.number().required()),
     },
-    description: Joi.string().min(1).max(100).required(),
+    // description: Joi.string().min(1).max(100).required(),
+    description: Joi.string().allow("").max(100),
   }).options({ abortEarly: false });
 
   return schema.validate(data);
@@ -73,7 +74,8 @@ exports.updateRecordDataValidate = (data) => {
       then: Joi.number().min(1).max(5).required(),
       otherwise: Joi.forbidden(),
     }),
-    description: Joi.string().min(1).max(100).required(),
+    // description: Joi.string().min(1).max(100).required(),
+    description: Joi.string().allow("").max(100),
   }).options({ abortEarly: false });
 
   return schema.validate(data);

@@ -9,12 +9,10 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
 opts.secretOrKey = process.env.PASSPORT_JWT_SECRETE;
 
 passport.serializeUser((user, done) => {
-  console.log("serialize");
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
-  console.log("deserialize");
   const user = await User.findById(id).exec();
   done(null, user);
 });
@@ -38,20 +36,22 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRETE,
       callbackURL: `${process.env.BACKEND}/api/v1/auth/googleRedirect`,
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (req, accessToken, refreshToken, profile, done) => {
       try {
-        console.log("strategy");
         const user = await User.findOne({ googleID: profile.id }).exec();
-        if (user) {
-          done(null, user);
-        } else {
-          const newUser = await User.create({
-            username: profile.displayName,
-            email: profile.emails[0].value,
-            googleID: profile.id,
-          });
-          done(null, newUser);
-        }
+        if (user) return done(null, user);
+
+        const isEmailExisted = await User.findOne({
+          email: profile.emails[0].value,
+        }).exec();
+        if (isEmailExisted) return done(null, false);
+
+        const newUser = await User.create({
+          username: profile.displayName,
+          email: profile.emails[0].value,
+          googleID: profile.id,
+        });
+        done(null, newUser);
       } catch (err) {
         done(err, false);
       }

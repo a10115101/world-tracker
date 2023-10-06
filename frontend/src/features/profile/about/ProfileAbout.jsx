@@ -31,6 +31,7 @@ function ProfileAbout() {
           <img
             src={backendPort(`public/users/${userInfo?.photo}`)}
             crossOrigin="use-credentials"
+            key={userInfo?.updatedAt}
             alt="photo"
           />
           <div>

@@ -28,7 +28,7 @@ app.set("trust proxy", 1);
 
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
-app.use(helmet());
+app.use(helmet(setting.helmetSetting()));
 app.use(cors(setting.corsSetting()));
 app.use("/public/users/", express.static("public/users"));
 app.use(mongoSanitize());

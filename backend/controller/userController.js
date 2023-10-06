@@ -24,7 +24,7 @@ exports.compressUserPhoto = async (req, res, next) => {
   try {
     if (!req.file) return next();
 
-    req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+    req.file.filename = `user-${req.user.id}.jpeg`;
     req.body.photo = req.file.filename;
 
     await sharp(req.file.buffer)

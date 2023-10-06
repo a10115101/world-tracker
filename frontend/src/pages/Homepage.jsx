@@ -5,8 +5,8 @@ import { enqueueSnackbar } from "notistack";
 import { useAuth } from "src/contexts/AuthContext";
 import { logout } from "src/services/apiAuth";
 import { options } from "src/utilities/snackbar";
-import styles from "./Homepage.module.css";
 import { clearLocalStorage } from "src/utilities/localStorage";
+import styles from "./Homepage.module.css";
 
 function Homepage() {
   const navigate = useNavigate();

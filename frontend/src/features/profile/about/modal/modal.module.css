@@ -37,6 +37,11 @@
   border: 2px solid black;
 }
 
+.innerContainer span {
+  padding-left: 1rem;
+  color: red;
+}
+
 .upload {
   padding: 0rem;
   border: 2px solid black;

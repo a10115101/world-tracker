@@ -22,6 +22,7 @@ function ProfileSidebar() {
             }`
           )}
           crossOrigin="use-credentials"
+          key={userInfo?.updatedAt}
           alt="pic"
         />
         <p>{userInfo?.username}</p>

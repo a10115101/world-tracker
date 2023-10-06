@@ -1,18 +1,35 @@
+exports.helmetSetting = () => {
+  return {
+    crossOriginResourcePolicy: false,
+  };
+};
+
 exports.corsSetting = () => {
   return {
     origin: process.env.FRONTEND,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: "GET,PUT,PATCH,POST,DELETE",
     credentials: true,
   };
 };
 
 exports.sessionSetting = () => {
+  let isSecure;
+
+  if (process.env.NODE_ENV === "production") {
+    isSecure = true;
+  } else {
+    isSecure = false;
+  }
+
   return {
     secret: process.env.SESSION_SECRETE,
     resave: false,
     saveUninitialized: false,
     proxy: true,
-    cookie: { secure: true, sameSite: "none" },
+    cookie: {
+      secure: isSecure,
+      sameSite: "none",
+    },
   };
 };
 

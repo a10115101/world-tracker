@@ -29,7 +29,6 @@ const recordSchema = new mongoose.Schema(
       validate: {
         validator: function (val) {
           if (this.get("status") === "visited") return val < Date.now();
-
           if (this.get("status") === "planning") return val > Date.now();
         },
         message: "Record must be valid date",
@@ -64,11 +63,11 @@ const recordSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: [true, "Record must hava description"],
-      minlength: [
-        1,
-        "Record's description length must greater than or equal to 1!",
-      ],
+      // required: [true, "Record must hava description"],
+      // minlength: [
+      //   1,
+      //   "Record's description length must greater than or equal to 1!",
+      // ],
       maxlength: [
         100,
         "Record's description length must less than or equal to 100!",
