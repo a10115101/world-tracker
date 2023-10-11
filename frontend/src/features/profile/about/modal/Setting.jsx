@@ -52,7 +52,7 @@ function Setting({ closeModal, userInfo }) {
               <option value="privacy">Privacy</option>
             </select>
           </div>
-          <button>Submit</button>
+          <button className={styles.btn}>Submit</button>
         </form>
       </div>
     </div>

@@ -80,7 +80,7 @@ function AdditionInfo({ closeModal, userInfo }) {
               <option value="en">English</option>
             </select>
           </div>
-          <button>Submit</button>
+          <button className={styles.btn}>Submit</button>
         </form>
       </div>
     </div>

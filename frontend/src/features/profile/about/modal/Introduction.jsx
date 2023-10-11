@@ -49,7 +49,7 @@ function Introduction({ closeModal, userInfo }) {
               onChange={(e) => setIntroduction(e.target.value)}
             />
           </div>
-          <button>Submit</button>
+          <button className={styles.btn}>Submit</button>
         </form>
       </div>
     </div>

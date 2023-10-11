@@ -57,7 +57,7 @@ function Photo({ closeModal, userInfo }) {
               onChange={(e) => setPhotoFile(e.target.files[0])}
             />
           </div>
-          <button>Upload</button>
+          <button className={styles.btn}>Upload</button>
           {isLoading && <span>Loading...</span>}
         </form>
       </div>

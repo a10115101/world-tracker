@@ -24,19 +24,6 @@
   margin-bottom: 0.25rem;
 }
 
-.innerContainer button {
-  border: 2px solid grey;
-  padding: 0.4rem 0.8rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 75px;
-}
-
-.innerContainer button:hover {
-  border: 2px solid black;
-}
-
 .innerContainer span {
   padding-left: 1rem;
   color: red;
@@ -55,4 +42,17 @@
 
 .datePicker div {
   z-index: 5;
+}
+
+.btn {
+  border: 2px solid grey;
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 75px;
+}
+
+.btn:hover {
+  border: 2px solid black;
 }
