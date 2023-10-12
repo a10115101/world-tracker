@@ -1,4 +1,4 @@
-[English](#world-tracker) | [中文]
+[English](#world-tracker) | [中文](https://github.com/a10115101/world-tracker/blob/main/README_ZH.md)
 
 # World-Tracker
 

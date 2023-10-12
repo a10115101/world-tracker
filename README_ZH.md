@@ -1,4 +1,4 @@
-[English] | [中文](#世界追蹤者)
+[English](https://github.com/a10115101/world-tracker/blob/main/README.md) | [中文](#世界追蹤者)
 
 # 世界追蹤者
 
@@ -46,7 +46,7 @@
 - 帳號 A : `demo_a@gmail.com` 密碼 : `12345678`
 - 帳號 B : `demo_b@gmail.com` 密碼 : `12345678`
 
-> **注意事項:**
+> **注意事項：**
 > 根據 [Render.com](https://render.com/docs/free#spinning-down-on-idle)，網頁後端伺服器超過 15 分鐘沒有收到新的請求，會進入**休眠狀態**，待接收到新請求後，**約 30 秒至 1 分鐘會恢復正常**。
 
 ## 系統架構
@@ -91,29 +91,29 @@
 
 ### 其他工具
 
-- 代碼風格: ESLint / Prettier
-- 版本控制 : Git / GitHub
-- API 平台 : Postman
+- 代碼風格：ESLint / Prettier
+- 版本控制： Git / GitHub
+- API 平台： Postman
 
 ## 展示
 
 ### 地圖搜尋
 
-- Search for a location and display information about the area.
+- 搜尋地點並顯示該地區的資訊。
   ![地圖搜尋](https://github.com/a10115101/world-tracker/blob/main/readme_demo/Map_Search_Demo.gif "地圖搜尋")
 
 ### 旅行紀錄過濾器
 
-- Users can easily filter records by status or date.
+- 使用者可依照**狀態**或**日期**輕鬆過濾紀錄
   ![旅行紀錄過濾器](https://github.com/a10115101/world-tracker/blob/main/readme_demo/Map_Record_Filter_Demo.gif "旅行紀錄過濾器")
 
 ### 旅行紀錄
 
 - 新增紀錄
-  ![Add New Record](https://github.com/a10115101/world-tracker/blob/main/readme_demo/Map_Record_Create_Demo.gif "Add New Record")
+  ![新增紀錄](https://github.com/a10115101/world-tracker/blob/main/readme_demo/Map_Record_Create_Demo.gif "新增紀錄")
 
 - 更新或刪除紀錄
-  ![Update or Delete the Record](https://github.com/a10115101/world-tracker/blob/main/readme_demo/Map_Record_Update_Delete_Demo.gif "Update or Delete the Record")
+  ![更新或刪除紀錄](https://github.com/a10115101/world-tracker/blob/main/readme_demo/Map_Record_Update_Delete_Demo.gif "更新或刪除紀錄")
 
 ### 關於我
 
