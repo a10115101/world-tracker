@@ -1,3 +1,5 @@
+[English](#world-tracker) | [中文]
+
 # World-Tracker
 
 > **Introduction**
@@ -34,6 +36,7 @@ Web Link：[World-Tracker](https://world-tracker.site/)
 - [Appendix](#appendix)
   - [Frontend Dependencies](#frontend-dependencies)
   - [Backend Dependencies](#backend-dependencies)
+  - [API documentation](#api-documentation)
 - [Contact](#contact)
 
 ## Test Account
@@ -44,7 +47,7 @@ You can login via the accounts shown below or with Google Oauth.
 - Account B : `demo_b@gmail.com` Password : `12345678`
 
 > **Notice:**
-> According to [Render.com](https://render.com/docs/free#spinning-down-on-idle), if the web server does not receive a new request for more than 15 minutes, it will go into a hibernation state and will resume normal after receiving a new request in about 30 seconds to 1 minute.
+> According to [Render.com](https://render.com/docs/free#spinning-down-on-idle), if the web server does not receive a new request for more than 15 minutes, it will go into a **hibernation state** and will **resume normal after receiving a new request in about 30 seconds to 1 minute**.
 
 ## System Architecture
 
@@ -164,6 +167,10 @@ You can login via the accounts shown below or with Google Oauth.
 - passport-google-oauth20
 - passport-jwt
 - sharp
+
+### API documentation
+
+[API documentation](https://documenter.getpostman.com/view/28528931/2s9YJjSzUk)
 
 ## Contact
 
